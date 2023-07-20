@@ -24,7 +24,7 @@
 			<tbody>
 				<c:forEach items="${list}" var="d" varStatus="i">
 				<tr>
-					<td><a class="link-underline link-underline-opacity-0 text-white" href="./detail.do?bookNum=${d.bookNum}">${d.bookName}</a></td>
+					<td><a class="link-underline link-underline-opacity-0 text-white" href="./detail?bookNum=${d.bookNum}">${d.bookName}</a></td>
 					<td>${d.bookRate} ${i.index}   </td>
 				</tr>			
 				</c:forEach>

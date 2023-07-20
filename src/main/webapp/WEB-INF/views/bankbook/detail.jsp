@@ -10,42 +10,37 @@
 </head>
 <body>
 <c:import url="../temp/header.jsp"></c:import>
+	<h1>Detail Page</h1>
 	
-	<section class="container mt-5">
-	<h1 class="my-4">Add Page</h1>
+	<%-- ${} --%>
+	<!-- Getter 이름 : 메서드에서 get을 제외하고 첫번째글자를 소문자로 바꾼것 -->
+	<h1>${requestScope.dto.bookName}</h1>
 	
-	<form action="./add.do" method="post">
-		<div class="mb-3">
-		  <label for="bookName" class="form-label">상품명</label>
-		  <input type="text" name="bookName" class="form-control" id="bookName" placeholder="상품명">
-		</div>
-		<div class="mb-3">
-		  <label for="bookContents" class="form-label">상품내용</label>
-		  <textarea class="form-control" name="bookContents" id="bookContents" rows="3"></textarea>
-		</div>	
-		<div class="mb-3">
-		  <label for="bookRate" class="form-label">이자율</label>
-		  <input type="text" name="bookRate" class="form-control" id="bookRate" placeholder="이자율">
-		</div>
-		
-		<div class="form-check">
-		  <input class="form-check-input" value="1" type="radio" name="booKSale"  id="booKSale1" checked>
-		  <label class="form-check-label" for="booKSale1">
-		    판매가능
-		  </label>
-		</div>
-		<div class="form-check">
-		  <input class="form-check-input" value="0" type="radio" name="booKSale" id="booKSale2" checked>
-		  <label class="form-check-label" for="booKSale2">
-		   판매중단
-		  </label>
-		</div>
-
-		<div class="my-3">
-			<button type="submit" class="btn btn-danger">상품등록</button>
-		</div>
-
-	</form>
-	</section>
+	<div>
+		${dto.bookContents}
+	</div>
+	
+	<h1>${dto.bookRate} </h1>
+	
+	<c:choose>
+		<c:when test="${dto.bookSale eq 1}">
+			<h1>판매중</h1>
+		</c:when>
+		<c:otherwise>
+			<h1>판매종료</h1>
+		</c:otherwise>
+	</c:choose>
+	
+	<a href="./update?bookNum=${dto.bookNum}">수정</a>
+	<a href="./delete?bookNum=${dto.bookNum}">삭제</a>
+	
+<%-- 	
+	<c:if test="${dto.bookSale eq 1}">
+		<h1>판매중</h1>
+	</c:if>
+	<c:if test="${dto.bookSale eq 0}">
+		<h1>판매종료</h1>
+	</c:if>
+--%>
 </body>
 </html>
