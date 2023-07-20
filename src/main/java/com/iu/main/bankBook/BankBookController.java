@@ -19,15 +19,17 @@ public class BankBookController {
 	@RequestMapping(value="list", method=RequestMethod.GET)	// method=클래스명.메소드(상수=final)
 	public String getList() throws Exception {
 		System.out.println("list");
-		bankBookService.service();
+		
 		
 		// src >> spring > appServlet > servlet-context.xml
 		return "bankbook/list";
 	}
 	
 	@RequestMapping(value="detail")
-	public String getDetail() throws Exception {
-		System.out.println("Detail");
+	public String getDetail(BankBookDTO bankBookDTO) throws Exception {
+		System.out.println("deatil");
+		bankBookDTO = bankBookService.getDetail(bankBookDTO);
+		System.out.println(bankBookDTO.getBookName());
 		return "bankbook/detail";
 	}
 	
