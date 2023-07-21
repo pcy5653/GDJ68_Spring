@@ -19,4 +19,8 @@ public class StudentService {
 	public StudentDTO getDetail(StudentDTO studentDTO) throws Exception{
 		return studentDAO.getDetail(studentDTO);
 	}
+	
+	public int setAdd(StudentDTO studentDTO) throws Exception {
+		return studentDAO.setAdd(studentDTO);
+	}
 }

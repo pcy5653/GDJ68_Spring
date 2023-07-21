@@ -29,8 +29,8 @@ public class StudentDAO {
 	
 	
 	// Form add(insert)
-	public int setAdd(StudentDAO studentDAO) throws Exception {
-		
+	public int setAdd(StudentDTO studentDTO) throws Exception {
+		return sqlSession.insert(NAMESPACE+"setAdd", studentDTO);
 	}
 	
 	// DB Insert

@@ -22,14 +22,14 @@
 	<p>${dto.total} </p>
 	<p>${dto.avg} </p>
 	
-	<c:choose>
+<%-- 	<c:choose>
 		<c:when test="${dto.bookSale eq 1}">
 			<h1>판매중</h1>
 		</c:when>
 		<c:otherwise>
 			<h1>판매종료</h1>
 		</c:otherwise>
-	</c:choose>
+	</c:choose> --%>
 	
 	<a href="./update?bookNum=${dto.studNum}">수정</a>
 	<a href="./delete?bookNum=${dto.studNum}">삭제</a>

@@ -29,13 +29,19 @@ public class StudentController {
 	
 	// Detail
 	@RequestMapping(value="detail")
-	public void getDetail(StudentDTO studentDTO, Model model) throws Exception {
+	public String getDetail(StudentDTO studentDTO, Model model) throws Exception {
 		studentDTO = studentService.getDetail(studentDTO);
 		model.addAttribute("dto", studentDTO);
+		
+		return "student/detail";
 	}
 	
 	
-	
+	// Form insert(add)
+	@RequestMapping()
+	public void setAdd() throws Exception {
+		
+	}
 	
 	
 	

@@ -18,11 +18,11 @@
     		VALUES(STUD_SEQ.NEXTVAL, #{studName}, #{kor}, #{eng}, #{math}, #{total}, #{avg})
     	</insert>
     	
-    	<delete id="setDelete" parameterType="com.iu.main.student.StduentDTO">
+    	<delete id="setDelete" parameterType="com.iu.main.student.StudentDTO">
     		DELETE SUTDNET WHERE STUDNUM=#{studNum}
     	</delete>
     	
-    	<update id="setUpdate" parameterType="com.iu.main.student.StdentDTO">
+    	<update id="setUpdate" parameterType="com.iu.main.student.StudentDTO">
     		UPDATE STUDENT
     		SET STUDNAME=#{studName}, KOR=#{kor}, ENG=#{eng}, MATH=#{math}
     		WHERE STUDNUM=#{studNum}
