@@ -82,6 +82,16 @@ public class BankBookController {
 		model.addAttribute("dto", bankBookDTO);
 	}
 	
+	// DB Update
+	@RequestMapping(value="update", method=RequestMethod.POST)
+	public String setUpdate(BankBookDTO bankBookDTO) throws Exception {
+		int restlt = bankBookService.setUpdate(bankBookDTO);
+//		return "redirect:./list";
+		return "redirect:./detail?bookNum="+bankBookDTO.getBookNum();
+	}
+	
+	
+	
 	@RequestMapping(value = "delete", method = RequestMethod.GET)
 	public String setDelete(Long bookNum) throws Exception{
 		int result = bankBookService.setDelete(bookNum);

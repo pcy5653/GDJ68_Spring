@@ -14,6 +14,7 @@
 	
 	<%-- ${} --%>
 	<!-- Getter 이름 : 메서드에서 get을 제외하고 첫번째글자를 소문자로 바꾼것 -->
+	<!-- DB & GETTER 이름 동일 -->
 	<h1>${requestScope.dto.bookName}</h1>
 	
 	<div>
