@@ -20,4 +20,25 @@
   	<select id="getDetail" parameterType="com.iu.main.bankBook.BankBookDTO" resultType="com.iu.main.bankBook.BankBookDTO">
   		SELECT * FROM BANKBOOK WHERE BOOKNUM=#{bookNum}
   	</select>
+  	
+  	
+  	<insert id="setAdd" parameterType="com.iu.main.bankBook.BankBookDTO">
+  		INSERT INTO BANKBOOK
+  		VALUES (BANK_SEQ.NEXTVAL, #{bookName}, #{bookRate}, #{bookSale}, #{bookContents})
+  	</insert>
+  	
+  	
+  	<!-- parameterType는 client에게 받은 값인데 다른 경우도 보여주는 것.
+  		패키지명이 아닌 Long타입을 갖는 경로작성
+  	 -->
+  	<delete id="setDelete" parameterType="java.lang.Long">
+  		DELETE BANKBOOK WHERE BOOKNUM=#{bookNum}
+  	</delete>
+  	
+  	
+  	<update id="setUpdate" parameterType="com.iu.main.bankBook.BankBookDTO">
+  		UPDATE BANKBOOK 
+  		SET BOOKNAME=#{bookName}, BOOKRATE=#{bookRate}, BOOKSALE=#{bookSale}, CONTENTS=#{bookContents}
+  		WHERE BOOKNUM=#{bookNum} 
+  	</update>
   </mapper>

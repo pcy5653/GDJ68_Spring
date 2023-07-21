@@ -36,9 +36,22 @@ public class BankBookDAO {
 	
 	
 	// add
+	// insert, update, delete는 리턴값으로 int(정수, 0~1이상 말함)를 보낸다 => colurm의 추가 실패 =0, 추가&수정&삭제 성공 = 1이상
+	public int setAdd(BankBookDTO bankBookDTO) throws Exception{
+		return sqlSession.insert(NAMESPACE+"setAdd", bankBookDTO);
+	}
+	
 	
 	// update
+	public int setUpdate(BankBookDTO bankBookDTO) throws Exception {
+		return sqlSession.update(NAMESPACE+"setUpdate", bankBookDTO);
+	}	
+	
 	
 	// delete
+	// DTO가 아닌 하나의 데이터를 보내는 변수(num)를 따라 Mapper에서도 똑같이 ParameterType도 동일타입으로 설정하고 받는 변수 값도 동일작성
+	public int setDelete(Long num) throws Exception {
+		return sqlSession.delete(NAMESPACE+"setDelete", num);
+	}
 		
 }

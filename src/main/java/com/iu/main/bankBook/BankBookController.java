@@ -2,6 +2,7 @@ package com.iu.main.bankBook;
 
 import java.util.List;
 
+import org.apache.ibatis.mapping.ResultSetType;
 // 총정리
 // client > DS -> Controller -> Service -> DAO(Mapper가서 쿼리문 실행하여 DTO에 받아 다시 보내준다)
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,17 +47,48 @@ public class BankBookController {
 		return mv;
 	}
 	
-	@RequestMapping(value="add")
-	public String add() throws Exception {
+	
+	//form
+	@RequestMapping(value="add", method=RequestMethod.GET)
+	public String setAdd() throws Exception {
 		System.out.println("add");
 		return "bankbook/add";
+		// JSP Form 경로
+		// 리턴타입: void 일 경우 return X, RequestMapping 경로를 따라간다.
+		// 아래 참조	
+	}
+//	@RequestMapping(value="add", method=RequestMethod.GET)
+//	public void setAdd() throws Exception {
+//
+//	}
+	
+	// DB insert
+	@RequestMapping(value = "add", method = RequestMethod.POST)
+	public String setAdd(BankBookDTO bankBookDTO) throws Exception{
+		int result = bankBookService.setAdd(bankBookDTO);
+		
+		// Add method (GET -> POST)
+		// GET(method)일 때는 정상 경로이지만
+		// POST는 Add로 들어가는 method가 맞지 않기에 redirect로 경로 재설정
+		return "redirect:./list";
 	}
 	
-	@RequestMapping(value="update")
-	public String update() throws Exception {
-		System.out.println("update");
-		return "bankbook/update";
+	
+	// Form(update)
+	// void면 return 시 해당 jsp경로 찾아감.
+	@RequestMapping(value="update", method=RequestMethod.GET)
+	public void setUpdate(BankBookDTO bankBookDTO, Model model) throws Exception {
+		bankBookDTO=bankBookService.getDetail(bankBookDTO);
+		model.addAttribute("dto", bankBookDTO);
 	}
+	
+	@RequestMapping(value = "delete", method = RequestMethod.GET)
+	public String setDelete(Long bookNum) throws Exception{
+		int result = bankBookService.setDelete(bookNum);
+	
+		return "redirect:./list";
+	}
+	
 	
 
 }
