@@ -12,4 +12,19 @@
     	<select id="getDetail" parameterType="com.iu.main.student.StudentDTO" resultType="com.iu.main.student.StudentDTO">
     		SELECT * FROM STUDENT WHERE STUDNUM=#{studNum}
     	</select>
+    	
+    	<insert id="setAdd" parameterType="com.iu.main.student.StudentDTO">
+    		INSERT INTO STUDENT
+    		VALUES(STUD_SEQ.NEXTVAL, #{studName}, #{kor}, #{eng}, #{math}, #{total}, #{avg})
+    	</insert>
+    	
+    	<delete id="setDelete" parameterType="com.iu.main.student.StduentDTO">
+    		DELETE SUTDNET WHERE STUDNUM=#{studNum}
+    	</delete>
+    	
+    	<update id="setUpdate" parameterType="com.iu.main.student.StdentDTO">
+    		UPDATE STUDENT
+    		SET STUDNAME=#{studName}, KOR=#{kor}, ENG=#{eng}, MATH=#{math}
+    		WHERE STUDNUM=#{studNum}
+    	</update>
     </mapper>

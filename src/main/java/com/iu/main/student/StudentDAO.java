@@ -26,4 +26,12 @@ public class StudentDAO {
 	public StudentDTO getDetail(StudentDTO studentDTO) throws Exception {
 		return sqlSession.selectOne(NAMESPACE+"getDetail", studentDTO);
 	}
+	
+	
+	// Form add(insert)
+	public int setAdd(StudentDAO studentDAO) throws Exception {
+		
+	}
+	
+	// DB Insert
 }
