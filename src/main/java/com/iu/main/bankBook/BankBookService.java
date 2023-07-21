@@ -13,11 +13,13 @@ public class BankBookService {
 	private BankBookDAO bankBookDAO;
 	
 	
+	// List
 	public List<BankBookDTO> getList() throws Exception {
 		return bankBookDAO.getList();
 	}
 	
 	
+	// Detail
 	public BankBookDTO getDetail(BankBookDTO bankBookDTO) throws Exception{
 		return bankBookDAO.getDetail(bankBookDTO);
 	}

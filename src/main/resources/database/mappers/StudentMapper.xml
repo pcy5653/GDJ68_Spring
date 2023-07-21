@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+    <mapper namespace="com.iu.main.student.StudentDAO">
+    	<!-- DAO의 메서드명과 동일(id) -->
+    	<select id="getList" resultType="com.iu.main.student.StudentDTO">
+    		SELECT STUDNUM, STUDNAME, AVG FROM STUDENT ORDER BY STUDNUM DESC
+    	</select>
+    	
+    	<select id="getDetail" parameterType="com.iu.main.student.StudentDTO" resultType="com.iu.main.student.StudentDTO">
+    		SELECT * FROM STUDENT WHERE STUDNUM=#{studNum}
+    	</select>
+    </mapper>
