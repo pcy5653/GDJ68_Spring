@@ -16,19 +16,23 @@
 	
 	<form action="./add" method="post">
 		<div class="mb-3">
-		  <label for="bookName" class="form-label">상품명</label>
-		  <input type="text" name="bookName" class="form-control" id="bookName" placeholder="상품명">
+		  <label for="studName" class="form-label">학생명</label>
+		  <input type="text" name="studName" class="form-control" id="studName" placeholder="상품명">
 		</div>
 		<div class="mb-3">
-		  <label for="bookContents" class="form-label">상품내용</label>
-		  <textarea class="form-control" name="bookContents" id="bookContents" rows="3"></textarea>
-		</div>	
+		  <label for="kor" class="form-label">국어</label>
+		  <input type="text" name="kor" class="form-control" id="kor" placeholder="국어점수 입력">
+		</div>
 		<div class="mb-3">
-		  <label for="bookRate" class="form-label">이자율</label>
-		  <input type="text" name="bookRate" class="form-control" id="bookRate" placeholder="이자율">
+		  <label for="eng" class="form-label">영어</label>
+		  <input type="text" name="eng" class="form-control" id="eng" placeholder="영어점수 입력">
+		</div>
+		<div class="mb-3">
+		  <label for="math" class="form-label">수학</label>
+		  <input type="text" name="math" class="form-control" id="math" placeholder="수학점수 입력">
 		</div>
 		
-		<div class="form-check">
+<!-- 		<div class="form-check">
 		  <input class="form-check-input" value="1" type="radio" name="booKSale"  id="booKSale1" checked>
 		  <label class="form-check-label" for="booKSale1">
 		    판매가능
@@ -39,7 +43,7 @@
 		  <label class="form-check-label" for="booKSale2">
 		   판매중단
 		  </label>
-		</div>
+		</div> -->
 
 		<div class="my-3">
 			<button type="submit" class="btn btn-danger">상품등록</button>
