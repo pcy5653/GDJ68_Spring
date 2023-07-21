@@ -13,6 +13,7 @@
 	</bean>
 	
 	<!-- 2. DB와 Mappers를 가진 객체(bean) 생성 -->
+	<!-- Connection, sql문이 있는 xml파일(Mapper)의 위치, config 파일의 위치를 알려줌 -->
 	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 		
@@ -24,6 +25,7 @@
 	</bean>
 	
 	<!-- 3. 2번에 생성된 객체를 가져옴 -->
+	<!-- DB연결, Mapper 위치 확인 -->
 	<bean class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryBean"></constructor-arg>
 	</bean>

@@ -22,6 +22,7 @@
 				<th>상품명</th><th>이자율</th>
 			</thead>
 			<tbody>
+				<!-- Controller에서 속성명=items를 해서  -->
 				<c:forEach items="${list}" var="d" varStatus="i">
 				<tr>
 					<td><a class="link-underline link-underline-opacity-0 text-white" href="./detail?bookNum=${d.bookNum}">${d.bookName}</a></td>
