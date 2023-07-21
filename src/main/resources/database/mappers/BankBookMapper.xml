@@ -38,7 +38,7 @@
   	
   	<update id="setUpdate" parameterType="com.iu.main.bankBook.BankBookDTO">
   		UPDATE BANKBOOK 
-  		SET BOOKNAME=#{bookName}, BOOKRATE=#{bookRate}, BOOKSALE=#{bookSale}, CONTENTS=#{bookContents}
+  		SET BOOKNAME=#{bookName}, BOOKRATE=#{bookRate}, BOOKSALE=#{bookSale}, BOOKCONTENTS=#{bookContents}
   		WHERE BOOKNUM=#{bookNum} 
   	</update>
   </mapper>
