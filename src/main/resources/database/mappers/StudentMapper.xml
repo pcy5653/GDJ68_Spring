@@ -19,7 +19,7 @@
     	</insert>
     	
     	<delete id="setDelete" parameterType="com.iu.main.student.StudentDTO">
-    		DELETE SUTDNET WHERE STUDNUM=#{studNum}
+    		DELETE STUDENT WHERE STUDNUM=#{studNum}
     	</delete>
     	
     	<update id="setUpdate" parameterType="com.iu.main.student.StudentDTO">
