@@ -13,4 +13,9 @@ public class MemberService {
 	public MemberDTO getLogin(MemberDTO memberDTO) throws Exception{
 		return memberDAO.getLogin(memberDTO);
 	}
+	
+	// 회원수정
+	public int setMemberUpdate(MemberDTO memberDTO) throws Exception{
+		return memberDAO.setMemberUpdate(memberDTO);
+	}
 }
