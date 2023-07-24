@@ -59,6 +59,12 @@ public class MemberController {
 	
 	
 	
+	// update
+	@RequestMapping(value="memberUpdate", method=RequestMethod.GET)
+	public void setMemberUpdate() throws Exception{
+		//리턴없이 바로 value의 이름으로 가도록
+	}
+	
 //	@RequestMapping(value="join", method=RequestMethod.GET)
 //	public String join() throws Exception {
 //		System.out.println("join");
