@@ -36,6 +36,7 @@
 		      
 		      <nav>
 		      	<ul class="nav">
+		      		<!-- not empty : null이 아니냐! 값을 갖고 있냐 -->
 		      		<c:if test="${not empty member}">
 		      		<li class="nav-item text-white me-3"><a href="/member/logout">로그아웃</a></li>
 		      		<li class="nav-item text-white me-3"><a href="/member/mypage">mypage</a></li>
