@@ -21,6 +21,9 @@
 			tomcat > webapps > 파일 > WEB-INF > classes 생성 됨
 			그래서 경로를 classpath(classes)부터 시작
 		  -->
+		
+		<!-- config, mapper 위치 설정 -->
+		<property name="configLocation" value="classpath:database/config/mybatisConfig.xml"></property>
 		<property name="mapperLocations" value="classpath:database/mappers/*Mapper.xml"></property>
 	</bean>
 	

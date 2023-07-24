@@ -17,12 +17,12 @@
   		3. resultType : 결과값을 setter에 넣는다, setter를 갖고 있는 DTO에 넣는다 -> BankBookDTO 타입
   					-> ?에 getter의 이름을 넣고 받은 값을 setter에 대입 > 해당 setter가 있는 클래스 위치 작성
   	-->
-  	<select id="getDetail" parameterType="com.iu.main.bankBook.BankBookDTO" resultType="com.iu.main.bankBook.BankBookDTO">
+  	<select id="getDetail" parameterType="BankBookDTO" resultType="com.iu.main.bankBook.BankBookDTO">
   		SELECT * FROM BANKBOOK WHERE BOOKNUM=#{bookNum}
   	</select>
   	
   	
-  	<insert id="setAdd" parameterType="com.iu.main.bankBook.BankBookDTO">
+  	<insert id="setAdd" parameterType="BankBookDTO">
   		INSERT INTO BANKBOOK
   		VALUES (BANK_SEQ.NEXTVAL, #{bookName}, #{bookRate}, #{bookSale}, #{bookContents})
   	</insert>
@@ -31,12 +31,12 @@
   	<!-- parameterType는 client에게 받은 값인데 다른 경우도 보여주는 것.
   		패키지명이 아닌 Long타입을 갖는 경로작성
   	 -->
-  	<delete id="setDelete" parameterType="java.lang.Long">
+  	<delete id="setDelete" parameterType="Long">
   		DELETE BANKBOOK WHERE BOOKNUM=#{bookNum}
   	</delete>
   	
   	
-  	<update id="setUpdate" parameterType="com.iu.main.bankBook.BankBookDTO">
+  	<update id="setUpdate" parameterType="BankBookDTO">
   		UPDATE BANKBOOK 
   		SET BOOKNAME=#{bookName}, BOOKRATE=#{bookRate}, BOOKSALE=#{bookSale}, BOOKCONTENTS=#{bookContents}
   		WHERE BOOKNUM=#{bookNum} 
