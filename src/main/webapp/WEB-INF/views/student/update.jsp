@@ -14,8 +14,10 @@
 	<form action="./update" method="post">
 		<input type="hidden" name="studNum" value="${dto.studNum}">
 		이름<input type="text" name="studName" value="${dto.studName}"><br>
-		합계 <input type="text" name="total">${dto.total}</input>
-		평균<input type="text" name="avg" value="${dto.avg}"><br>
+		국어<input type="text" name="kor" value="${dto.kor}"><br>
+		영어<input type="text" name="eng" value="${dto.eng}"><br>
+		수학<input type="text" name="math" value="${dto.math}"><br>
+
 		
 <!-- 		<p>
 			판매가능 <input type="radio" value="1" checked name="bookSale"><br>

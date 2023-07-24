@@ -15,7 +15,7 @@
     	
     	<insert id="setAdd" parameterType="com.iu.main.student.StudentDTO">
     		INSERT INTO STUDENT
-    		VALUES(STUD_SEQ.NEXTVAL, #{studName}, #{kor}, #{eng}, #{math}, #{total}, #{avg})
+    		VALUES(STUDENT_SEQ.NEXTVAL, #{studName}, #{kor}, #{eng}, #{math}, #{total}, #{avg})
     	</insert>
     	
     	<delete id="setDelete" parameterType="com.iu.main.student.StudentDTO">
@@ -24,7 +24,7 @@
     	
     	<update id="setUpdate" parameterType="com.iu.main.student.StudentDTO">
     		UPDATE STUDENT
-    		SET STUDNAME=#{studName}, KOR=#{kor}, ENG=#{eng}, MATH=#{math}
+    		SET STUDNAME=#{studName}, KOR=#{kor}, ENG=#{eng}, MATH=#{math}, TOTAL=#{total}, AVG=#{avg}
     		WHERE STUDNUM=#{studNum}
     	</update>
     </mapper>

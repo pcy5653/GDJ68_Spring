@@ -31,8 +31,8 @@
 		</c:otherwise>
 	</c:choose> --%>
 	
-	<a href="./update?bookNum=${dto.studNum}">수정</a>
-	<a href="./delete?bookNum=${dto.studNum}">삭제</a>
+	<a href="./update?studNum=${dto.studNum}">수정</a>
+	<a href="./delete?studNum=${dto.studNum}">삭제</a>
 	
 <%-- 	
 	<c:if test="${dto.bookSale eq 1}">

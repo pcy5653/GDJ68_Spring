@@ -22,16 +22,24 @@ public class StudentDAO {
 	}
 	
 	
-	// Detail -> 하나의 내용만 출력
+	// Detail -> 하나의 내용만 출력(DTO)
 	public StudentDTO getDetail(StudentDTO studentDTO) throws Exception {
 		return sqlSession.selectOne(NAMESPACE+"getDetail", studentDTO);
 	}
 	
 	
-	// Form add(insert)
-	public int setAdd(StudentDTO studentDTO) throws Exception {
-		return sqlSession.insert(NAMESPACE+"setAdd", studentDTO);
-	}
-	
-	// DB Insert
+    // insert, update, delete => 결과값(정수=int)출력
+    // Add(insert)  
+    public int setAdd(StudentDTO studentDTO) throws Exception {
+        return sqlSession.insert(NAMESPACE+"setAdd", studentDTO);
+    }
+    
+    // Update
+    public int setUpdate(StudentDTO studentDTO) throws Exception {
+        return sqlSession.update(NAMESPACE+"setUpdate", studentDTO);
+    }
+    // Delete
+    public int setDelete(StudentDTO studentDTO) throws Exception {
+        return sqlSession.delete(NAMESPACE+"setDelete", studentDTO);
+    }
 }

@@ -17,7 +17,7 @@
 	<form action="./add" method="post">
 		<div class="mb-3">
 		  <label for="studName" class="form-label">학생명</label>
-		  <input type="text" name="studName" class="form-control" id="studName" placeholder="상품명">
+		  <input type="text" name="studName" class="form-control" id="studName" placeholder="학생이름">
 		</div>
 		<div class="mb-3">
 		  <label for="kor" class="form-label">국어</label>
@@ -31,6 +31,7 @@
 		  <label for="math" class="form-label">수학</label>
 		  <input type="text" name="math" class="form-control" id="math" placeholder="수학점수 입력">
 		</div>
+		   
 		
 <!-- 		<div class="form-check">
 		  <input class="form-check-input" value="1" type="radio" name="booKSale"  id="booKSale1" checked>
