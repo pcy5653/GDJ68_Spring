@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- # Mapper : sql문 작성하는 곳. -->
+  <!-- ? 위치 : getter의 이름 (get을 빼고 첫글자 소문자변경) -->
+  <mapper namespace="com.iu.main.bankBook.BankBookDAO">
+  	<select id="getList" resultType="com.iu.main.bankBook.BankBookDTO">
+  		<!-- CONTENT 제외 -->
+  		SELECT BOOKNUM, BOOKNAME, BOOKRATE, BOOKSALE FROM BANKBOOK ORDER BY BOOKNUM DESC
+  	</select>
+  	
+  	
+  	<!-- 
+  		1. id : 사용하려는 DAO method명 작성 | 같은 namespace에서만 중복되지 않으면 된다.
+  		2. parameterType : 사용된? 파라미터(외부에서 받아주는 데이터, 현재 DTO의 bookNum을 받아서 전달하기 때문에 ) 경로
+  		3. resultType : 결과값을 setter에 넣는다, setter를 갖고 있는 DTO에 넣는다 -> BankBookDTO 타입
+  					-> ?에 getter의 이름을 넣고 받은 값을 setter에 대입 > 해당 setter가 있는 클래스 위치 작성
+  	-->
+  	<select id="getDetail" parameterType="BankBookDTO" resultType="com.iu.main.bankBook.BankBookDTO">
+  		SELECT * FROM BANKBOOK WHERE BOOKNUM=#{bookNum}
+  	</select>
+  	
+  	
+  	<insert id="setAdd" parameterType="BankBookDTO">
+  		INSERT INTO BANKBOOK
+  		VALUES (BANK_SEQ.NEXTVAL, #{bookName}, #{bookRate}, #{bookSale}, #{bookContents})
+  	</insert>
+  	
+  	
+  	<!-- parameterType는 client에게 받은 값인데 다른 경우도 보여주는 것.
+  		패키지명이 아닌 Long타입을 갖는 경로작성
+  	 -->
+  	<delete id="setDelete" parameterType="Long">
+  		DELETE BANKBOOK WHERE BOOKNUM=#{bookNum}
+  	</delete>
+  	
+  	
+  	<update id="setUpdate" parameterType="BankBookDTO">
+  		UPDATE BANKBOOK 
+  		SET BOOKNAME=#{bookName}, BOOKRATE=#{bookRate}, BOOKSALE=#{bookSale}, BOOKCONTENTS=#{bookContents}
+  		WHERE BOOKNUM=#{bookNum} 
+  	</update>
+  </mapper>

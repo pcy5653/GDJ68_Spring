@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.iu.main.member.MemberDAO">
+  <!-- #{} = getter의 이름 -->
+  
+  <!-- 로그인 -->
+  <!-- paraneterType을 풀패키지가 아닌 Config에 alies로 축약하여 alies명을 작성 -->
+  <select id="getLogin" parameterType="MemberDTO" resultType="MemberDTO">
+  		SELECT 	* FROM MEMBER 
+  		WHERE ID=#{id} AND PW=#{pw}
+  </select>
+  
+  <!-- 회원수정 -->
+  <update id="setMemberUpdate" parameterType="MemberDTO">
+  		UPDATE MEMBER SET
+  		PW=#{pw}, NAME=#{name}, EMAIL=#{email}, BIRTH=#{birth}
+  		WHERE ID=#{id}
+  </update>
+  </mapper>

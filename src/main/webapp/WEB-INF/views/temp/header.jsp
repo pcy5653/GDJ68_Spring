@@ -18,6 +18,9 @@
 		        <li class="nav-item">
 		          <a class="nav-link active" href="/bankbook/list">BankProduct</a>
 		        </li>
+		        <li class="nav-item">
+		          <a class="nav-link active" href="/notice/list">Notice</a>
+		        </li>
 		        <li class="nav-item dropdown">
 		          <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 		            Dropdown
@@ -36,6 +39,7 @@
 		      
 		      <nav>
 		      	<ul class="nav">
+		      		<!-- not empty : null이 아니냐! 값을 갖고 있냐 -->
 		      		<c:if test="${not empty member}">
 		      		<li class="nav-item text-white me-3"><a href="/member/logout">로그아웃</a></li>
 		      		<li class="nav-item text-white me-3"><a href="/member/mypage">mypage</a></li>
