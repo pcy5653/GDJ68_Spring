@@ -6,6 +6,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.iu.main.util.Pager;
+
+
 @Repository
 public class NoticeDAO {
 	
@@ -14,9 +17,16 @@ public class NoticeDAO {
 	
 	private final String NAMESPACE="com.iu.main.notice.NoticeDAO.";
 	
+	
+	//total | Service 받을 때 Long 타입
+	public Long getTotal() throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getTotal");
+	}
+	
 	// List
-	public List<NoticeDTO> getList() throws Exception{
-		return sqlSession.selectList(NAMESPACE+"getList");
+	public List<NoticeDTO> getList(Pager pager) throws Exception{
+		// 파라미터로 total의 데이터를 넣은 pager를 받아 리턴
+		return sqlSession.selectList(NAMESPACE+"getList", pager);
 	}
 	
 	// Detail

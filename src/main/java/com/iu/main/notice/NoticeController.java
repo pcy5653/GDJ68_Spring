@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.iu.main.util.Pager;
+
 @Controller
 @RequestMapping(value="/notice/*")
 public class NoticeController {
@@ -18,12 +20,13 @@ public class NoticeController {
 	
 	
 	@RequestMapping(value="list")
-	public ModelAndView getList(NoticeDTO noticeDTO, ModelAndView mv) throws Exception {
-		List<NoticeDTO> ar = noticeService.getList();
-		mv.setViewName("board/list");
-		mv.addObject("list", ar);
+	public String getList(Pager pager, Model model) throws Exception {
+		List<NoticeDTO> ar = noticeService.getList(pager);
+
+		model.addAttribute("list", ar);
+		model.addAttribute("", pager);
 		
-		return mv;
+		return "board/list";
 	}
 	
 	@RequestMapping(value="detail", method = RequestMethod.GET)

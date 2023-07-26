@@ -5,7 +5,20 @@
   
   <mapper namespace="com.iu.main.notice.NoticeDAO">
   		<select id="getList" resultType="NoticeDTO">
-  			SELECT NOTICENUM, NOTICENAME, NOTICETITLE, NOTICEDATE, NOTICEHIT FROM NOTICE ORDER BY NOTICENUM ASC
+  			SELECT * FROM 
+				(SELECT ROWNUM R, B.* FROM
+					(
+							SELECT * FROM NOTICE 
+							WHERE NOTICENUM>0
+							ORDER BY NOTICENUM ASC
+					) B
+				)
+			WHERE R BETWEEN ${startRow} AND ${lastRow}
+  		</select>
+  		
+  		<!-- total -->
+  		<select id="getTotal" resultType="Long">
+  			SELECT COUNT(NOTICENUM) FROM NOTICE
   		</select>
   		
   		<select id="getDetail" parameterType="NoticeDTO" resultType="NoticeDTO">
