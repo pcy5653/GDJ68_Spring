@@ -1,9 +1,13 @@
 package com.iu.main.bankBook;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.iu.main.util.Pager;
 
 @Service // 해당 클래스에 객체 생성 (서비스역할)
 public class BankBookService {
@@ -13,8 +17,26 @@ public class BankBookService {
 	private BankBookDAO bankBookDAO;
 	
 	
-	public List<BankBookDTO> getList() throws Exception {
-		return bankBookDAO.getList();
+	public List<BankBookDTO> getList(Pager pager) throws Exception {
+//		Map<String, Integer> map = new HashMap<String, Integer>();
+		// page	 startRow  lastRow
+		//  1  		1		  10
+		//  2		11		  20
+		//  3 		21		  30
+//		int count=10;
+//		int startRow=(page-1)*count+1;
+//		int lastRow=page*count;
+
+//		map.put("startRow", startRow);
+//		map.put("lastRow", lastRow);
+		
+		pager.makeRowNum();
+		
+		// Long타입으로 리턴한 값을 받아 pager에 담기
+		Long tatal = bankBookDAO.getTotal();
+		pager.makePageNum(tatal);
+		
+		return bankBookDAO.getList(pager);
 	}
 	
 	

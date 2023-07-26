@@ -4,10 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.iu.main.util.Pager;
 
 @Repository //해당 클래스의 객체 생성 (DAO 객체생성:spring에서 생성) | (DB역할)
 public class BankBookDAO {
@@ -19,9 +22,17 @@ public class BankBookDAO {
 	// *Mapper 파일 위치
 	private final String NAMESPACE="com.iu.main.bankBook.BankBookDAO.";
 	
+	
+	// total : List의 페이지 넘버 보여주기
+	public Long getTotal() throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getTotal");
+	}
+	
+	
 	// List : 여러개 추출(List(부모) > ArrayList(자))
-	public List<BankBookDTO> getList() throws Exception{
-		return sqlSession.selectList(NAMESPACE+"getList");
+	public List<BankBookDTO> getList(Pager pager) throws Exception{
+		// 파라미터로 List의 갯수를 보내주는 데이터 2개를 보내준다.
+		return sqlSession.selectList(NAMESPACE+"getList", pager);
 	}
 
 	

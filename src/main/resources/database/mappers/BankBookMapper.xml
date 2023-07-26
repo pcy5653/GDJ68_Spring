@@ -5,9 +5,23 @@
   <!-- # Mapper : sql문 작성하는 곳. -->
   <!-- ? 위치 : getter의 이름 (get을 빼고 첫글자 소문자변경) -->
   <mapper namespace="com.iu.main.bankBook.BankBookDAO">
-  	<select id="getList" resultType="com.iu.main.bankBook.BankBookDTO">
+  	<select id="getList" parameterType="com.iu.main.util.Pager" resultType="com.iu.main.bankBook.BankBookDTO">
   		<!-- CONTENT 제외 -->
-  		SELECT BOOKNUM, BOOKNAME, BOOKRATE, BOOKSALE FROM BANKBOOK ORDER BY BOOKNUM DESC
+  		<!-- 1. List에서 원하는 갯수만큼 보여주기(현재 1~10)  -->
+		SELECT BOOKNUM, BOOKNAME, BOOKRATE, BOOKSALE FROM 
+			(SELECT ROWNUM R, B.* FROM
+				(
+					SELECT * FROM BANKBOOK 
+					WHERE BOOKNUM>0 
+					ORDER BY BOOKNUM DESC
+				) B
+			)
+		WHERE R BETWEEN #{startRow} AND #{lastRow}
+  	</select>
+  	
+  	<!-- 2. List의 data 전체 갯수 출력, 결과값 : 숫자 > Long으로 받기 -->
+  	<select id="getTotal" resultType="Long">
+  		SELECT COUNT(BOOKNUM) FROM BANKBOOK
   	</select>
   	
   	

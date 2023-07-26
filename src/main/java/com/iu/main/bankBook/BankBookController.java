@@ -10,7 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.iu.main.util.Pager;
 
 @Controller // 해당 객체를 생성 (Controller 역할)
 @RequestMapping("/bankbook/*")	// /bankbook/으로 들어온 모든 파일을 해당 class에서 처리하라
@@ -25,11 +28,12 @@ public class BankBookController {
 	
 	// List | Model타입 사용
 	@RequestMapping(value="list", method=RequestMethod.GET)	// method=클래스명.메소드(상수=final)
-	public String getList(Model model) throws Exception {
-		List<BankBookDTO> ar = bankBookService.getList();
+	public String getList(Pager pager, Model model) throws Exception {
+		// @RequestParam(defaultValue = "1") Integer page -> 매개변수 : Null왔을 때 page의 기본값을 1로 넣어라.
+		List<BankBookDTO> ar = bankBookService.getList(pager);
 		// list.jsp의 속성명, object(List<BankBookDTO>로 받아온 내용) 
 		model.addAttribute("list", ar);
-		
+		model.addAttribute("pager", pager);
 		// return 값으로 model로 내용이 작성된 list.jsp 경로를 보내준다.
 		return "bankbook/list";
 	}
