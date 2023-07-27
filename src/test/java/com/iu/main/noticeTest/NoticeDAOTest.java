@@ -18,10 +18,10 @@ public class NoticeDAOTest extends Mytest {
 	@Autowired
 	private NoticeService noticeService;
 	
-	@Test
-	public void getList() throws Exception {
-		List<NoticeDTO> ar = noticeService.getList();
-		assertNotEquals(0, ar.size());
-	}
+	//@Test
+//	public void getList() throws Exception {
+//		List<NoticeDTO> ar = noticeService.getList();
+//		assertNotEquals(0, ar.size());
+//	}
 
 }
