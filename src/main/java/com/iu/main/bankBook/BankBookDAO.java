@@ -24,8 +24,8 @@ public class BankBookDAO {
 	
 	
 	// total : List의 페이지 넘버 보여주기
-	public Long getTotal() throws Exception{
-		return sqlSession.selectOne(NAMESPACE+"getTotal");
+	public Long getTotal(Pager pager) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getTotal", pager);
 	}
 	
 	

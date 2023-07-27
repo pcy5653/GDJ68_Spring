@@ -33,7 +33,7 @@ public class BankBookService {
 		pager.makeRowNum();
 		
 		// Long타입으로 리턴한 값을 받아 pager에 담기
-		Long tatal = bankBookDAO.getTotal();
+		Long tatal = bankBookDAO.getTotal(pager);
 		pager.makePageNum(tatal);
 		
 		return bankBookDAO.getList(pager);

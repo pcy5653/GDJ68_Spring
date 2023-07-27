@@ -22,13 +22,18 @@ public class Pager {
 	// 끝번호
 	private Long lastNum;
 	
-	
 	// 이전블럭 활성화(기본값 : false)
 	private boolean pre;	// false면 1번 블럭, true면 1번 아님
 	// 다음블럭 활성화
 	private boolean next;	// false면 마지막블럭, true면 마지막 아님
 	
 	
+	// 검색
+	private String kind;
+	private String search;
+
+
+
 	// 1. 보여지는 data 갯수 계산 method
 	public void makeRowNum() {
 		//getPage = Null이 오면 1을 받을 수 있도록 설정 (getter 확인)
@@ -101,7 +106,29 @@ public class Pager {
 			this.lastNum=totalPage;
 		}
 	}
-	
+	public String getKind() {
+		return kind;
+	}
+
+
+	public void setKind(String kind) {
+		this.kind = kind;
+	}
+
+
+	public String getSearch() {
+		if(this.search==null) {
+			// search가 null(검색X)일 때 LIKE '%%'를 실행하기 위해 ""로 빈칸을 제공
+			this.search="";
+		}
+		
+		return "%"+search+"%";
+	}
+
+
+	public void setSearch(String search) {
+		this.search = search;
+	}
 	
 	public Long getStartNum() {
 		return startNum;

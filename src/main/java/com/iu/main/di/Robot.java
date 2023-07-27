@@ -14,11 +14,11 @@ public class Robot  {
 		this.arm = new Arm();
 	}
 	
-	public Robot(Arm arm) {
-		// 1.생성자에서 주입
-		// 결합도가 낮다(약하다)
-		this.arm = new Arm();
-	}
+//	public Robot(Arm arm) {
+//		// 1.생성자에서 주입
+//		// 결합도가 낮다(약하다)
+//		this.arm = new Arm();
+//	}
 	
 
 	

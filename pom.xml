@@ -14,6 +14,13 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	<dependencies>
+	<!-- commons-fileupload : img 파일 output, input stream=upload 을 위한 repository-->
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>1.5</version>
+		</dependency>
+		
 		<!-- mybatis -->
 		<dependency>
 		    <groupId>org.mybatis</groupId>

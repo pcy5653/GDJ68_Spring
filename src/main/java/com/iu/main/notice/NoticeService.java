@@ -19,7 +19,7 @@ public class NoticeService {
 		
 		// List total
 		pager.makeRowNum();
-		Long total = noticeDAO.getTotal();
+		Long total = noticeDAO.getTotal(pager);
 		pager.makePageNum(total);
 		
 		return noticeDAO.getList(pager);

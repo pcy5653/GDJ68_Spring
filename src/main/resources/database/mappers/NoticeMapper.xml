@@ -10,6 +10,20 @@
 					(
 							SELECT * FROM NOTICE 
 							WHERE NOTICENUM>0
+								AND
+								<choose>
+									<when test="kind == 'name'">
+										NOTICENAME LIKE #{search}
+									</when>
+									<when test="kind == 'title'">
+										NOTICETITLE LIKE #{search}
+									</when>
+									<otherwise>
+										NOTICECONTENTS LIKE #{search}
+									</otherwise>
+								</choose>
+							
+							
 							ORDER BY NOTICENUM ASC
 					) B
 				)
@@ -19,6 +33,19 @@
   		<!-- total -->
   		<select id="getTotal" resultType="Long">
   			SELECT COUNT(NOTICENUM) FROM NOTICE
+  			WHERE NOTICENUM>0
+				AND
+			<choose>
+				<when test="kind == 'name'">
+					NOTICENAME LIKE #{search}
+				</when>
+				<when test="kind == 'title'">
+					NOTICETITLE LIKE #{search}
+				</when>
+				<otherwise>
+					NOTICECONTENTS LIKE #{search}
+				</otherwise>
+			</choose>
   		</select>
   		
   		<select id="getDetail" parameterType="NoticeDTO" resultType="NoticeDTO">

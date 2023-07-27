@@ -28,6 +28,7 @@ public class BankBookController {
 	
 	// List | Model타입 사용
 	@RequestMapping(value="list", method=RequestMethod.GET)	// method=클래스명.메소드(상수=final)
+	// pager에서 page번호, kind, search를 받는다
 	public String getList(Pager pager, Model model) throws Exception {
 		// @RequestParam(defaultValue = "1") Integer page -> 매개변수 : Null왔을 때 page의 기본값을 1로 넣어라.
 		List<BankBookDTO> ar = bankBookService.getList(pager);

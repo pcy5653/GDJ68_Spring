@@ -22,4 +22,9 @@ public class MemberDAO {
 	public int setMemberUpdate(MemberDTO memberDTO) throws Exception{
 		return sqlSession.update(NAMESPACE+"setMemberUpdate", memberDTO);
 	}
+	
+	// Join 회원가입
+	public int setJoin(MemberDTO memberDTO)throws Exception{
+		return sqlSession.insert(NAMESPACE+"setJoin", memberDTO);
+	}
 }

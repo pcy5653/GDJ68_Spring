@@ -6,6 +6,7 @@
   <mapper namespace="com.iu.main.member.MemberDAO">
   <!-- #{} = getter의 이름 -->
   
+
   <!-- 로그인 -->
   <!-- paraneterType을 풀패키지가 아닌 Config에 alies로 축약하여 alies명을 작성 -->
   <select id="getLogin" parameterType="MemberDTO" resultType="MemberDTO">
@@ -19,4 +20,11 @@
   		PW=#{pw}, NAME=#{name}, EMAIL=#{email}, BIRTH=#{birth}
   		WHERE ID=#{id}
   </update>
+  
+    <!-- join 회원가입 -->
+  <insert id="setJoin" parameterType="MemberDTO">
+  	INSERT INTO MEMBER (ID, PW, NAME, EMAIL, BIRTH) 
+  	VALUES (#{id}, #{pw}, #{name}, #{email}, #{birth})
+  </insert>
+  
   </mapper>
