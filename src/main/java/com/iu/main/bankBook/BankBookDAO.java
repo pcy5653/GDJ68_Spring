@@ -45,11 +45,21 @@ public class BankBookDAO {
 		return sqlSession.selectOne(NAMESPACE+"getDetail", bankBookDTO);
 	}
 	
+	// sequence 받기
+	public long getSequence() throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getSequence");
+	}
+	
 	
 	// add
 	// insert, update, delete는 리턴값으로 int(정수, 0~1이상 말함)를 보낸다 => colurm의 추가 실패 =0, 추가&수정&삭제 성공 = 1이상
 	public int setAdd(BankBookDTO bankBookDTO) throws Exception{
 		return sqlSession.insert(NAMESPACE+"setAdd", bankBookDTO);
+	}
+	
+	// file add
+	public int setFileAdd(BankBookFileDTO bankBookFileDTO) throws Exception{
+		return sqlSession.insert(NAMESPACE+"setFileAdd", bankBookFileDTO);
 	}
 	
 	

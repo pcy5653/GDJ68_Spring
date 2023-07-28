@@ -2,6 +2,8 @@ package com.iu.main.bankBook;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.mapping.ResultSetType;
 // 총정리
 // client > DS -> Controller -> Service -> DAO(Mapper가서 쿼리문 실행하여 DTO에 받아 다시 보내준다)
@@ -11,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iu.main.util.Pager;
@@ -69,8 +72,9 @@ public class BankBookController {
 	
 	// DB insert
 	@RequestMapping(value = "add", method = RequestMethod.POST)
-	public String setAdd(BankBookDTO bankBookDTO) throws Exception{
-		int result = bankBookService.setAdd(bankBookDTO);
+	// MultipartFile [] photos = 파라미터명과 동일하게 작성
+	public String setAdd(BankBookDTO bankBookDTO, MultipartFile [] photos, HttpSession session) throws Exception{
+		int result = bankBookService.setAdd(bankBookDTO, photos, session);
 		
 		// Add method (GET -> POST)
 		// GET(method)일 때는 정상 경로이지만

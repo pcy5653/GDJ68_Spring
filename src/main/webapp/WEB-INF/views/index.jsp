@@ -48,6 +48,6 @@
 	</c:if>
 	
 	<!-- 실제 /resources/upload/member에 올라가는 경로 -->
-	<img alt="" src="/resources/upload/member/3.jpg">
+	
 </body>
 </html>

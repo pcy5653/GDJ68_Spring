@@ -3,13 +3,23 @@ package com.iu.main.file;
 import static org.junit.Assert.*;
 
 import java.util.Calendar;
+import java.util.Random;
 
 import org.junit.Test;
 
 import com.iu.main.Mytest;
 
 public class CalendarTest extends Mytest{
-
+	
+	@Test
+	public void test2() {
+		Calendar ca = Calendar.getInstance();
+		Random random = new Random(ca.getTimeInMillis());
+		random.nextInt();	// 무한 랜덤
+		random.nextInt(5);	// 0~4 random
+	}
+	
+	
 	@Test
 	public void test() {
 		// 1. Random 사용

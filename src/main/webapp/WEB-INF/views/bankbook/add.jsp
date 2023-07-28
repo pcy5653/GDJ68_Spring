@@ -14,7 +14,7 @@
 	<section class="container mt-5">
 	<h1 class="my-4">Add Page</h1>
 	
-	<form action="./add" method="post">
+	<form action="./add" method="post" enctype="multipart/form-data">
 		<div class="mb-3">
 		  <label for="bookName" class="form-label">상품명</label>
 		  <input type="text" name="bookName" class="form-control" id="bookName" placeholder="상품명">
@@ -39,6 +39,19 @@
 		  <label class="form-check-label" for="booKSale2">
 		   판매중단
 		  </label>
+		</div>
+		
+		<div class="mb-3">
+		  <label for="pic" class="form-label">사진첨부1</label>
+		  <input type="file" name="photos" class="form-control" id="pic">
+		</div>
+		<div class="mb-3">
+		  <label for="pic" class="form-label">사진첨부2</label>
+		  <input type="file" name="photos" class="form-control" id="pic">
+		</div>
+		<div class="mb-3">
+		  <label for="pic" class="form-label">사진첨부3</label>
+		  <input type="file" name="photos" class="form-control" id="pic">
 		</div>
 
 		<div class="my-3">

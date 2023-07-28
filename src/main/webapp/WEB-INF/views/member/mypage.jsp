@@ -14,6 +14,11 @@
 	<h1 class="my-4">My Page</h1>
 	
 	<div>
+	
+		<p>
+			<!-- ${member.memberFileDTO.fileName} = member는 Controller의 getLogin에서 불러오는 속성명 -->
+			<img alt="" src="../resources/upload/member/${member.memberFileDTO.fileName}">
+		</p>
 		<p>
 			${member.id} : ${sessionScope.member.name}
 		</p>

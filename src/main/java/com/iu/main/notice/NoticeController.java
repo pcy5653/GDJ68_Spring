@@ -24,7 +24,7 @@ public class NoticeController {
 		List<NoticeDTO> ar = noticeService.getList(pager);
 
 		model.addAttribute("list", ar);
-		model.addAttribute("", pager);
+		model.addAttribute("pager", pager);
 		
 		return "board/list";
 	}

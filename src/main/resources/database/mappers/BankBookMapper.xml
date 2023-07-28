@@ -73,14 +73,48 @@
   		3. resultType : 결과값을 setter에 넣는다, setter를 갖고 있는 DTO에 넣는다 -> BankBookDTO 타입
   					-> ?에 getter의 이름을 넣고 받은 값을 setter에 대입 > 해당 setter가 있는 클래스 위치 작성
   	-->
-  	<select id="getDetail" parameterType="BankBookDTO" resultType="BankBookDTO">
-  		SELECT * FROM BANKBOOK WHERE BOOKNUM=#{bookNum}
+  	<select id="getDetail" parameterType="BankBookDTO" resultMap="getDetailResult">
+  		SELECT B.*, BF.*
+  		FROM BANKBOOK B
+  		LEFT OUTER JOIN
+  		BANKFILE BF
+  		ON(B.BOOKNUM = BF.BOOKNUM)
+  		WHERE B.BOOKNUM=#{bookNum}
+  	</select>
+  	<resultMap type="BankBookDTO" id="getDetailResult">
+  		<id column="BOOKNUM" property="bookNum"/>
+  		<result column="BOOKNAME" property="bookName"/>
+  		<result column="BOOKCONTENTS" property="bookContents"/>
+  		<result column="BOOKRATE" property="bookRate"/>
+		<result column="BOOKSALE" property="bookSale"/>
+		
+		<!-- N개의 bankfileDTO -->
+		<collection property="fileDTOs" javaType="List" ofType="BankBookFileDTO">
+			<id column="FILENUM" property="fileNum"/>
+			<result column="FILENAME" property="fileName"/>
+			<result column="ORIGINALNAME" property="originalName"/>
+		</collection>
+  	</resultMap>
+  	
+  	<!-- BookNum의 번호를 받기 -->
+  	<select id="getSequence" resultType="Long">
+  		SELECT BANK_SEQ.NEXTVAL FROM DUAL
   	</select>
   	
-  	
+  	<!-- 받아온 bookNum을 BANK_SEQ.NEXTVAL로 집어 넣지 않는다. -->
   	<insert id="setAdd" parameterType="BankBookDTO">
+  		<selectKey keyProperty="bookNum" resultType="Long" order="BEFORE">
+  			<!-- order="BEFORE" = 밑의 INSERT쿼리가 실행되기 전에 해당 SELECT문을 실행하여 KeyProperty에 넣어라-->	
+  			<!-- BookNum의 번호를 받기 -->
+			SELECT BANK_SEQ.NEXTVAL FROM DUAL
+  		</selectKey>
   		INSERT INTO BANKBOOK
-  		VALUES (BANK_SEQ.NEXTVAL, #{bookName}, #{bookRate}, #{bookSale}, #{bookContents})
+  		VALUES (#{bookNum}, #{bookName}, #{bookRate}, #{bookSale}, #{bookContents})
+  	</insert>
+  	
+  	<insert id="setFileAdd" parameterType="BankBookFileDTO">
+  		INSERT INTO BANKFILE (FILENUM, BOOKNUM, FILENAME, ORIGINALNAME)
+  		VALUES (BF_SEQ.NEXTVAL, #{bookNum}, #{fileName}, #{originalName})
   	</insert>
   	
   	

@@ -4,9 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.iu.main.util.FileManager;
 import com.iu.main.util.Pager;
 
 @Service // 해당 클래스에 객체 생성 (서비스역할)
@@ -15,6 +19,9 @@ public class BankBookService {
 	//DAO 의존
 	@Autowired // 아래 객체의 타입을 찾아서 변수 생성
 	private BankBookDAO bankBookDAO;
+	
+	@Autowired
+	private FileManager fileManager;
 	
 	
 	public List<BankBookDTO> getList(Pager pager) throws Exception {
@@ -45,8 +52,35 @@ public class BankBookService {
 	}
 	
 	
-	public int setAdd(BankBookDTO bankBookDTO) throws Exception {
-		return bankBookDAO.setAdd(bankBookDTO);
+	public int setAdd(BankBookDTO bankBookDTO, MultipartFile [] photos, HttpSession session) throws Exception {
+		// 1. 어디에 저장? /resources/upload/bankbook/
+
+		String path = "/resources/upload/bankbook/";
+		// insert 실행되기전에 BookNum을 검색하여 setBookNum에 집어넣는다.
+		// [목표] 시퀀스로 만들어진 bookNum값을 가져와 bookNum에 넣어준다.
+		// 방법1. insert 실행되기 전에 시퀀스 번호를 받아와(Mapper에서 select문 이용해 알아가지고 받아오기) setAdd를 실행할 때 변수로 시퀀스번호를 넣어준다. 
+//		long num = bankBookDAO.getSequence();
+//		bankBookDTO.setBookNum(num);
+		
+		
+		
+		// insert
+		int result = bankBookDAO.setAdd(bankBookDTO);
+		
+		for(MultipartFile multipartFile: photos) {
+			
+			if(multipartFile.isEmpty()) {
+				continue;
+			}
+			String fileName = fileManager.fileSave(path, session, multipartFile);
+			BankBookFileDTO bankBookFileDTO = new BankBookFileDTO();
+			bankBookFileDTO.setOriginalName(multipartFile.getOriginalFilename());
+			bankBookFileDTO.setFileName(fileName);
+			bankBookFileDTO.setBookNum(bankBookDTO.getBookNum());
+			result = bankBookDAO.setFileAdd(bankBookFileDTO);
+		}
+		
+		return result;
 	}
 	
 	

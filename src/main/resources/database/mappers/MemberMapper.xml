@@ -9,10 +9,32 @@
 
   <!-- 로그인 -->
   <!-- paraneterType을 풀패키지가 아닌 Config에 alies로 축약하여 alies명을 작성 -->
-  <select id="getLogin" parameterType="MemberDTO" resultType="MemberDTO">
-  		SELECT 	* FROM MEMBER 
-  		WHERE ID=#{id} AND PW=#{pw}
+  <!-- Member와 MemberFile의 정보를 가져오기 -->
+  <!-- resultType으로 반환티입 지정해서 아래의 resultMap에서 실행 -->
+  <select id="getLogin" parameterType="MemberDTO" resultMap="getLoginResult">
+  		SELECT M.* , MF.* 
+  		FROM MEMBER M
+  			LEFT OUTER JOIN
+  			MEMBERFILE MF
+  			ON(M.ID = MF.ID)
+  		WHERE M.ID=#{id} AND M.PW=#{pw}
   </select>
+  
+  <!-- Mypage의 파일 경로 -->
+  <resultMap type="MemberDTO" id="getLoginResult">  <!-- property = setter의 이름 -->
+  	<id column="ID" property="id"/>		<!-- Member의 id & MemberFile의 id 동일, 1개 작성 -->
+  	<result column="PW" property="pw"/>
+  	<result column="NAME" property="name"/>
+  	<result column="EMAIL" property="email"/>
+  	<result column="BIRTH" property="birth"/>
+  	
+  	<!-- association으로 member에 memberfileDTO 객체선언한 안의 내용 보기(memberfileDTO Mapping) -->
+  	<association property="memberFileDTO" javaType="MemberFileDTO">
+  		<result column="FILENUM" property="fileNum"/>
+  		<result column="FILENAME" property="fileName"/>
+  		<result column="ORIGINALNAME" property="originalName"/>
+  	</association>
+  </resultMap>
   
   <!-- 회원수정 -->
   <update id="setMemberUpdate" parameterType="MemberDTO">
@@ -27,4 +49,25 @@
   	VALUES (#{id}, #{pw}, #{name}, #{email}, #{birth})
   </insert>
   
+  <!-- 회원가입시 파일join -->
+  <insert id="setFileJoin" parameterType="MemberFileDTO">
+  	INSERT INTO MEMBERFILE (FILENUM, ID, FILENAME, ORIGINALNAME)
+  	VALUES (MF_SEQ.NEXTVAL, #{id}, #{fileName}, #{originalName})
+  </insert>
+  
   </mapper>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

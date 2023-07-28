@@ -27,4 +27,9 @@ public class MemberDAO {
 	public int setJoin(MemberDTO memberDTO)throws Exception{
 		return sqlSession.insert(NAMESPACE+"setJoin", memberDTO);
 	}
+	
+	// MEMBERFILE 
+	public int setFileJoin(MemberFileDTO memberFileDTO) throws Exception {
+		return sqlSession.insert(NAMESPACE+"setFileJoin", memberFileDTO);
+	}
 }
