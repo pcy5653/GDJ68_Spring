@@ -4,26 +4,31 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.iu.main.notice.NoticeDAO">
+  <!-- #{} : 꺼내올 getter의 이름 -->
+  
+  		<sql id="searchSql">
+  			WHERE NOTICENUM>0
+			AND
+				<choose>
+					<when test="kind == 'name'">
+						NOTICENAME LIKE #{search}
+					</when>
+					<when test="kind == 'title'">
+						NOTICETITLE LIKE #{search}
+					</when>
+					<otherwise>
+						NOTICECONTENTS LIKE #{search}
+					</otherwise>
+				</choose>
+  		</sql>
+  
+  
   		<select id="getList" resultType="NoticeDTO">
   			SELECT * FROM 
 				(SELECT ROWNUM R, B.* FROM
 					(
 							SELECT * FROM NOTICE 
-							WHERE NOTICENUM>0
-								AND
-								<choose>
-									<when test="kind == 'name'">
-										NOTICENAME LIKE #{search}
-									</when>
-									<when test="kind == 'title'">
-										NOTICETITLE LIKE #{search}
-									</when>
-									<otherwise>
-										NOTICECONTENTS LIKE #{search}
-									</otherwise>
-								</choose>
-							
-							
+							<include refid="searchSql"></include>
 							ORDER BY NOTICENUM ASC
 					) B
 				)
@@ -33,28 +38,29 @@
   		<!-- total -->
   		<select id="getTotal" resultType="Long">
   			SELECT COUNT(NOTICENUM) FROM NOTICE
-  			WHERE NOTICENUM>0
-				AND
-			<choose>
-				<when test="kind == 'name'">
-					NOTICENAME LIKE #{search}
-				</when>
-				<when test="kind == 'title'">
-					NOTICETITLE LIKE #{search}
-				</when>
-				<otherwise>
-					NOTICECONTENTS LIKE #{search}
-				</otherwise>
-			</choose>
+  			<include refid="searchSql"></include>
   		</select>
+  		
   		
   		<select id="getDetail" parameterType="NoticeDTO" resultType="NoticeDTO">
   			SELECT * FROM NOTICE WHERE NOTICENUM=#{noticeNum}
   		</select>
   		
+  		
   		<insert id="setAdd" parameterType="NoticeDTO">
-  			INSERT INTO NOTICE VALUES (NOTICE_SEQ.NEXTVAL, #{noticeName}, #{noticeTitle}, #{noticeContents}, SYSDATE ,0)
+  			<selectKey keyProperty="noticeNum" resultType="Integer" order="BEFORE">
+  				SELECT NOTICE_SEQ.NEXTVAL FROM DUAL
+  			</selectKey>
+  			INSERT INTO NOTICE 
+  			VALUES (#{noticeNum}, #{noticeName}, #{noticeTitle}, #{noticeContents}, SYSDATE ,0)
   		</insert>
+  		
+  		<insert id="setFileAdd" parameterType="NoticeFileDTO">
+  			INSERT INTO NOTICEFILE (FILENUM, ID, FILENAME, ORIGINALNAME)
+  			VALUES (NOTICEFILE_SEQ.NEXTVAL, #{noticeNum}, #{fileName}, #{originalName})
+  		</insert>
+  		
+  		
   		
   		<update id="setUpdate" parameterType="NoticeDTO">
   			UPDATE NOTICE

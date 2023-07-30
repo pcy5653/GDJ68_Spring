@@ -64,11 +64,13 @@ public class BankBookService {
 		
 		
 		
-		// insert
+		// setAdd 실행하면서 bookNum을 찾아 DTO에 넣는다.
 		int result = bankBookDAO.setAdd(bankBookDTO);
 		
+		// file select
 		for(MultipartFile multipartFile: photos) {
 			
+			// 파일이 비어있다면 다시 for문으로 가라.
 			if(multipartFile.isEmpty()) {
 				continue;
 			}

@@ -35,7 +35,7 @@
 	<section class="container mt-5">
 	<h1 class="my-4">Add Page</h1>
 	
-	<form action="./add" method="post">
+	<form action="./add" method="post" enctype="multipart/form-data">
 		<div class="mb-3 nameLine">
 		  <label for="noticeName" class="form-label nameLabel">작성자</label>
 		  <input type="text" name="noticeName" class="form-control" id="noticeName" value="">
@@ -49,7 +49,26 @@
 		  <textarea class="form-control" name="noticeContents" id="noticeContents" rows="3"></textarea>
 		</div>	
 		
-		
+		<div class="mb-3">
+		  <label for="pic" class="form-label">사진첨부1</label>
+		  <input type="file" name="photos" class="form-control" id="pic">
+		</div>
+		<div class="mb-3">
+		  <label for="pic" class="form-label">사진첨부2</label>
+		  <input type="file" name="photos" class="form-control" id="pic">
+		</div>
+		<div class="mb-3">
+		  <label for="pic" class="form-label">사진첨부3</label>
+		  <input type="file" name="photos" class="form-control" id="pic">
+		</div>
+		<div class="mb-3">
+		  <label for="pic" class="form-label">사진첨부4</label>
+		  <input type="file" name="photos" class="form-control" id="pic">
+		</div>
+		<div class="mb-3">
+		  <label for="pic" class="form-label">사진첨부5</label>
+		  <input type="file" name="photos" class="form-control" id="pic">
+		</div>
 
 
 		<div class="my-3">

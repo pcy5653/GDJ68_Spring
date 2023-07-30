@@ -20,7 +20,7 @@ public class FileManager {
 		// 1. 어디에 저장?
 		// String path="/resources/upload/member/";	=> 매개변수 받기
 		
-		// 2. 실제 경로 알아오기 (tomcat의 Application(내장객체)사용)
+		// 2. 실제 경로 알아오기 (tomcat의 Application(내장객체)사용 > session을 사용하기 위함)
 		// jsp : application
 		// java : ServletContext
 		String realPath = session.getServletContext().getRealPath(path);
@@ -40,6 +40,6 @@ public class FileManager {
 		// 5. 파일 저장
 		multipartFile.transferTo(file);
 		
-		return uId; //Service에서 fileName 넣기 위해
+		return uId; //Service에서 각각의 fileName 넣기 위해
 	}
 }

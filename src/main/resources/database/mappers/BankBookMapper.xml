@@ -5,6 +5,8 @@
   <!-- # Mapper : sql문 작성하는 곳. -->
   <!-- ? 위치 : getter의 이름 (get을 빼고 첫글자 소문자변경) -->
   <mapper namespace="com.iu.main.bankBook.BankBookDAO">
+  
+  	<!-- getList, getTotal에서 활용 -->
   	<sql id="searchSql">
 	  	WHERE BOOKNUM>0 
 	  	AND
@@ -96,7 +98,8 @@
 		</collection>
   	</resultMap>
   	
-  	<!-- BookNum의 번호를 받기 -->
+  	
+  	<!-- BookNum의 번호를 받기 | 실행X -->
   	<select id="getSequence" resultType="Long">
   		SELECT BANK_SEQ.NEXTVAL FROM DUAL
   	</select>
@@ -112,10 +115,12 @@
   		VALUES (#{bookNum}, #{bookName}, #{bookRate}, #{bookSale}, #{bookContents})
   	</insert>
   	
+  	<!-- file 정보 넣기 -->
   	<insert id="setFileAdd" parameterType="BankBookFileDTO">
   		INSERT INTO BANKFILE (FILENUM, BOOKNUM, FILENAME, ORIGINALNAME)
   		VALUES (BF_SEQ.NEXTVAL, #{bookNum}, #{fileName}, #{originalName})
   	</insert>
+  	
   	
   	
   	<!-- parameterType는 client에게 받은 값인데 다른 경우도 보여주는 것.

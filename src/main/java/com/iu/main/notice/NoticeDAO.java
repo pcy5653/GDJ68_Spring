@@ -39,6 +39,11 @@ public class NoticeDAO {
 		return sqlSession.insert(NAMESPACE+"setAdd", noticeDTO);
 	}
 	
+	// file Add
+	public int setFileAdd(NoticeFileDTO noticeFileDTO) {
+		return sqlSession.insert(NAMESPACE+"setFileAdd",noticeFileDTO);
+	}
+	
 	//update
 	public int setUpdate(NoticeDTO noticeDTO) throws Exception{
 		return sqlSession.update(NAMESPACE+"setUpdate", noticeDTO);
