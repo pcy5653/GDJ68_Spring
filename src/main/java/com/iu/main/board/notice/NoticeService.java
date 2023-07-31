@@ -1,4 +1,4 @@
-package com.iu.main.notice;
+package com.iu.main.board.notice;
 
 import java.util.List;
 
@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.iu.main.board.BoardDTO;
+import com.iu.main.board.BoardService;
 import com.iu.main.util.FileManager;
 import com.iu.main.util.Pager;
 
 @Service
-public class NoticeService {
+public class NoticeService implements BoardService{
 	
 	@Autowired
 	private NoticeDAO noticeDAO;
@@ -23,7 +25,8 @@ public class NoticeService {
 	
 	
 	// List
-	public List<NoticeDTO> getList(Pager pager) throws Exception {
+	@Override
+	public List<BoardDTO> getList(Pager pager) throws Exception {
 		
 		// List total
 		pager.makeRowNum();
@@ -34,18 +37,19 @@ public class NoticeService {
 	}
 	
 	// Detail
-	public NoticeDTO getDetail(NoticeDTO noticeDTO) throws Exception{
-		return noticeDAO.getDetail(noticeDTO);
+	@Override
+	public NoticeDTO getDetail(BoardDTO boardDTO) throws Exception{
+		return noticeDAO.getDetail(boardDTO);
 	}
 	
 	// Add(insert)
-	public int setAdd(NoticeDTO noticeDTO, MultipartFile [] photos, HttpSession session) throws Exception{
+	@Override
+	public int setAdd(BoardDTO boardDTO, MultipartFile [] photos, HttpSession session) throws Exception{
 		// 1. 어디에 저장?
 		String path = "/resources/upload/notice/";
 		
-		
 		// setAdd를 실행하면서 noticeNum을 찾아 DTO 대입
-		int result = noticeDAO.setAdd(noticeDTO);
+		int result = noticeDAO.setAdd(boardDTO);
 		
 		// file select
 		for(MultipartFile multipartFile: photos) {
@@ -57,7 +61,7 @@ public class NoticeService {
 			NoticeFileDTO noticeFileDTO = new NoticeFileDTO();
 			noticeFileDTO.setFileName(fileName);
 			noticeFileDTO.setOriginalName(multipartFile.getOriginalFilename());
-			noticeFileDTO.setNoticeNum(noticeDTO.getNoticeNum());
+			noticeFileDTO.setFileNum(boardDTO.getNum());
 			result = noticeDAO.setFileAdd(noticeFileDTO);
 		}
 		
@@ -65,12 +69,14 @@ public class NoticeService {
 	}
 	
 	// Update
-	public int setUpdate(NoticeDTO noticeDTO) throws Exception{
-		return noticeDAO.setUpdate(noticeDTO);
+	@Override
+	public int setUpdate(BoardDTO boardDTO) throws Exception{
+		return noticeDAO.setUpdate(boardDTO);
 	}
 	
 	// Delete
-	public int setDelete(NoticeDTO noticeDTO) throws Exception {
-		return noticeDAO.setDelete(noticeDTO);
+	@Override
+	public int setDelete(BoardDTO boardDTO) throws Exception {
+		return noticeDAO.setDelete(boardDTO);
 	}
 }

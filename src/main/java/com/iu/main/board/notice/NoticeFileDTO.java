@@ -1,15 +1,15 @@
-package com.iu.main.notice;
+package com.iu.main.board.notice;
 
 import com.iu.main.file.FileDTO;
 
 public class NoticeFileDTO extends FileDTO {
-	private Integer noticeNum;
+	private Long noticeNum;
 
 	
-	public Integer getNoticeNum() {
+	public Long getNoticeNum() {
 		return noticeNum;
 	}
-	public void setNoticeNum(Integer noticeNum) {
+	public void setNoticeNum(Long noticeNum) {
 		this.noticeNum = noticeNum;
 	}
 

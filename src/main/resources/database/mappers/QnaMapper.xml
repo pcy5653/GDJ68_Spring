@@ -3,20 +3,20 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="com.iu.main.qna.QnaDAO">
+  <mapper namespace="com.iu.main.board.qna.QnaDAO">
   	
   	<sql id="searchSql">
-  		WHERE QNANUM>0
+  		WHERE NUM>0
   		AND
   			<choose>
   				<when test="kind=='name'">
-  					QNANAME LIKE #{search}
+  					NAME LIKE #{search}
   				</when>
   				<when test="kind=='title'">
-  					QNANAME LIKE #{search}
+  					SUBJECT LIKE #{search}
   				</when>
   				<otherwise>
-  					QNACONTENTS LIKE #{search}
+  					CONTENTS LIKE #{search}
   				</otherwise>
   			</choose>
   	</sql>
@@ -29,23 +29,30 @@
 		  		(
 			  		SELECT * FROM QNA 
 			  		<include refid="searchSql"></include>
-			  		ORDER BY QNANUM 
+			  		ORDER BY NUM 
 		  		) B
 	  		)
 	  	WHERE R BETWEEN ${startRow} AND ${lastRow}
   	</select>
+
   	
   	
   	<!-- total = Pager -->
   	<select id="getTotal" resultType="Long">
-  		SELECT COUNT(QNANUM) FROM QNA
+  		SELECT COUNT(NUM) FROM QNA
   		<include refid="searchSql"></include>
   	</select>
   	
   	
   	
   	
-  	
+  	<insert id="setAdd" parameterType="QnaDTO">
+  		<selectKey keyProperty="num" resultType="Long" order="BEFORE">
+  			SELECT QNA_SEQ.NEXTVAL FROM DUAL
+  		</selectKey>
+  		INSERT INTO QNA
+  		VALUES (#{num}, #{name}, #{subject}, #{contents}, SYSDATE, 0, 0, 0, 0)
+  	</insert>
   	
   	
   	

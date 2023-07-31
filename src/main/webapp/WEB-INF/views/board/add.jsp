@@ -37,16 +37,16 @@
 	
 	<form action="./add" method="post" enctype="multipart/form-data">
 		<div class="mb-3 nameLine">
-		  <label for="noticeName" class="form-label nameLabel">작성자</label>
-		  <input type="text" name="noticeName" class="form-control" id="noticeName" value="">
+		  <label for="name" class="form-label nameLabel">작성자</label>
+		  <input type="text" name="name" class="form-control" id="noticeName" value="">
 		</div>
 		<div class="mb-3">
-		  <label for="noticeTitle" class="form-label">Title</label>
-		  <input type="text" name="noticeTitle" class="form-control" id="noticeTitle" placeholder="제목을 작성하세요">
+		  <label for="title" class="form-label">Title</label>
+		  <input type="text" name="subject" class="form-control" id="noticeTitle" placeholder="제목을 작성하세요">
 		</div>
 		<div class="mb-3">
-		  <label for="noticeContents" class="form-label">Contents</label>
-		  <textarea class="form-control" name="noticeContents" id="noticeContents" rows="3"></textarea>
+		  <label for="contents" class="form-label">Contents</label>
+		  <textarea class="form-control" name="contents" id="noticeContents" rows="3"></textarea>
 		</div>	
 		
 		<div class="mb-3">

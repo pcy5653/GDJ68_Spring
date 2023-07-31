@@ -38,13 +38,13 @@
 			<tbody>
 				<!-- Controller에서 속성명=items를 해서  -->
 				<c:forEach items="${list}" var="dto" varStatus="i">
-				<tr class="row-date">
-					<td>${dto.noticeNum}</td>
-					<td><a class="link-underline link-underline-opacity-0 text-black" href="./detail?noticeNum=${dto.noticeNum}">${dto.noticeTitle}</a></td>
-					<td>${dto.noticeName}</td>
-					<td>${dto.noticeDate}</td>
-					<td>${dto.noticeHit}</td>
-				</tr>			
+					<tr class="row-date">
+						<td>${dto.num}</td>
+						<td><a class="link-underline link-underline-opacity-0 text-black" href="./detail?num=${dto.num}">${dto.subject}</a></td>
+						<td>${dto.name}</td>
+						<td>${dto.createDate}</td>
+						<td>${dto.hit}</td>
+					</tr>			
 				</c:forEach>
 		
 			</tbody>

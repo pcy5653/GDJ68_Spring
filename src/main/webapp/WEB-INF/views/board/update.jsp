@@ -12,9 +12,9 @@
 <c:import url="../temp/header.jsp"></c:import>
 	<h1>Update Page</h1>
 	<form action="./update" method="post">
-		<input type="hidden" name="noticeNum" value="${notice.noticeNum}">
-		Title<input type="text" name="noticeTitle" value="${notice.noticeTitle}"><br>
-		내용 <textarea rows="" cols="" name="noticeContents">${notice.noticeContents}</textarea>
+		<input type="hidden" name="num" value="${notice.num}">
+		Title<input type="text" name="title" value="${notice.title}"><br>
+		내용 <textarea rows="" cols="" name="contents">${notice.contents}</textarea>
 		
 		
 		<p>

@@ -8,9 +8,9 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.iu.main.Mytest;
-import com.iu.main.notice.NoticeDAO;
-import com.iu.main.notice.NoticeDTO;
-import com.iu.main.notice.NoticeService;
+import com.iu.main.board.notice.NoticeDAO;
+import com.iu.main.board.notice.NoticeDTO;
+import com.iu.main.board.notice.NoticeService;
 
 // Mytest 상속받아 annotation 작성하지 않아도 사용가능
 public class NoticeDAOTest extends Mytest {

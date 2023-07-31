@@ -1,4 +1,4 @@
-package com.iu.main.notice;
+package com.iu.main.board.notice;
 
 import java.util.List;
 
@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iu.main.bankBook.BankBookDTO;
+import com.iu.main.board.BoardDTO;
 import com.iu.main.util.Pager;
 
 @Controller
@@ -25,7 +26,7 @@ public class NoticeController {
 	
 	@RequestMapping(value="list")
 	public String getList(Pager pager, Model model) throws Exception {
-		List<NoticeDTO> ar = noticeService.getList(pager);
+		List<BoardDTO> ar = noticeService.getList(pager);
 
 		model.addAttribute("list", ar);
 		model.addAttribute("pager", pager);
@@ -35,10 +36,11 @@ public class NoticeController {
 	
 	@RequestMapping(value="detail", method = RequestMethod.GET)
 	public ModelAndView getDetail(NoticeDTO noticeDTO, ModelAndView mv) throws Exception {
-		noticeDTO = noticeService.getDetail(noticeDTO);
+		// 만들어진 것 : NoticeDTO | 담아오는 것 : BoardDTO
+		BoardDTO boardDTO = noticeService.getDetail(noticeDTO);
 		mv.setViewName("board/detail");
 		// jsp에서 실행할 변수의 키(notice)의 이름을 jsp에서 정확하게 작성하자!
-		mv.addObject("notice", noticeDTO);
+		mv.addObject("notice", boardDTO);
 		
 		return mv;
 	}
@@ -75,7 +77,7 @@ public class NoticeController {
 		int result = noticeService.setUpdate(noticeDTO);
 		
 		// detail에는 하나의 내용을 보여주기 때문에 URL 자체에 detail?noticeNum=원하는번호(변수=noticeDTO.getNoticeNum())로 해당 상세내용을 본다!!
-		return "redirect:./detail?noticeNum="+noticeDTO.getNoticeNum();
+		return "redirect:./detail?noticeNum="+noticeDTO.getNum();
 	}
 	
 	

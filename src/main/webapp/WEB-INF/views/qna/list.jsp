@@ -39,11 +39,11 @@
 				<!-- Controller에서 속성명=items를 해서  -->
 				<c:forEach items="${list}" var="dto" varStatus="i">
 				<tr class="row-date">
-					<td>${dto.qnaNum}</td>
-					<td><a class="link-underline link-underline-opacity-0 text-black" href="./detail?qnaNum=${dto.qnaNum}">${dto.qnaTitle}</a></td>
-					<td>${dto.qnaName}</td>
-					<td>${dto.qnaDate}</td>
-					<td>${dto.qnaHit}</td>
+					<td>${dto.num}</td>
+					<td><a class="link-underline link-underline-opacity-0 text-black" href="./detail?num=${dto.num}">${dto.subject}</a></td>
+					<td>${dto.name}</td>
+					<td>${dto.date}</td>
+					<td>${dto.hit}</td>
 				</tr>			
 				</c:forEach>
 		

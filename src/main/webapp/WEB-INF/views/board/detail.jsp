@@ -39,17 +39,17 @@
 	
 	<table class="table table-hover">
 			<thead class="table-dark">
-				<th>Title</th><th>작성자</th><th>날짜</th><th>HIT</th>
+				<th>SUBJECT</th><th>작성자</th><th>날짜</th><th>HIT</th>
 			</thead>
 			<tbody>
 				<!-- Controller에서 속성명=items를 해서  -->
 				<tr class="row-date">
-					<td>${notice.noticeTitle}</td>
-					<td>${notice.noticeName}</td>
-					<td>${notice.noticeDate}</td>
-					<td>${notice.noticeHit}</td>
+					<td>${notice.subject}</td>
+					<td>${notice.name}</td>
+					<td>${notice.createDate}</td>
+					<td>${notice.hit}</td>
 				</tr>			
-				<tr><td colspan=4>${notice.noticeContents}</td></tr>
+				<tr><td colspan=4>${notice.contents}</td></tr>
 			</tbody>
 			
 		</table>
@@ -60,8 +60,8 @@
 		</c:forEach>
 		
 		
-		<a href="./update?noticeNum=${notice.noticeNum}" class="btn btn-danger">수정</a>
-		<a href="./delete?noticeNum=${notice.noticeNum}" class="btn btn-danger">삭제</a>
+		<a href="./update?num=${notice.num}" class="btn btn-danger">수정</a>
+		<a href="./delete?num=${notice.num}" class="btn btn-danger">삭제</a>
 
 	</section>
 	

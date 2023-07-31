@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="com.iu.main.notice.NoticeDAO">
+  <mapper namespace="com.iu.main.board.notice.NoticeDAO">
   <!-- #{} : 꺼내올 getter의 이름 -->
   
   		<sql id="searchSql">
@@ -23,7 +23,7 @@
   		</sql>
   
   
-  		<select id="getList" resultType="NoticeDTO">
+  		<select id="getList" resultMap="getSelectResult" parameterType="com.iu.main.util.Pager">
   			SELECT * FROM 
 				(SELECT ROWNUM R, B.* FROM
 					(
@@ -34,6 +34,16 @@
 				)
 			WHERE R BETWEEN ${startRow} AND ${lastRow}
   		</select>
+  		
+  		<resultMap type="NoticeDTO" id="getSelectResult">
+  			<id column = "NOTICENUM" property="num"/>
+  			<result column="NOTICENAME" property="name"/>
+ 			<result column="NOTICETITLE" property="subject"/>		
+ 			<result column="NOTICECONTENTS" property="contents"/>	
+ 			<result column="NOTICEDATE" property="createDate"/>	
+ 			<result column="NOTICEHIT" property="hit"/>
+  		</resultMap>
+  		
   		
   		<!-- total -->
   		<select id="getTotal" resultType="Long">
@@ -49,15 +59,15 @@
   			LEFT OUTER JOIN
   			NOTICEFILE NF
   			ON(N.NOTICENUM = NF.NOTICENUM)
-  			WHERE N.NOTICENUM=#{noticeNum}
+  			WHERE N.NOTICENUM=#{num}
   		</select>
   		<resultMap type="NoticeDTO" id="getDetailResult">
-  			<id column = "NOTICENUM" property="noticeNum"/>
-  			<result column="NOTICENAME" property="noticeName"/>
- 			<result column="NOTICETITLE" property="noticeTitle"/>		
- 			<result column="NOTICECONTENTS" property="noticeContents"/>	
- 			<result column="NOTICEDATE" property="noticeDate"/>	
- 			<result column="NOTICEHIT" property="noticeHit"/>	
+  			<id column = "NOTICENUM" property="num"/>
+  			<result column="NOTICENAME" property="name"/>
+ 			<result column="NOTICETITLE" property="subject"/>		
+ 			<result column="NOTICECONTENTS" property="contents"/>	
+ 			<result column="NOTICEDATE" property="createDate"/>	
+ 			<result column="NOTICEHIT" property="hit"/>	
  			
  			<!-- N개의 noticefileDTO -->
 			<collection property="fileDTOs" javaType="List" ofType="NoticeFileDTO">
@@ -71,11 +81,11 @@
   		
   		
   		<insert id="setAdd" parameterType="NoticeDTO">
-  			<selectKey keyProperty="noticeNum" resultType="Integer" order="BEFORE">
+  			<selectKey keyProperty="num" resultType="Long" order="BEFORE">
   				SELECT NOTICE_SEQ.NEXTVAL FROM DUAL
   			</selectKey>
   			INSERT INTO NOTICE 
-  			VALUES (#{noticeNum}, #{noticeName}, #{noticeTitle}, #{noticeContents}, SYSDATE ,0)
+  			VALUES (#{num}, #{name}, #{subject}, #{contents}, SYSDATE ,0)
   		</insert>
   		
   		<insert id="setFileAdd" parameterType="NoticeFileDTO">
@@ -87,11 +97,11 @@
   		
   		<update id="setUpdate" parameterType="NoticeDTO">
   			UPDATE NOTICE
-  			SET NOTICETITLE=#{noticeTitle}, NOTICECONTENTS=#{noticeContents}
-  			WHERE NOTICENUM=#{noticeNum}
+  			SET NOTICETITLE=#{subject}, NOTICECONTENTS=#{contents}
+  			WHERE NOTICENUM=#{num}
   		</update>
   		
   		<delete id="setDelete" parameterType="NoticeDTO">
-  			DELETE NOTICE WHERE NOTICENUM=#{noticeNum}
+  			DELETE NOTICE WHERE NOTICENUM=#{num}
   		</delete>
   </mapper>
