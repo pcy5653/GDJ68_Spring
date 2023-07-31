@@ -90,6 +90,8 @@
 		</div>
 		
 		<a class="btn btn-danger" href="./add">게시물 등록</a>
+		
+		
 	
 	</section>
 	

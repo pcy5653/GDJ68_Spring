@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.iu.main.member.MemberDTO;
 import com.iu.main.util.Pager;
 
 @Controller // 해당 객체를 생성 (Controller 역할)
@@ -38,6 +39,7 @@ public class BankBookController {
 		// list.jsp의 속성명, object(List<BankBookDTO>로 받아온 내용) 
 		model.addAttribute("list", ar);
 		model.addAttribute("pager", pager);
+		
 		// return 값으로 model로 내용이 작성된 list.jsp 경로를 보내준다.
 		return "bankbook/list";
 	}

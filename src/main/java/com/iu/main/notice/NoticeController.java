@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.iu.main.bankBook.BankBookDTO;
 import com.iu.main.util.Pager;
 
 @Controller
@@ -36,6 +37,7 @@ public class NoticeController {
 	public ModelAndView getDetail(NoticeDTO noticeDTO, ModelAndView mv) throws Exception {
 		noticeDTO = noticeService.getDetail(noticeDTO);
 		mv.setViewName("board/detail");
+		// jsp에서 실행할 변수의 키(notice)의 이름을 jsp에서 정확하게 작성하자!
 		mv.addObject("notice", noticeDTO);
 		
 		return mv;

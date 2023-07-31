@@ -53,8 +53,15 @@
 			</tbody>
 			
 		</table>
-			<a href="./update?noticeNum=${notice.noticeNum}" class="btn btn-danger">수정</a>
-			<a href="./delete?noticeNum=${notice.noticeNum}" class="btn btn-danger">삭제</a>
+		
+		<!-- Controller에서 작성한 키 이름과 동일하게 적기 -->
+		<c:forEach items="${notice.fileDTOs}" var="f">
+			<img alt="" src="../resources/upload/notice/${f.fileName}">
+		</c:forEach>
+		
+		
+		<a href="./update?noticeNum=${notice.noticeNum}" class="btn btn-danger">수정</a>
+		<a href="./delete?noticeNum=${notice.noticeNum}" class="btn btn-danger">삭제</a>
 
 	</section>
 	
