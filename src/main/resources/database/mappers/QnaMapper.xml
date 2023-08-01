@@ -29,7 +29,7 @@
 		  		(
 			  		SELECT * FROM QNA 
 			  		<include refid="searchSql"></include>
-			  		ORDER BY NUM 
+			  		ORDER BY REF DESC, STEP ASC
 		  		) B
 	  		)
 	  	WHERE R BETWEEN ${startRow} AND ${lastRow}
@@ -45,27 +45,77 @@
   	
   	
   	
-  	
+  	<!-- 게시물등록 add -->
   	<insert id="setAdd" parameterType="QnaDTO">
   		<selectKey keyProperty="num" resultType="Long" order="BEFORE">
   			SELECT QNA_SEQ.NEXTVAL FROM DUAL
   		</selectKey>
   		INSERT INTO QNA
-  		VALUES (#{num}, #{name}, #{subject}, #{contents}, SYSDATE, 0, 0, 0, 0)
+  		VALUES (#{num}, #{name}, #{subject}, #{contents}, SYSDATE, 0, #{num}, 0, 0)
+  	</insert>
+  	
+  	<insert id="setFileAdd" parameterType="QnaFileDTO">
+  		INSERT INTO QNAFILE (FILENUM, NUM, FILENAME, ORIGINALNAME)
+  		VALUES (NF_SEQ.NEXTVAL, #{num}, #{fileName}, #{originalName})
   	</insert>
   	
   	
+  	<update id="setStepUpdate" parameterType="QnaDTO">
+  		UPDATE QNA
+  		SET STEP = STEP+1
+  		WHERE REF = #{ref} 
+  		AND STEP > #{step}
+  	</update>
+  	
+  
+  	
+  	<insert id="setReplyAdd" parameterType="QnaDTO">
+  		<selectKey keyProperty="num" resultType="Long" order="BEFORE">
+  			SELECT QNA_SEQ.NEXTVAL FROM DUAL
+  		</selectKey>
+  		INSERT INTO QNA (NUM, NAME, SUBJECT, CONTENTS, CREATEDATE, HIT, REF, STEP, DEPTH)
+  		VALUES (#{num},#{name}, #{subject}, #{contents}, SYSDATE, 0, #{ref}, #{step}, #{depth})
+  	</insert>
+  	
+  
+  	<select id="getDetail" parameterType="QnaDTO" resultMap="getDetailResult">	
+  			SELECT Q.*, QF.*
+  			FROM QNA Q
+  			LEFT OUTER JOIN
+  			QNAFILE QF
+  			ON(Q.NUM = QF.NUM)
+  			WHERE Q.NUM=#{num}	
+  	</select>
+    <resultMap type="QnaDTO" id="getDetailResult">
+  			<id column = "NUM" property="num"/>
+  			<result column="NAME" property="name"/>
+ 			<result column="SUBJECT" property="subject"/>		
+ 			<result column="CONTENTS" property="contents"/>	
+ 			<result column="NOTICEDATE" property="createDate"/>	
+ 			<result column="HIT" property="hit"/>	
+ 			<result column="REF" property="ref"/>
+ 			<result column="STEP" property="step"/>
+ 			<result column="DEPTH" property="depth"/>
+ 			
+ 			<!-- N개의 noticefileDTO -->
+			<collection property="fileDTOs" javaType="List" ofType="QnaFileDTO">
+				<id column="FILENUM" property="fileNum"/>
+				<result column="FILENAME" property="fileName"/>
+				<result column="ORIGINALNAME" property="originalName"/>
+			</collection>
+  		</resultMap> 
   	
   	
+  	<update id="setUpdate" parameterType="QnaDTO">
+  		UPDATE QNA
+  		SET SUBJECT=#{subject}, CONTENTS=#{contents}
+  		WHERE NUM=#{num}
+  	</update>
   	
   	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
+  	<delete id="setDelete" parameterType="QnaDTO">
+  			DELETE QNA WHERE NUM=#{num}
+  	</delete>
   	
   	
   	

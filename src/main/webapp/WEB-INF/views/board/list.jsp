@@ -28,7 +28,8 @@
 	
 	<c:import url="../temp/header.jsp"></c:import>
 	<section class="container mt-5">
-		<h1 class="mb-4 text-center">Notice List</h1>
+		<!-- Conttroller에서 각각의 (Notice, Qna) 페이지인지 보기 위해 키 이름인 board 사용 -->
+		<h1 class="mb-4 text-center">${board} List</h1>
 	
 		
 		<table class="table table-hover">
@@ -40,7 +41,16 @@
 				<c:forEach items="${list}" var="dto" varStatus="i">
 					<tr class="row-date">
 						<td>${dto.num}</td>
-						<td><a class="link-underline link-underline-opacity-0 text-black" href="./detail?num=${dto.num}">${dto.subject}</a></td>
+			
+						
+						<td><a class="link-underline link-underline-opacity-0 text-black" href="./detail?num=${dto.num}">
+							<!-- notice에는 depth가 없기 때문에 exception 방지 => c:catch -->
+							<c:catch>
+								<!-- 답글 내용을 -- 표시 -->
+								<c:forEach begin="1" end="${dto.depth }">--</c:forEach>
+							</c:catch>
+							${dto.subject}
+						</a></td>
 						<td>${dto.name}</td>
 						<td>${dto.createDate}</td>
 						<td>${dto.hit}</td>
@@ -90,6 +100,7 @@
 		</div>
 		
 		<a class="btn btn-danger" href="./add">게시물 등록</a>
+		
 		
 		
 	

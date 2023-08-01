@@ -102,7 +102,7 @@ public class MemberController {
 		System.out.println(pic.getOriginalFilename());
 		System.out.println(pic.getSize());
 		// getByte() : 이진 데이터(0.1)를 다룰 때 배열[]로 리턴
-		pic.getBytes();
+		//pic.getBytes();
 		
 		return "redirect:../list";
 	}

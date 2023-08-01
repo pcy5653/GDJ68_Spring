@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.iu.main.board.BoardDAO;
 import com.iu.main.board.BoardDTO;
+import com.iu.main.board.notice.NoticeFileDTO;
 import com.iu.main.util.Pager;
 
 @Repository
@@ -35,23 +36,35 @@ public class QnaDAO implements BoardDAO {
 	public int setAdd(BoardDTO boardDTO) throws Exception {
 		return sqlSession.insert(NAMESPACE+"setAdd", boardDTO);
 	}
+	
+	// file Add
+	public int setFileAdd(QnaFileDTO qnaFileDTO) {
+		return sqlSession.insert(NAMESPACE+"setFileAdd",qnaFileDTO);
+	}
 
 	@Override
 	public BoardDTO getDetail(BoardDTO boardDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne(NAMESPACE+"getDetail", boardDTO);
+	}
+	
+	// 답글
+	public int setReplyAdd(QnaDTO qnaDTO) throws Exception{
+		return sqlSession.insert(NAMESPACE+"setReplyAdd", qnaDTO);
+	}
+	
+	// STEP 증가
+	public int setStepUpdate(QnaDTO qnaDTO) throws Exception{
+		return sqlSession.update(NAMESPACE+"setStepUpdate", qnaDTO);
 	}
 
 	@Override
 	public int setUpdate(BoardDTO boardDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update(NAMESPACE+"setUpdate", boardDTO);
 	}
 
 	@Override
 	public int setDelete(BoardDTO boardDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.delete(NAMESPACE+"setDelete", boardDTO);
 	}
 
 	@Override

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,6 +23,13 @@ public class NoticeController {
 	
 	@Autowired
 	private NoticeService noticeService;
+	
+	// jsp H1의 이름
+	// @ModelAttribute : @RequestMapping이 실행되기 전에(list, add, ...) 실행되고, board(키)로 notice(value)를 담아 보낸다.
+	@ModelAttribute("board")
+	public String getBoardName() {
+		return "notice";
+	}
 	
 	
 	@RequestMapping(value="list")
@@ -40,7 +48,7 @@ public class NoticeController {
 		BoardDTO boardDTO = noticeService.getDetail(noticeDTO);
 		mv.setViewName("board/detail");
 		// jsp에서 실행할 변수의 키(notice)의 이름을 jsp에서 정확하게 작성하자!
-		mv.addObject("notice", boardDTO);
+		mv.addObject("dto", boardDTO);
 		
 		return mv;
 	}
@@ -66,8 +74,8 @@ public class NoticeController {
 	// Update
 	@RequestMapping(value="update", method = RequestMethod.GET)
 	public String setUpdate(NoticeDTO noticeDTO, Model model) throws Exception {
-		noticeDTO = noticeService.getDetail(noticeDTO);
-		model.addAttribute("notice", noticeDTO);
+		BoardDTO boardDTO = noticeService.getDetail(noticeDTO);
+		model.addAttribute("dto", boardDTO);
 		
 		return "board/update";
 	}
@@ -76,8 +84,9 @@ public class NoticeController {
 	public String setUpdate(NoticeDTO noticeDTO)throws Exception{
 		int result = noticeService.setUpdate(noticeDTO);
 		
+		
 		// detail에는 하나의 내용을 보여주기 때문에 URL 자체에 detail?noticeNum=원하는번호(변수=noticeDTO.getNoticeNum())로 해당 상세내용을 본다!!
-		return "redirect:./detail?noticeNum="+noticeDTO.getNum();
+		return "redirect:./detail?num="+noticeDTO.getNum();
 	}
 	
 	

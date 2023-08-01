@@ -77,10 +77,10 @@ public class MemberService {
 //		// 2번 방법. MultipartFile의 transferTo 메서드
 //		multipartFile.transferTo(file);
 		
-		String path="/resources/upload/member/";
-		
 		int result = memberDAO.setJoin(memberDTO);
 		
+		String path="/resources/upload/member/";
+	
 		if(!multipartFile.isEmpty()) {
 			String fileName = fileManager.fileSave(path, session, multipartFile);
 			
