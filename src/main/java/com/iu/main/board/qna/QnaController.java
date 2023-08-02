@@ -58,8 +58,9 @@ public class QnaController {
 	}
 	
 	@RequestMapping(value="reply", method = RequestMethod.GET)
-	public String setReplyAdd(Long num, Model model)throws Exception {
+	public String setReplyAdd(Long num, Model model, QnaDTO qnaDTO)throws Exception {
 		model.addAttribute("num", num);
+		model.addAttribute(qnaDTO);
 		return "board/reply";
 		
 	}

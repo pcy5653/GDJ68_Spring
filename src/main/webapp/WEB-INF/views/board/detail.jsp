@@ -66,7 +66,7 @@
 		
 		<form action="">
 			<!--  -->
-			<c:if test="${board ne 'NOTICE'}">
+			<c:if test="${board ne 'notice'}">
 				<a href="./reply?num=${dto.num}" class="btn btn-danger">답글달기</a>
 			</c:if>
 		</form>

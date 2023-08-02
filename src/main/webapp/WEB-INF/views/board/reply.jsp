@@ -40,15 +40,15 @@
 				<input type="hidden" name="num" value="${num}">
 				<div class="mb-3 nameLine">
 				  <label for="name" class="form-label nameLabel">작성자</label>
-				  <input type="text" name="name" class="form-control" id="noticeName" value="">
+				  <input type="text" name="name" class="form-control" id="noticeName" value="${name}">
 				</div>
 				<div class="mb-3">
 				  <label for="title" class="form-label">Title</label>
-				  <input type="text" name="subject" class="form-control" id="noticeTitle" placeholder="제목을 작성하세요">
+				  <input type="text" name="subject" class="form-control" value="${subject}" id="noticeTitle" placeholder="제목을 작성하세요">
 				</div>
 				<div class="mb-3">
 				  <label for="contents" class="form-label">Contents</label>
-				  <textarea class="form-control" name="contents" id="noticeContents" rows="3"></textarea>
+				  <textarea class="form-control" name="contents" value="${contnets}" id="noticeContents" rows="3"></textarea>
 				</div>
 				
 				<button type="submit" class="btn btn-danger">답글 등록</button>
