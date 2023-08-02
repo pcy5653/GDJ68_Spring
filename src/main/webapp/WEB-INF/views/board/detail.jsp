@@ -64,22 +64,20 @@
 		<a href="./update?num=${dto.num}" class="btn btn-danger">수정</a>
 		<a href="./delete?num=${dto.num}" class="btn btn-danger">삭제</a>
 		
+		<!-- parameterName = data-delete-name 속성에 넣기 -->
+		<button id="del"  class="btn btn-danger" data-delete-name="num" data-delete-num="${dto.num}">삭제</button>
+
 		<form action="">
 			<!--  -->
 			<c:if test="${board ne 'notice'}">
 				<a href="./reply?num=${dto.num}" class="btn btn-danger">답글달기</a>
 			</c:if>
 		</form>
+
+
+		<script src="../resources/js/delete.js"></script>
 	</section>
 	
 	
-<%-- 	
-	<c:if test="${dto.bookSale eq 1}">
-		<h1>판매중</h1>
-	</c:if>
-	<c:if test="${dto.bookSale eq 0}">
-		<h1>판매종료</h1>
-	</c:if>
---%>
 </body>
 </html>
