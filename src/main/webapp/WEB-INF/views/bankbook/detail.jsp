@@ -37,8 +37,13 @@
 		<img alt="" src="/resources/upload/bankbook/${f.fileName}">
 	</c:forEach>
 	
+	<!-- 
 	<a href="./update?bookNum=${dto.bookNum}">수정</a>
-	<a href="./delete?bookNum=${dto.bookNum}">삭제</a>
+	<a href="./delete?bookNum=${dto.bookNum}">삭제</a> 
+	-->
+
+
+
 	<button id="update">수정</button>
 	<!-- 2. 속성 사용 : data-**** 이라는 속성명을 통해 bookNum을 받아와 JS에서 id명.getAttributes로 불러와 삭제 -->
 	<button id="del" data-delete-name="bookNum" data-delete-num="${dto.bookNum}">삭제</button>

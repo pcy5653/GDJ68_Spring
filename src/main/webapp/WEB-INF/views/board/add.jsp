@@ -35,18 +35,18 @@
 	<section class="container mt-5">
 	<h1 class="my-4">${board} Add Page</h1>
 	
-	<form action="./add" method="post" enctype="multipart/form-data">
+	<form action="./add" method="post" id="frm" enctype="multipart/form-data">
 		<div class="mb-3 nameLine">
 		  <label for="name" class="form-label nameLabel">작성자</label>
-		  <input type="text" name="name" class="form-control" id="noticeName" value="">
+		  <input type="text" name="name" class="form-control" id="writer" value="${member.id}">
 		</div>
 		<div class="mb-3">
 		  <label for="title" class="form-label">Title</label>
-		  <input type="text" name="subject" class="form-control" id="noticeTitle" placeholder="제목을 작성하세요">
+		  <input type="text" name="subject" class="form-control" id="subject" placeholder="제목을 작성하세요">
 		</div>
 		<div class="mb-3">
 		  <label for="contents" class="form-label">Contents</label>
-		  <textarea class="form-control" name="contents" id="noticeContents" rows="3"></textarea>
+		  <textarea class="form-control" name="contents" id="contents" rows="3"></textarea>
 		</div>	
 		
 		<div class="mb-3">
@@ -72,10 +72,30 @@
 
 
 		<div class="my-3">
-			<button type="submit" class="btn btn-danger">게시글 등록</button>
+			<button type="button" class="btn btn-danger" id="btn">게시글 등록</button>
 		</div>
 
 	</form>
 	</section>
+
+	<script>
+		// >>>> Title 미작성 시 넘어가지 않도록 설정.
+		const btn = document.getElementById("btn");
+		const subject = document.getElementById("subject");
+		const frm = document.getElementById("frm");
+
+		btn.addEventListener("click", function(){
+			console.log(subject.value=="");			// true
+			console.log(subject.value.length == 0); // true
+			if(subject.value==""){
+				alert("제목은 필수 입니다.");
+				// title 강제 작성
+				subject.focus();
+			}else {
+				frm.submit();
+			}
+		})
+
+	</script>
 </body>
 </html>

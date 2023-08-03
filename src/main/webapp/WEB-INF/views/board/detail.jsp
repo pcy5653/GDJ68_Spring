@@ -61,18 +61,25 @@
 		
 		
 		
-		<a href="./update?num=${dto.num}" class="btn btn-danger">수정</a>
-		<a href="./delete?num=${dto.num}" class="btn btn-danger">삭제</a>
+		<form id="frm">
+			<input type="hidden" name="num" value="${dto.num}">
+		</form>
+
+		<!-- <a href="./update?num=${dto.num}" class="btn btn-danger">수정</a> -->
+		<!-- 입력 form으로 method GET -->
+		<button id="update" class="btn btn-danger c1" data-url="update">수정</button>
 		
 		<!-- parameterName = data-delete-name 속성에 넣기 -->
-		<button id="del"  class="btn btn-danger" data-delete-name="num" data-delete-num="${dto.num}">삭제</button>
+		<!-- method POST -->
+		<button id="del"  class="btn btn-danger c1" data-url="delete" data-delete-name="num" data-delete-num="${dto.num}">삭제</button>
 
-		<form action="">
-			<!--  -->
-			<c:if test="${board ne 'notice'}">
-				<a href="./reply?num=${dto.num}" class="btn btn-danger">답글달기</a>
-			</c:if>
-		</form>
+
+		<c:if test="${board ne 'notice'}">
+			<!-- <a href="./reply?num=${dto.num}" class="btn btn-danger">답글달기</a> -->
+			<!-- 입력 form으로 method GET -->
+			<button id="reply" class="btn btn-danger c1" data-url="reply">답글</button>
+		</c:if>
+
 
 
 		<script src="../resources/js/delete.js"></script>

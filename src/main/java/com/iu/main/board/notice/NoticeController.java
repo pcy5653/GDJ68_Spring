@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -43,14 +44,20 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value="detail", method = RequestMethod.GET)
-	public ModelAndView getDetail(NoticeDTO noticeDTO, ModelAndView mv) throws Exception {
+	public String getDetail(NoticeDTO noticeDTO, Model model) throws Exception {
 		// 만들어진 것 : NoticeDTO | 담아오는 것 : BoardDTO
 		BoardDTO boardDTO = noticeService.getDetail(noticeDTO);
-		mv.setViewName("board/detail");
-		// jsp에서 실행할 변수의 키(notice)의 이름을 jsp에서 정확하게 작성하자!
-		mv.addObject("dto", boardDTO);
 		
-		return mv;
+		// boardDTO의 여부에 따라 jsp 선택
+		if(boardDTO != null) {
+			// jsp에서 실행할 변수의 키(notice)의 이름을 jsp에서 정확하게 작성하자!
+			model.addAttribute("dto", boardDTO);
+			return "board/detail";
+		}else {
+			model.addAttribute("message","없는 내용입니다!");
+			model.addAttribute("url", "list");
+			return "commons/result";
+		}
 	}
 	
 	
@@ -64,10 +71,20 @@ public class NoticeController {
 	
 	// DB Add(insert)
 	@RequestMapping(value="add", method = RequestMethod.POST)
-	public String setAdd(NoticeDTO noticeDTO, MultipartFile [] photos, HttpSession session) throws Exception {
+	public String setAdd(NoticeDTO noticeDTO, MultipartFile [] photos, HttpSession session, Model model) throws Exception {
 		int result = noticeService.setAdd(noticeDTO, photos, session);
 		
-		return "redirect:./list";
+		String message = "등록실패";
+		if(result>0) {
+			message="등록성공";
+		}
+		
+		// 1. 등록 성공여부를 message에 담아 jsp로 보내기
+		model.addAttribute("message", message);
+		// 2. 등록 시 원하는 url로 이동하기
+		model.addAttribute("url", "list");
+		// alert 창에 띄울거니 jsp로 값을 보낸다.
+		return "commons/result";
 	}
 	
 	
@@ -92,7 +109,7 @@ public class NoticeController {
 	
 	
 	// Delete
-	@RequestMapping(value="delete", method = RequestMethod.GET)
+	@RequestMapping(value="delete", method = RequestMethod.POST)
 	public String setDelete(NoticeDTO noticeDTO) throws Exception{
 		int result = noticeService.setDelete(noticeDTO);
 		

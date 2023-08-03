@@ -8,12 +8,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:if test="${result gt 0}">
-		<h1>성공</h1>
-	</c:if>
-	<c:if test="${result le 0}">
-		<h1>실패</h1>
-	</c:if>
-	<a href="/">Home</a>
+
+    <script>
+    	// 문자열로 받기 위해 '' 붙이기
+    	// 1. 등록 시 메세지 여부
+        alert('${message}');
+    	// 2. 등록 후 Controller에서 대입한 url로 연결
+		location.href="${url}";
+    </script>
+	
+
 </body>
 </html>
