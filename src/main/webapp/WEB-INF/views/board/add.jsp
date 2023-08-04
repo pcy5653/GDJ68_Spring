@@ -12,6 +12,7 @@
 	h1 {text-align:center;font-weight:800;}
 	.container {position:relative;} 
 	
+	input{margin-bottom: 10px;}
 	.form-label {font-size:1.5rem; font-weight:600;}
 	.nameLine {display:flex; padding-top:0.5rem;}
 	.nameLabel {margin-right:3rem;}
@@ -19,13 +20,18 @@
 	.btn{
 		border:var(--bs-btn-border-width) solid #9fb1df;
 		background-color:#9fb1df;
-		position:absolute; right:0; bottom=0;
+		position:absolute; right:0; bottom:0;
 	}
 	.btn-danger{
 		--bs-btn-hover-border-color: #2497fa;
 		--bs-btn-hover-bg:#2497fa; 
 		transition: all 0.5s cubic-bezier(0.28, -0.32, 0.58, 1.19);
 		}
+	#fileBtn{
+		--bs-btn-hover-border-color: #2497fa;
+		--bs-btn-hover-bg:#2497fa; 
+		transition: all 0.5s cubic-bezier(0.28, -0.32, 0.58, 1.19);
+	}
 </style>
 
 </head>
@@ -49,26 +55,14 @@
 		  <textarea class="form-control" name="contents" id="contents" rows="3"></textarea>
 		</div>	
 		
+		
+		<div id="fileList" class="my-5"></div>
+		
 		<div class="mb-3">
-		  <label for="pic" class="form-label">사진첨부1</label>
-		  <input type="file" name="photos" class="form-control" id="pic">
+			<button type="button"  id="add">File 추가</button>
 		</div>
-		<div class="mb-3">
-		  <label for="pic" class="form-label">사진첨부2</label>
-		  <input type="file" name="photos" class="form-control" id="pic">
-		</div>
-		<div class="mb-3">
-		  <label for="pic" class="form-label">사진첨부3</label>
-		  <input type="file" name="photos" class="form-control" id="pic">
-		</div>
-		<div class="mb-3">
-		  <label for="pic" class="form-label">사진첨부4</label>
-		  <input type="file" name="photos" class="form-control" id="pic">
-		</div>
-		<div class="mb-3">
-		  <label for="pic" class="form-label">사진첨부5</label>
-		  <input type="file" name="photos" class="form-control" id="pic">
-		</div>
+		
+
 
 
 		<div class="my-3">
@@ -77,6 +71,7 @@
 
 	</form>
 	</section>
+	<script src="/resources/js/file.js"></script>
 
 	<script>
 		// >>>> Title 미작성 시 넘어가지 않도록 설정.
