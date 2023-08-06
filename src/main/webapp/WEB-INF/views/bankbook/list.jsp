@@ -26,7 +26,7 @@
 				<c:forEach items="${list}" var="d" varStatus="i">
 				<tr>
 					<td><a class="link-underline link-underline-opacity-0 text-white" href="./detail?bookNum=${d.bookNum}">${d.bookName}</a></td>
-					<td>${d.bookRate} ${i.index}   </td>
+					<td>${d.bookRate}</td>
 				</tr>			
 				</c:forEach>
 		
@@ -85,7 +85,7 @@
 			<form action="./list" method="get" >
 				  <!-- parameter(name,value) -->
 				  <select name="kind" class="form-select" aria-label="Default select example">
-					  <option value="name">Name</option>
+					  <option value="name">subject</option>
 					  <option value="contents">Contents</option>
 				 </select>
 				 <!-- parameter -->

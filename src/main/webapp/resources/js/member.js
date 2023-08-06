@@ -115,7 +115,7 @@ btn.addEventListener("click", function(){
     if(!c){
         // form 전송
         console.log("form 전송")
-        //frm.submit();
+        frm.submit();
     }else{
         alert("필수 항목을 작성하세요.");
     }

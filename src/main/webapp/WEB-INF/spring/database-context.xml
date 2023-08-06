@@ -28,7 +28,7 @@
 		
 		<!-- config, mapper 위치 설정 -->
 		<property name="configLocation" value="classpath:database/config/mybatisConfig.xml"></property>
-		<property name="mapperLocations" value="classpath:database/mappers/*Mapper.xml"></property>
+		<property name="mapperLocations" value="classpath*:database/mappers/*Mapper.xml"></property>
 	</bean>
 	
 	<!-- 3. 2번에 생성된 객체를 가져옴 -->

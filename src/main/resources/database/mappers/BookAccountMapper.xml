@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.iu.main.bookAccount.BookAccountDAO">
+  		
+  		<!-- 1. List에서 총 몇개씩 보여줄지 정함 (startRow, lastRow)  -->
+  		<select id="getList" parameterType="Pager" resultType="BookAccountDTO">
+  			SELECT ACCOUNTNUM, BOOKNUM, ACCOUNTDATE FROM
+			( SELECT ROWNUM R, B.* FROM
+				(
+					SELECT * FROM BOOKACCOUNT
+					ORDER BY BOOKNUM DESC
+				)B
+			)
+			WHERE R BETWEEN #{startRow} AND #{lastRow};
+  		</select>
+  		
+  		
+  		<!-- 1_2. total : List의 하단 페이지 번호, 몇개의 list로 1block 생성 -->
+	  	<select id="getTotal" parameterType="Pager" resultType="Long">
+	  		SELECT COUNT(ACCOUNTNUM) FROM BOOKACCOUNT
+	  	</select>
+		
+	
+		<!-- 2. Detail : 일련번호를 통해 상세내용 확인 -->
+		<select id="getDetail" parameterType="BookAccountDTO" resultType="BookAccountDTO">
+			SELECT BA.* FROM BOOKACCOUNT BA
+			WHERE ACCOUNTNUM = #{accountNum}
+		</select>
+		
+		
+		<!-- 3. Add :  -->
+		<insert id="setAdd" parameterType="BookAccountDTO" >
+			<selectKey keyProperty="accountNum" resultType="Long" order="BEFORE">
+				SELECT BA_SEQ.NEXTVAL FROM DUAL
+			</selectKey>
+			INSERT INTO BOOKACCOUNT
+			VALUES (#{accountNum}, #{id}, #{bookNum}, #{account}, #{accountPassword}, #{accountBalnace}, SYSDATE)
+		</insert>
+		
+		
+  		<!-- 4. Update : 비밀번호, 잔액 수정 -->
+  		<update id="setUpdate" parameterType="BookAccountDTO">
+  			UPDATE BOOKACCOUNT
+  			SET ACCOUNTPASSWORD=#{accountPassword}, ACCOUNTBALANCE=#{accountBalance}
+  			WHERE ACCOUNTNUM = #{accountNum}
+  		</update>
+  		
+  		
+  		<!-- 5. Delete : 잔액있을 때는 삭제 불가 -->
+  		<delete id="setDelete" parameterType="BookAccountDTO">
+  			DELETE BOOKACCOUNT
+  			WEHRE ACCOUNTNUM=#{accountNum} AND ACCOUNTBALANCE=0;
+  		</delete>	
+  		
+  </mapper>
