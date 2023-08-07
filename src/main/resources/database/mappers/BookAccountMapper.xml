@@ -6,16 +6,24 @@
   <mapper namespace="com.iu.main.bookAccount.BookAccountDAO">
   		
   		<!-- 
+  			>> MemberDTO(id)와 Pager(범위)를 받기 위해 Map안에 2개를 넣었다. <<
   			 1. List에서 총 몇개씩 보여줄지 정함 (startRow, lastRow)
   			 2. 로그인 한 사용자의 세부내용이니 Member의 ID를 받아오고 resultType을 세부내용을 담을 BookAccountDTO 설정.
   		  -->
-  		<select id="getList" parameterType="MemberDTO" resultType="BookAccountDTO">
-  			SELECT * FROM BOOKACCOUNT WHERE ID = #{id}
+  		<select id="getList" parameterType="Map" resultType="BookAccountDTO">
+  			SELECT * FROM 
+	  			(SELECT ROWNUM R, A.* FROM
+		  			(SELECT * FROM BOOKACCOUNT 
+		  			WHERE ID = #{member.id}
+		  			ORDER BY ACCOUNTNUM DESC ) 
+		  			A 
+		  		)
+  			WHERE R BETWEEN #{pager.startRow} AND #{pager.lastRow}
   		</select>
   		
   		
   		<!-- 1_2. total : List의 하단 페이지 번호, 몇개의 list로 1block 생성 -->
-	  	<select id="getTotal" parameterType="Pager" resultType="Long">
+	  	<select id="getTotal" resultType="Long">
 	  		SELECT COUNT(ACCOUNTNUM) FROM BOOKACCOUNT
 	  	</select>
 		

@@ -18,5 +18,6 @@
 		<typeAlias type="com.iu.main.util.Pager" alias="Pager"/>
 		<typeAlias type="java.lang.Long" alias="Long"/>
 		<typeAlias type="java.util.List" alias="List"/>
+		<typeAlias type="java.util.Map" alias="Map"/>
 	</typeAliases>
 </configuration>

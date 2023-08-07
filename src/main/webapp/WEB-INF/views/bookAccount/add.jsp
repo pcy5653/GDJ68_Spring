@@ -13,14 +13,14 @@
 <section class="container mt-5">	
 	<h1 class="my-4">상품가입 Page</h1>
 	
-	<form action="./add" method="post">
+	<form action="./add" method="post" id="frm">
 		<!-- 1. 받아온 bookNum을 집어넣기 -->
 		<input type="hidden" name="bookNum" value="${dto.bookNum}">
 		
 		<!-- 2. 비밀번호는 입력하여 controller로 보내주기 --> 
 		<div class="mb-3">
 			<label for="pw" class="form-label">PASSWORD</label>
-			<input type="password" name="accountPassword" class="form-control" id="pw" placeholder="출금 비밀번호를 입력하세요">
+			<input type="password" name="accountPassword" class="form-control" id="pw" placeholder="출금 비밀번호 4자리를 입력하세요">
 		</div>
 		
 		<div class="mb-3">
@@ -34,13 +34,18 @@
 
 <script type="text/javascript">
 	/* 1. 버튼을 눌렀을 때, 비밀번호 (4글자) 길이가 맞는지 확인 */
+	const pw = document.getElementById("pw");
 	const btn = document.getElementById("btn");
+	const frm = document.getElementById("frm");
 	
 	btn.addEventListener("click", function(){
-		if(btn.value.length == 4){
-			alert("사용가능한 비밀번호 입니다.");
+		// 4자리 확인과 숫자가 맞는지 확인(isInteger)
+		// pw.value*1 = 문자열*1은 숫자 출력.
+		if(pw.value.length == 4 && Number.isInteger(pw.value*1)){
+			//alert("사용가능한 비밀번호 입니다.");
+			frm.submit();
 		}else{
-			alert("비밀번호는 4글자입니다.");
+			alert("비밀번호는 숫자 4글자입니다.");
 		}
 	})
 

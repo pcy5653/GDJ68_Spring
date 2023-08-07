@@ -45,6 +45,10 @@ public class BookAccountDTO {
 		this.accountPassword = accountPassword;
 	}
 	public Long getAccountBalance() {
+		// 잔액 입력안할 시 null이 오니 0원으로 설정.
+		if(this.accountBalance==null) {
+			this.accountBalance=0L;
+		}
 		return accountBalance;
 	}
 	public void setAccountBalance(Long accountBalance) {

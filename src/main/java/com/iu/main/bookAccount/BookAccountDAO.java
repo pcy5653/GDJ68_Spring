@@ -2,6 +2,7 @@ package com.iu.main.bookAccount;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +22,13 @@ public class BookAccountDAO {
 	
 	
 	// List : 존재하지 않는 id를 작성했을 시, 오류발생
-	public List<BookAccountDTO> getList(MemberDTO memberDTO) throws Exception{
-		return sqlSession.selectList(NAMESPACE+"getList", memberDTO);
+	public List<BookAccountDTO> getList(Map<String, Object> map) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"getList", map);
 	}
 	
 	// Total
-	public Long getTotal(Pager pager)throws Exception{
-		return sqlSession.selectOne(NAMESPACE+"getTotal", pager);
+	public Long getTotal()throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getTotal");
 	}
 	
 	

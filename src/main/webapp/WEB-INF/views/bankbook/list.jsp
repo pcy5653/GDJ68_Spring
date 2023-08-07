@@ -97,11 +97,13 @@
 		</div>
 		
 		<a class="btn btn-danger" href="./add">상품등록</a>
+
+		<button id="list" class="btn btn-danger">GetList</button>
 		
 		
 	
 	</section>
-	
+	<script type="text/javascript" src="../resources/js/bookList.js"></script>
 <%-- 	
 	<c:forEach begin="1" end="10" step="2" var="num">
 		<h1>${num}</h1>

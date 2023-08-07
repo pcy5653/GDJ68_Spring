@@ -32,7 +32,41 @@
 
 	<a class="btn btn-primary" href="./memberUpdate">회원수정</a>
 	
+	<div id="productList">
+
+	</div>
+
+
 </section>
+
+<script>
+	const productList = document.getElementById("productList");
+	getList(1);
+	
+
+	// Ajax
+	// pager 번호 넘기기
+	function getList(page){
+		fetch("../bookAccount/list?page="+page,{
+		method : "get"
+		})
+		.then((response)=>{return response.text()})
+		.then((r)=>{
+			productList.innerHTML=r;
+			console.log(r);
+		})
+		;
+	}
+
+
+	productList.addEventListener("click", function(event){
+		// li > a 태그 class명 : move
+		if(event.target.classList.contains("move")){	
+			alert("page");
+		}
+	})
+
+</script>
 
 </body>
 </html>
