@@ -5,16 +5,12 @@
   
   <mapper namespace="com.iu.main.bookAccount.BookAccountDAO">
   		
-  		<!-- 1. List에서 총 몇개씩 보여줄지 정함 (startRow, lastRow)  -->
-  		<select id="getList" parameterType="Pager" resultType="BookAccountDTO">
-  			SELECT ACCOUNTNUM, BOOKNUM, ACCOUNTDATE FROM
-			( SELECT ROWNUM R, B.* FROM
-				(
-					SELECT * FROM BOOKACCOUNT
-					ORDER BY BOOKNUM DESC
-				)B
-			)
-			WHERE R BETWEEN #{startRow} AND #{lastRow};
+  		<!-- 
+  			 1. List에서 총 몇개씩 보여줄지 정함 (startRow, lastRow)
+  			 2. 로그인 한 사용자의 세부내용이니 Member의 ID를 받아오고 resultType을 세부내용을 담을 BookAccountDTO 설정.
+  		  -->
+  		<select id="getList" parameterType="MemberDTO" resultType="BookAccountDTO">
+  			SELECT * FROM BOOKACCOUNT WHERE ID = #{id}
   		</select>
   		
   		
@@ -33,11 +29,11 @@
 		
 		<!-- 3. Add :  -->
 		<insert id="setAdd" parameterType="BookAccountDTO" >
-			<selectKey keyProperty="accountNum" resultType="Long" order="BEFORE">
+			<!-- <selectKey keyProperty="accountNum" resultType="Long" order="BEFORE">
 				SELECT BA_SEQ.NEXTVAL FROM DUAL
-			</selectKey>
-			INSERT INTO BOOKACCOUNT
-			VALUES (#{accountNum}, #{id}, #{bookNum}, #{account}, #{accountPassword}, #{accountBalnace}, SYSDATE)
+			</selectKey> -->
+			INSERT INTO BOOKACCOUNT (ACCOUNTNUM, ID, BOOKNUM, ACCOUNT, ACCOUNTPASSWORD, ACCOUNTBALANCE, ACCOUNTDATE)
+			VALUES (BA_SEQ.NEXTVAL, #{id}, #{bookNum}, #{account}, #{accountPassword}, #{accountBalance}, SYSDATE)
 		</insert>
 		
 		

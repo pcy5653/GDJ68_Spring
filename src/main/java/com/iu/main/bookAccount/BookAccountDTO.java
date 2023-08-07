@@ -7,7 +7,7 @@ public class BookAccountDTO {
 	private String id;
 	private Long bookNum;
 	private Long account;
-	private Integer accountPassword;
+	private String accountPassword;
 	private Long accountBalance;
 	private Date accountDate;
 	
@@ -38,10 +38,10 @@ public class BookAccountDTO {
 	public void setAccount(Long account) {
 		this.account = account;
 	}
-	public Integer getAccountPassword() {
+	public String getAccountPassword() {
 		return accountPassword;
 	}
-	public void setAccountPassword(Integer accountPassword) {
+	public void setAccountPassword(String accountPassword) {
 		this.accountPassword = accountPassword;
 	}
 	public Long getAccountBalance() {

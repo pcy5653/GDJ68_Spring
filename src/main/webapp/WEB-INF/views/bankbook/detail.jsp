@@ -47,6 +47,7 @@
 	<button id="update">수정</button>
 	<!-- 2. 속성 사용 : data-**** 이라는 속성명을 통해 bookNum을 받아와 JS에서 id명.getAttributes로 불러와 삭제 -->
 	<button id="del" data-delete-name="bookNum" data-delete-num="${dto.bookNum}">삭제</button>
+	<a class="btn btn-primary" href="../bookAccount/add?bookNum=${dto.bookNum}">상품가입</a>
 	
 	
 <%-- 	
