@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -59,7 +60,7 @@ public class NoticeController {
 			return "commons/result";
 		}
 	}
-	
+
 	
 	
 	// Form Add(insert)
@@ -98,12 +99,21 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value="update", method = RequestMethod.POST)
-	public String setUpdate(NoticeDTO noticeDTO)throws Exception{
-		int result = noticeService.setUpdate(noticeDTO);
+	public String setUpdate(NoticeDTO noticeDTO, MultipartFile [] photos, HttpSession session)throws Exception{
+		int result = noticeService.setUpdate(noticeDTO, photos, session);
 		
 		
 		// detail에는 하나의 내용을 보여주기 때문에 URL 자체에 detail?noticeNum=원하는번호(변수=noticeDTO.getNoticeNum())로 해당 상세내용을 본다!!
 		return "redirect:./detail?num="+noticeDTO.getNum();
+	}
+	
+	// 수정 중 파일 삭제
+	@GetMapping("fileDelete")
+	public String setFileDelete(NoticeFileDTO noticeFileDTO,HttpSession session, Model model)throws Exception{
+		int result = noticeService.setFileDelete(noticeFileDTO, session);
+		model.addAttribute("result", result);
+		
+		return "commons/ajaxResult";
 	}
 	
 	

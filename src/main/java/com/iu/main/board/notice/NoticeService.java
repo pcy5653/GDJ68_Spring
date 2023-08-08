@@ -68,10 +68,43 @@ public class NoticeService implements BoardService{
 		return result;
 	}
 	
+	
 	// Update
 	@Override
-	public int setUpdate(BoardDTO boardDTO) throws Exception{
-		return noticeDAO.setUpdate(boardDTO);
+	public int setUpdate(BoardDTO boardDTO, MultipartFile [] files, HttpSession session) throws Exception{
+		int result = noticeDAO.setUpdate(boardDTO);
+		
+		String path = "/resources/upload/notice/";
+		// file select
+			for(MultipartFile multipartFile: files) {
+				if(multipartFile.isEmpty()) {
+					continue;
+				}
+				String fileName=fileManager.fileSave(path, session, multipartFile);
+				
+				NoticeFileDTO noticeFileDTO = new NoticeFileDTO();
+				noticeFileDTO.setFileName(fileName);
+				noticeFileDTO.setOriginalName(multipartFile.getOriginalFilename());
+				noticeFileDTO.setNoticeNum(boardDTO.getNum());
+				result = noticeDAO.setFileAdd(noticeFileDTO);
+			}
+		return result;
+	}
+	// 수정 중 파일 삭제 (fileNum 변수)
+	public int setFileDelete(NoticeFileDTO noticeFileDTO, HttpSession session)throws Exception{
+		// 1. 폴더 파일 삭제 
+		// fileNum으로 fileName을 조회하기
+		noticeFileDTO = noticeDAO.getFileDetail(noticeFileDTO);
+		// fileName, resources/upload/파일위치, 회원만!
+		boolean check = fileManager.fileDelete(noticeFileDTO, "/resources/upload/notice/", session);
+		
+		// 2. DB 삭제 : 폴더파일 먼저 삭제된 뒤, DB 삭제
+		if(check) {
+			return noticeDAO.setFileDelete(noticeFileDTO);
+		}
+		
+		// 2. 위의 if문 실행 안된다면 0
+		return 0;
 	}
 	
 	// Delete

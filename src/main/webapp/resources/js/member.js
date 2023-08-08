@@ -15,21 +15,43 @@ const emailtext = document.getElementById("emailText");
 const birthtext = document.getElementById("birthText");
 
 
+// 인덱스마다 id중복확인, id, pw, pw2, name, email 확인
+let checkResults=[false, false, false, false, false, false, false];
 
 
-// ID : 빈칸X, 10글자 초과X
+// ID : 빈칸X, 10글자 초과X, 중복X
 id.addEventListener("blur", function(){
-    if(id.value=="" || id.value.length > 10){
-        id.focus();
-        idtext.innerText="10글자 이하의 ID를 입력하세요";
-        idtext.className="f";
-        checkResults[0] = false; 
-    }else{
-        idtext.innerText="사용가능한 ID입니다.";
-        idtext.className="s";
-        checkResults[0] = true; 
-    }
+
+    // 중복X
+    // ../member/join 현재위치 생략가능.
+    fetch("idCheck?id="+id.value,{ method : "get"})
+    .then((response)=>{
+        return response.text();         // 0 or 1
+    })
+    .then((r)=>{                        // response의 결과값을 r에 담는다.
+        if(r.trim()=='0'){
+            if(id.value=="" || id.value.length > 10){
+                id.focus();
+                idtext.innerText="10글자 이하의 ID를 입력하세요";
+                idtext.className="f";
+                checkResults[0] = false; 
+                checkResults[1] = false; 
+            }else{
+                idtext.innerText="사용가능한 ID입니다.";
+                idtext.className="s";
+                checkResults[0] = true; 
+                checkResults[1] = true; 
+            }
+
+        }else{
+            idtext.innerHTML="이미 사용중인 ID입니다.";
+            idtext.className="f";
+        }
+    })
+    
+
 });
+
 
 
 // PW : 빈칸X, 6글자 이상 12글자 미만
@@ -37,18 +59,18 @@ pw.addEventListener("blur", function(){
     if(pw.value.length >= 6 && pw.value.length < 12){
         pwtext.innerText="올바른 PW입니다."
         pwtext.className="s";
-        checkResults[1] = true; 
+        checkResults[2] = true; 
     }else{
         pw.focus();
         pwtext.innerText="6글자 이상 12글자 미만입니다.";
         pwtext.className="f";
-        checkResults[1] = false; 
+        checkResults[2] = false; 
     }
 })
 
 pw.addEventListener("change", function(){
     pw2.value="";   // pw와 값이 다를 때, pw2의 값을 빈칸
-    checkResults[2]=false;  // true -> false 변경
+    checkResults[3]=false;  // true -> false 변경
     pwtext2.innerText="일치하지 않습니다."
     pwtext2.className="f";
 })
@@ -59,11 +81,11 @@ pw2.addEventListener("keyup", function(){
     if(pw2.value==pw.value){
         pwtext2.innerText="일치합니다.";
         pwtext2.className="s";
-        checkResults[2] = true; 
+        checkResults[3] = true; 
     }else{
         pwtext2.innerText="일치하지 않습니다.";
         pwtext2.className="f";
-        checkResults[2] = false; 
+        checkResults[3] = false; 
     }
 })
 
@@ -73,25 +95,27 @@ n.addEventListener("blur", function(){
     let check = emptyCheck(n);
     nametext.innerText="이름을 작성하세요.";
     nametext.className="f";
-    checkResults[3] = false; 
+    checkResults[4] = false; 
 
     if(!check){     // check=false면 공백채움
         nametext.innerText="가능합니다.";
         nametext.className="s"; 
-        checkResults[3] = true; 
+        checkResults[4] = true; 
     }
 })
 
 
 // Email : 빈칸X 
 email.addEventListener("blur", function(){
-    if(email.value==""){
-        email.focus();
-        emailtext.innerText="Email을 입력하세요. (ex> abc@naver.com)"
-        checkResults[4] = false; 
-    }else{
-        emailtext.innerText="";
-        checkResults[4] = true; 
+    let check = emptyCheck(email);
+    emailtext.innerText="Email을 작성하세요.";
+    emailtext.className="f";
+    checkResults[5] = false;
+
+    if(!check){     // check=false면 공백채움
+        emailtext.innerText="사용가능한 이메일 입니다.";
+        emailtext.className="s"; 
+        checkResults[5] = true;
     }
 })
 
@@ -101,12 +125,12 @@ birth.addEventListener("change", function(){
     let check = emptyCheck(birth);
     birthtext.innerText="Email을 작성하세요.";
     birthtext.className="f";
-    checkResults[5] = false; 
+    checkResults[6] = false; 
 
     if(!check){     // check=false면 공백채움
         birthtext.innerText="사용가능한 이메일 입니다.";
         birthtext.className="s"; 
-        checkResults[5] = true; 
+        checkResults[6] = true; 
     }
 })
 
@@ -145,8 +169,7 @@ let pw2CheckResult = false;
 let nameCheckResult = false;
 let emailCheckResult = false;
 
-// 인덱스마다 id, pw, pw2, name, email 확인
-let checkResults=[false, false, false, false, false, false];
+
 
 
 //// ID

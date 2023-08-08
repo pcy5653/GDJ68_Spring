@@ -71,8 +71,16 @@
 			</div>
 		  </div>
 		</div>
-	  </div>
+	</div>
 	
+
+
+
+	<!-- 실시간 댓글 -->
+	<div id="replyList">
+
+	</div>
+
 <%-- 	
 	<c:if test="${dto.bookSale eq 1}">
 		<h1>판매중</h1>
@@ -165,6 +173,25 @@
 				}
 			}
 		}
-	</script>
+
+	// 실시간 댓글
+		const reply = document.getElementById("replyList");
+		
+		
+		getReplyList(1);
+
+		function getReplyList(page){
+			
+			let bookNum = add.getAttribute("data-add-num");
+			fetch("../bookReply/list?bookNum="+bookNum,{
+				method : "get"
+			})
+			.then((response)=> {return response.text()})
+			.then((r)=>{
+				reply.innerHTML=r;
+			})
+		}
+</script>
+
 </body>
 </html>

@@ -15,6 +15,7 @@
 		<typeAlias type="com.iu.main.board.qna.QnaDTO" alias="QnaDTO"/>
 		<typeAlias type="com.iu.main.board.qna.QnaFileDTO" alias="QnaFileDTO"/>
 		<typeAlias type="com.iu.main.bookAccount.BookAccountDTO" alias="BookAccountDTO"/>
+		<typeAlias type="com.iu.main.bookReply.BookReplyDTO" alias="BookReplyDTO"/>
 		<typeAlias type="com.iu.main.util.Pager" alias="Pager"/>
 		<typeAlias type="java.lang.Long" alias="Long"/>
 		<typeAlias type="java.util.List" alias="List"/>

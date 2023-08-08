@@ -93,4 +93,9 @@ public class MemberService {
 		
 		return result;
 	}
+	
+	// Join Id
+	public MemberDTO getIdCheck(MemberDTO memberDTO)throws Exception{
+		return memberDAO.getIdCheck(memberDTO);
+	}
 }

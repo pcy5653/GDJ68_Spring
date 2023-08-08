@@ -49,6 +49,12 @@
   	VALUES (#{id}, #{pw}, #{name}, #{email}, #{birth})
   </insert>
   
+  <!-- join 회원가입 ID 중복 확인 -->
+  <select id="getIdCheck" parameterType="MemberDTO" resultType="MemberDTO">
+  	SELECT ID FROM MEMBER
+  	WHERE ID = #{id}
+  </select>
+  
   <!-- 회원가입시 파일join -->
   <insert id="setFileJoin" parameterType="MemberFileDTO">
   	INSERT INTO MEMBERFILE (FILENUM, ID, FILENAME, ORIGINALNAME)

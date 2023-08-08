@@ -28,6 +28,11 @@ public class MemberDAO {
 		return sqlSession.insert(NAMESPACE+"setJoin", memberDTO);
 	}
 	
+	// Join 회원가입 중 ID 중복확인
+	public MemberDTO getIdCheck(MemberDTO memberDTO)throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getIdCheck",memberDTO);
+	}
+	
 	// MEMBERFILE 
 	public int setFileJoin(MemberFileDTO memberFileDTO) throws Exception {
 		return sqlSession.insert(NAMESPACE+"setFileJoin", memberFileDTO);

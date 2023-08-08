@@ -5,10 +5,41 @@
 
 const filelist = document.getElementById("fileList");
 const fbtn = document.getElementById("add");
+const delets = document.getElementsByClassName("delets");
 
+
+if(delets != null){
+    count=delets.length;
+    //alert(count);
+}
+
+// >> board > update.jsp 중에 span class="delets" (X)를 누를시 파일 삭제
+for(del of delets){
+    del.addEventListener("click",function(){
+        let num = this.getAttribute("data-delete-num");
+        let check = confirm("삭제시 복구 불가합니다. 정말로 삭제하시겠습니까?");    // true | false
+
+        if(check){
+            // 현재위치 (Notice or QNA) 
+            fetch("./fileDelete?fileNum="+num, {
+                method : "get"
+            })
+            .then((result)=>{return result.text()})
+            .then((r)=>{
+                if(r.trim()=='1'){
+                    this.previousSibling.previousSibling.remove();  // this의 형제, class="alert alert-info"
+                    this.remove();                                  // 본인 자신 (span)
+                    count--;                                        // 삭제하고 전체 count 감소
+                }
+            })      
+            
+        }
+    });
+}
 
 let count = 0;
 let idx = 0;
+
 
 // 1. fileBtn 누를 시 file input 생성 (5개까지만 생성)
 fbtn.addEventListener("click", function(){
@@ -83,6 +114,5 @@ filelist.addEventListener("click", function(event){
         count--;    // 파일 삭제 시, count 수를 차감.
     }
 });
-
 
 

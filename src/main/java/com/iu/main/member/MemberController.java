@@ -1,9 +1,13 @@
 package com.iu.main.member;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -97,7 +101,8 @@ public class MemberController {
 	// 회원가입 버튼 누를 시 발생
 	@RequestMapping(value="join", method=RequestMethod.POST)
 	public String setJoin(MemberDTO memberDTO, MultipartFile pic, HttpSession session) throws Exception {
-		int result = memberService.setJoin(memberDTO, pic, session); 
+		int result = memberService.setJoin(memberDTO, pic, session);
+		
 		System.out.println(pic.getName());
 		System.out.println(pic.getOriginalFilename());
 		System.out.println(pic.getSize());
@@ -106,4 +111,21 @@ public class MemberController {
 		
 		return "redirect:../list";
 	}
+	
+	@GetMapping("idCheck")
+	public String getIdCheck(MemberDTO memberDTO, Model model)throws Exception{
+		memberDTO = memberService.getIdCheck(memberDTO);
+		
+		// null : 중복X
+		int result = 1;	// 중복
+		
+		if(memberDTO==null) {
+			result = 0;	// 중복X	
+		}
+		
+		model.addAttribute("result", result);	// ajaxResult에서 result 속성 사용.
+		
+		return "commons/ajaxResult";
+	}
+	
 }

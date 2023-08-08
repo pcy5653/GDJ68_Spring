@@ -44,27 +44,30 @@
 	getList(1);
 	
 
-	// Ajax
-	// pager 번호 넘기기
-	function getList(page){
-		fetch("../bookAccount/list?page="+page,{
+	// mypage > 상품가입목록 하단의 page를 누르면 해당 page의 내용 출력.
+	productList.addEventListener("click", function(event){
+	// li > a 태그 class명 : move
+	if(event.target.classList.contains("move")){	
+		let page = event.target.getAttribute("data-num");
+		console.log("before");
+		getList(page);
+	}
+})
+
+// Ajax
+// pager 번호 넘기기
+function getList(page){
+	fetch("../bookAccount/list?page="+page,{
 		method : "get"
-		})
-		.then((response)=>{return response.text()})
-		.then((r)=>{
-			productList.innerHTML=r;
-			console.log(r);
+	})
+	.then((response)=>{return response.text()})
+	.then((r)=>{
+		console.log("ajax 실행");
+		productList.innerHTML=r;
+		console.log("after");
 		})
 		;
 	}
-
-
-	productList.addEventListener("click", function(event){
-		// li > a 태그 class명 : move
-		if(event.target.classList.contains("move")){	
-			alert("page");
-		}
-	})
 
 </script>
 

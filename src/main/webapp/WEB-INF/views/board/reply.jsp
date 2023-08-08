@@ -40,7 +40,7 @@
 				<input type="hidden" name="num" value="${num}">
 				<div class="mb-3 nameLine">
 				  <label for="name" class="form-label nameLabel">작성자</label>
-				  <input type="text" name="name" class="form-control" id="noticeName" value="${name}">
+				  <input type="text" name="name" class="form-control" id="noticeName" value="${member.id}">
 				</div>
 				<div class="mb-3">
 				  <label for="title" class="form-label">Title</label>

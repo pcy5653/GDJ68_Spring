@@ -2,6 +2,10 @@ package com.iu.main.board;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import com.iu.main.util.Pager;
 
 public interface BoardDAO {

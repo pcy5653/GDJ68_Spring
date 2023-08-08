@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.iu.main.bankBook.BankBookDTO;
+import com.iu.main.file.FileDTO;
 import com.iu.main.member.MemberDTO;
 
 @Component
@@ -41,5 +42,18 @@ public class FileManager {
 		multipartFile.transferTo(file);
 		
 		return uId; //Service에서 각각의 fileName 넣기 위해
+	}
+	
+	
+	// fileDelete : fileName을 받아야 하기 때문에 부모인 FileDTO 매개변수
+	public boolean fileDelete(FileDTO fileDTO, String path, HttpSession session)throws Exception {
+		// 1. 어디폴더? : 삭제할 폴더의 실제 경로
+		path = session.getServletContext().getRealPath(path);
+		
+		// 2. 파일의 이름으로 경로 설정
+		File file = new File(path, fileDTO.getFileName());
+		
+		// 3. 삭제 (ture | false)
+		return file.delete();
 	}
 }

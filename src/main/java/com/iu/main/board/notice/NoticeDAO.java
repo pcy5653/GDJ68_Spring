@@ -2,9 +2,12 @@ package com.iu.main.board.notice;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.iu.main.board.BoardDAO;
 import com.iu.main.board.BoardDTO;
@@ -55,6 +58,15 @@ public class NoticeDAO implements BoardDAO{
 	@Override
 	public int setUpdate(BoardDTO boardDTO) throws Exception{
 		return sqlSession.update(NAMESPACE+"setUpdate", boardDTO);
+	}
+	// 수정 중 파일 삭제
+	// 1. 폴더 파일 삭제
+	public NoticeFileDTO getFileDetail(NoticeFileDTO noticeFileDTO)throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getFileDetail", noticeFileDTO);
+	}
+	// 2. DB 삭제
+	public int setFileDelete(NoticeFileDTO noticeFileDTO)throws Exception{
+		return sqlSession.delete(NAMESPACE+"setFileDelete", noticeFileDTO);
 	}
 	
 	// Delete
