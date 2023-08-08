@@ -81,6 +81,11 @@
 
 	</div>
 
+	<form action="" id="frm" method="post">
+		<!-- <input type="text" name="text" id="text" class="form-control" placeholder="댓글을 달아주세요." data-re-contents="${dto.replyContents}"> -->
+		<button type="button" id="textBtn" class="btn btn-primary">댓글달기</button>
+	</form>
+
 <%-- 	
 	<c:if test="${dto.bookSale eq 1}">
 		<h1>판매중</h1>
@@ -180,9 +185,17 @@
 		
 		getReplyList(1);
 
+
+		reply.addEventListener("click", function(event){
+			if(event.target.classList.contains("move")){
+				let page = event.target.getAttribute("data-num");
+				getReplyList(page);
+			}
+		})
+
 		function getReplyList(page){
 			
-			let bookNum = add.getAttribute("data-add-num");
+			let bookNum = add.getAttribute("data-add-num");		// 재활용. 해당 bookNum 대입.
 			fetch("../bookReply/list?bookNum="+bookNum,{
 				method : "get"
 			})
@@ -191,6 +204,35 @@
 				reply.innerHTML=r;
 			})
 		}
+
+
+		const frm = document.getElementById("frm");
+		const text = document.getElementById("text");
+		const textBtn = document.getElementById("textBtn");
+		const con = text.getAttribute("data-re-contents");
+
+		// function ajax3(con){
+		// 	let bookNum = add.getAttribute("data-add-num");
+
+		// 	fetch("../bookReply/add",{
+		// 		method :"post",
+		// 		body : "bookNum="+bookNum,
+		// 		headers : {
+		// 			"Content-type":"application/x-www-form-urlencoded"
+		// 		}
+		// 	})
+		// 	.then((response)=>{
+		// 		return response.text();		// 0 or 1
+		// 	})
+		// 	.then((r)=>{	// response의 결과값을 r에 담는다.
+		// 		reply.innerHTML="r";
+		// 	})
+		// 	;
+		// }
+
+		// textBtn.addEventListener("click", function(){
+		// 	ajax3(con);
+		// })
 </script>
 
 </body>

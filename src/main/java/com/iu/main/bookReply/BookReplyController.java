@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -31,5 +33,20 @@ public class BookReplyController {
 		model.addAttribute("list", ar);
 		
 		return "bookReply/list";
+	}
+	
+	
+	
+	@GetMapping(value="add")
+	public void setAdd(BookReplyDTO bookReplyDTO, Model model)throws Exception{
+		model.addAttribute("dto", bookReplyDTO);
+	}
+	@PostMapping(value = "add")
+	public String setAdd(BookReplyDTO bookReplyDTO, HttpSession session ,Model model)throws Exception{
+		int result = bookReplyService.setAdd(bookReplyDTO);
+		
+		model.addAttribute("result", result);
+		
+		return "commons/ajaxResult";
 	}
 }

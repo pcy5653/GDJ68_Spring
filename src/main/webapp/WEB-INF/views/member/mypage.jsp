@@ -39,7 +39,7 @@
 
 </section>
 
-<script>
+<script type="text/javascript">
 	const productList = document.getElementById("productList");
 	getList(1);
 	
@@ -49,7 +49,6 @@
 	// li > a 태그 class명 : move
 	if(event.target.classList.contains("move")){	
 		let page = event.target.getAttribute("data-num");
-		console.log("before");
 		getList(page);
 	}
 })
@@ -62,9 +61,7 @@ function getList(page){
 	})
 	.then((response)=>{return response.text()})
 	.then((r)=>{
-		console.log("ajax 실행");
 		productList.innerHTML=r;
-		console.log("after");
 		})
 		;
 	}

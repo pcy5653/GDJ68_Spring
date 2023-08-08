@@ -26,4 +26,10 @@ public class BookReplyDAO {
 	public Long getTotal()throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"getList");
 	}
+	
+	
+	// Add
+	public int setAdd(BookReplyDTO bookReplyDTO)throws Exception{
+		return sqlSession.insert(NAMESPACE+"setAdd", bookReplyDTO);
+	}
 }

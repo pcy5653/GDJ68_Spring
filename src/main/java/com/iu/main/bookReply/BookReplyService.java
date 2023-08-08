@@ -20,4 +20,10 @@ public class BookReplyService {
 	public List<BookReplyDTO> getList(BookReplyDTO bookReplyDTO)throws Exception{
 		return bookReplyDAO.getList(bookReplyDTO);
 	}
+	
+	
+	// Add
+	public int setAdd(BookReplyDTO bookReplyDTO)throws Exception{
+		return bookReplyDAO.setAdd(bookReplyDTO);
+	}
 }

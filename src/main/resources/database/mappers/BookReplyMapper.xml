@@ -5,7 +5,7 @@
   
   <mapper namespace="com.iu.main.bookReply.BookReplyDAO">
   	
-  	<!-- List -->
+  	<!-- List : 상품 댓글 list -->
   	<select id="getList" parameterType="BookReplyDTO" resultType="BookReplyDTO">
   		<!-- SELECT * FROM
 	  		(SELECT ROWNUM R, B.* FROM
@@ -20,5 +20,13 @@
   	<select id="getTotal" resultType="Long">
   		SELECT COUNT(BOOKNUM) FROM BOOKREPLY
   	</select>
+  	
+  	
+  	<!-- Insert : 댓글 insert -->
+  	<insert id="setAdd" parameterType="BookReplyDTO">
+  		INSERT INTO BOOKREPLY (REPLYNUM, BOOKNUM, ID, REPLYCONTENTS, REPLYDATE)
+  		VALUES (BR_SEQ.NEXTVAL, #{bookNum}, #{id}, #{replyContents}, SYSDATE)
+  	</insert>
+  	
   	
   </mapper>
