@@ -81,10 +81,10 @@
 
 	</div>
 
-	<form action="" id="frm" method="post">
-		<!-- <input type="text" name="text" id="text" class="form-control" placeholder="댓글을 달아주세요." data-re-contents="${dto.replyContents}"> -->
+	<div>
+		<input type="text" id="text">
 		<button type="button" id="textBtn" class="btn btn-primary">댓글달기</button>
-	</form>
+	</div>
 
 <%-- 	
 	<c:if test="${dto.bookSale eq 1}">
@@ -206,17 +206,17 @@
 		}
 
 
-		const frm = document.getElementById("frm");
-		const text = document.getElementById("text");
-		const textBtn = document.getElementById("textBtn");
-		const con = text.getAttribute("data-re-contents");
+	// 댓글 insert
+		// const text = document.getElementById("text").value;
+		// const textBtn = document.getElementById("textBtn");
+ 
 
-		// function ajax3(con){
+		// function ajax3(bookNum, text){
 		// 	let bookNum = add.getAttribute("data-add-num");
 
 		// 	fetch("../bookReply/add",{
 		// 		method :"post",
-		// 		body : "bookNum="+bookNum,
+		// 		body : "bookNum="+bookNum+"&"+"replyContents="+text,
 		// 		headers : {
 		// 			"Content-type":"application/x-www-form-urlencoded"
 		// 		}
@@ -231,7 +231,7 @@
 		// }
 
 		// textBtn.addEventListener("click", function(){
-		// 	ajax3(con);
+		// 	ajax3(bookNum, text);
 		// })
 </script>
 
