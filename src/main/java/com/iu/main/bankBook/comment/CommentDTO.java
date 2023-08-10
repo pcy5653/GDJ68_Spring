@@ -6,7 +6,7 @@ public class CommentDTO {
 	private Long commentNum;
 	private String id;
 	private Long bookNum;
-	private String commnetContents;
+	private String commentContents;
 	private Date commentDate;
 	public Long getCommentNum() {
 		return commentNum;
@@ -26,11 +26,12 @@ public class CommentDTO {
 	public void setBookNum(Long bookNum) {
 		this.bookNum = bookNum;
 	}
-	public String getCommnetContents() {
-		return commnetContents;
+
+	public String getCommentContents() {
+		return commentContents;
 	}
-	public void setCommnetContents(String commnetContents) {
-		this.commnetContents = commnetContents;
+	public void setCommentContents(String commentContents) {
+		this.commentContents = commentContents;
 	}
 	public Date getCommentDate() {
 		return commentDate;

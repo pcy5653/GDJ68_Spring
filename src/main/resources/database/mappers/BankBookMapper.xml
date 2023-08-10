@@ -153,10 +153,13 @@
   		(SELECT ROWNUM R, C.* FROM
   		(SELECT * FROM BOOKCOMMENT 
   		WHERE BOOKNUM = #{comment.bookNum}	
-  		ORDERY BY COMMENTNUM DESC) C)
+  		ORDER BY COMMENTNUM DESC) C)
   		WHERE R BETWEEN #{pager.startRow} AND #{pager.lastRow}
   	</select>
   	
-  	
+  	<insert id="setCommentAdd" parameterType="CommentDTO" >
+  		INSERT INTO BOOKCOMMENT (COMMENTNUM, ID, BOOKNUM, COMMENTCONTENTS, COMMENTDATE)
+  		VALUES (CO_SEQ.NEXTVAL, #{id}, #{bookNum}, #{commentContents}, #{commentDate})
+  	</insert>
   	
   </mapper>

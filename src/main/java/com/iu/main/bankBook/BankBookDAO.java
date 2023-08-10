@@ -81,12 +81,16 @@ public class BankBookDAO {
 	
 	// COMMENT LIST
 	public List<CommentDTO> getCommentList(Map<String, Object> map) throws Exception{
-		// 파라미터로 List의 갯수를 보내주는 데이터 2개를 보내준다.
+		// 파라미터로 List의 갯수를 보내주는 데이터 2개를 보내준다. (bookNum, row값(start, last))
 		return sqlSession.selectList(NAMESPACE+"getCommentList", map);
 	}
 	
 	public Long getCommentTotal(CommentDTO commentDTO) throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"getCommentTotal", commentDTO);
+	}
+	
+	public int setCommentAdd(CommentDTO commentDTO)throws Exception{
+		return sqlSession.insert(NAMESPACE+"setCommentAdd", commentDTO);
 	}
 		
 }
