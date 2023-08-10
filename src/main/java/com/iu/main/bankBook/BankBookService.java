@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.iu.main.bankBook.comment.CommentDTO;
 import com.iu.main.util.FileManager;
 import com.iu.main.util.Pager;
 
@@ -23,7 +24,7 @@ public class BankBookService {
 	@Autowired
 	private FileManager fileManager;
 	
-	
+	// ---------------BANKBOOK
 	public List<BankBookDTO> getList(Pager pager) throws Exception {
 //		Map<String, Integer> map = new HashMap<String, Integer>();
 		// page	 startRow  lastRow
@@ -94,4 +95,18 @@ public class BankBookService {
 	public int setDelete(Long num) throws Exception {
 		return bankBookDAO.setDelete(num);
 	}
+	
+	
+	// ---------------COMMENT 
+	public List<CommentDTO> getCommentList(Pager pager, CommentDTO commentDTO) throws Exception{
+		Map<String, Object> map = new HashMap<String, Object>();
+		pager.makeRowNum();
+		pager.makePageNum(bankBookDAO.getCommentTotal(commentDTO));
+		map.put("pager", pager);
+		map.put("comment", commentDTO);
+		
+		return bankBookDAO.getCommentList(map);
+	}
+	
 }
+

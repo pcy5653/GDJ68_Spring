@@ -41,9 +41,14 @@ public class BookReplyController {
 	public void setAdd(BookReplyDTO bookReplyDTO, Model model)throws Exception{
 		model.addAttribute("dto", bookReplyDTO);
 	}
+	
 	@PostMapping(value = "add")
 	public String setAdd(BookReplyDTO bookReplyDTO, HttpSession session ,Model model)throws Exception{
+		// id넣기
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		bookReplyDTO.setId(memberDTO.getId());
 		int result = bookReplyService.setAdd(bookReplyDTO);
+		
 		
 		model.addAttribute("result", result);
 		

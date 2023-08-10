@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <title>Insert title here</title>
 <c:import url="../temp/bootStrap.jsp"></c:import>
 </head>
@@ -40,32 +41,64 @@
 </section>
 
 <script type="text/javascript">
-	const productList = document.getElementById("productList");
-	getList(1);
+	// JavaScript
+
+// 	const productList = document.getElementById("productList");
+// 	getList(1);
 	
 
-	// mypage > 상품가입목록 하단의 page를 누르면 해당 page의 내용 출력.
-	productList.addEventListener("click", function(event){
-	// li > a 태그 class명 : move
-	if(event.target.classList.contains("move")){	
-		let page = event.target.getAttribute("data-num");
+// 	// mypage > 상품가입목록 하단의 page를 누르면 해당 page의 내용 출력.
+// 	productList.addEventListener("click", function(event){
+// 	// li > a 태그 class명 : move
+// 	if(event.target.classList.contains("move")){	
+// 		let page = event.target.getAttribute("data-num");
+// 		getList(page);
+// 	}
+// })
+
+// // Ajax
+// // pager 번호 넘기기
+// function getList(page){
+// 	fetch("../bookAccount/list?page="+page,{
+// 		method : "get"
+// 	})
+// 	.then((response)=>{return response.text()})
+// 	.then((r)=>{
+// 		productList.innerHTML=r;
+// 		})
+// 		;
+// 	}
+
+</script>
+<script type="text/javascript">
+	//Jquery
+
+	$('#productList').on("click",".move",function(){
+		let page = $(this).attr("data-num");	
 		getList(page);
-	}
-})
-
-// Ajax
-// pager 번호 넘기기
-function getList(page){
-	fetch("../bookAccount/list?page="+page,{
-		method : "get"
 	})
-	.then((response)=>{return response.text()})
-	.then((r)=>{
-		productList.innerHTML=r;
+
+	getList(1);
+
+	// Jquery Ajax
+	function getList(page){
+		$.ajax({
+			type:'get',
+			url : '../bookAccount/list',
+			data : {
+				page:page
+			},
+			success:function(response){
+				$('#productList').html(response.trim());
+			},
+			error:function(){
+				alert("관리자에게 문의")
+			}
+
 		})
-		;
 	}
 
+	
 </script>
 
 </body>

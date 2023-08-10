@@ -6,6 +6,8 @@
 const filelist = document.getElementById("fileList");
 const fbtn = document.getElementById("add");
 const delets = document.getElementsByClassName("delets");
+let count = 0;
+let idx = 0;
 
 
 if(delets != null){
@@ -13,7 +15,7 @@ if(delets != null){
     //alert(count);
 }
 
-// >> board > update.jsp 중에 span class="delets" (X)를 누를시 파일 삭제
+//>> board > update.jsp 중에 span class="delets" (X)를 누를시 파일 삭제
 for(del of delets){
     del.addEventListener("click",function(){
         let num = this.getAttribute("data-delete-num");
@@ -37,10 +39,9 @@ for(del of delets){
     });
 }
 
-let count = 0;
-let idx = 0;
 
-
+/*
+// borad > add.jsp
 // 1. fileBtn 누를 시 file input 생성 (5개까지만 생성)
 fbtn.addEventListener("click", function(){
     if(count < 5){
@@ -97,8 +98,9 @@ fbtn.addEventListener("click", function(){
     }
 
     idx++;
-    
 })
+*/
+
 
 
 // 3. 파일 옆에 X를 눌렀을 때, file이 삭제되도록 실행.
@@ -116,3 +118,34 @@ filelist.addEventListener("click", function(event){
 });
 
 
+
+// jquery
+// 1. 파일추가
+$('#add').click(function(){   
+    if(count<5){
+        let i = '<div class="input-group mb-3" id="file"'+idx+'>';
+        i = i.concat('<input type="file" name="photos" class="form-control" id="pic">');
+        i = i.concat('<span class="df" data-id="file"'+idx+'>X</span>');
+        i = i.concat('</div>');
+
+        $('#fileList').append(i);
+        count++;
+        idx++;
+    }else{
+        alert("최대파일은 5개 입니다.")
+    }
+})
+
+// 2. 파일삭제 : event 위임
+// idx 필요. 부모찾기 위해
+$('#filelist').on("click", ".df", function(){
+    let deleteId = $(this).attr("data-id");
+    $('#'+deleteId).remove();
+    count--;
+})
+
+// idx 필요X. 바로 부모 삭제
+// $('#filelist').on("click", ".df", function(){
+//     $(this).parent().remove();
+//     count--;
+// })

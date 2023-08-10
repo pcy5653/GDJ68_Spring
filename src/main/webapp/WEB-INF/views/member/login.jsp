@@ -18,12 +18,12 @@
 		
 			<!-- value값은 미리 넣을 수 있는 값인데 연습시에만 value값 넣어놓기 -->
 			<label for="id" class="form-label">ID</label>
-			<input type="text" value="1234" name="id" class="form-control" id="id" placeholder="ID를 입력하세요">
+			<input type="text" value="sunday1" name="id" class="form-control" id="id" placeholder="ID를 입력하세요">
 		</div>
 		
 		<div class="mb-3">
 			<label for="pw" class="form-label">PASSWORD</label>
-			<input type="password" value="1234" name="pw" class="form-control" id="pw" placeholder="PW를 입력하세요">
+			<input type="password" value="123456" name="pw" class="form-control" id="pw" placeholder="PW를 입력하세요">
 		</div>
 		
 		<div class="mb-3">

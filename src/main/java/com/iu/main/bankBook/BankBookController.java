@@ -10,12 +10,14 @@ import org.apache.ibatis.mapping.ResultSetType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.iu.main.bankBook.comment.CommentDTO;
 import com.iu.main.member.MemberDTO;
 import com.iu.main.util.Pager;
 
@@ -29,6 +31,7 @@ public class BankBookController {
 	@Autowired
 	private BankBookService bankBookService;
 	
+	//--------BANKBOOK
 	
 	// List | Model타입 사용
 	@RequestMapping(value="list", method=RequestMethod.GET)	// method=클래스명.메소드(상수=final)
@@ -111,5 +114,12 @@ public class BankBookController {
 	}
 	
 	
+	
+	//--------COMMENT (bankbook > detail.jsp > commentList table 쪽)
+	@GetMapping("commentList")
+	public void getCommentList(CommentDTO commentDTO, Pager pager, Model model)throws Exception{
+		List<CommentDTO> ar = bankBookService.getCommentList(pager, commentDTO);
+		model.addAttribute("commentList", ar);
+	}
 
 }

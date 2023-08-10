@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.iu.main.bankBook.comment.CommentDTO;
 import com.iu.main.util.Pager;
 
 @Repository //해당 클래스의 객체 생성 (DAO 객체생성:spring에서 생성) | (DB역할)
@@ -22,7 +23,7 @@ public class BankBookDAO {
 	// *Mapper 파일 위치
 	private final String NAMESPACE="com.iu.main.bankBook.BankBookDAO.";
 	
-	
+	//------- BANKBOOK LIST
 	
 	// total : List의 페이지 넘버 보여주기
 	public Long getTotal(Pager pager) throws Exception{
@@ -35,7 +36,7 @@ public class BankBookDAO {
 		// 파라미터로 List의 갯수를 보내주는 데이터 2개를 보내준다.
 		return sqlSession.selectList(NAMESPACE+"getList", pager);
 	}
-
+	
 	
 	// detail
 	public BankBookDTO getDetail(BankBookDTO bankBookDTO) throws Exception {
@@ -74,6 +75,18 @@ public class BankBookDAO {
 	// DTO가 아닌 하나의 데이터를 보내는 변수(num)를 따라 Mapper에서도 똑같이 ParameterType도 동일타입으로 설정하고 받는 변수 값도 동일작성
 	public int setDelete(Long num) throws Exception {
 		return sqlSession.delete(NAMESPACE+"setDelete", num);
+	}
+	
+	
+	
+	// COMMENT LIST
+	public List<CommentDTO> getCommentList(Map<String, Object> map) throws Exception{
+		// 파라미터로 List의 갯수를 보내주는 데이터 2개를 보내준다.
+		return sqlSession.selectList(NAMESPACE+"getCommentList", map);
+	}
+	
+	public Long getCommentTotal(CommentDTO commentDTO) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"getCommentTotal", commentDTO);
 	}
 		
 }

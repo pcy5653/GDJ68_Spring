@@ -8,6 +8,7 @@
 		<!-- alias = 패키지를 id로 설정하는 개념 | 마지막클래스명 = alias명 -->
 		<typeAlias type="com.iu.main.bankBook.BankBookDTO" alias="BankBookDTO"/>
 		<typeAlias type="com.iu.main.bankBook.BankBookFileDTO" alias="BankBookFileDTO"/>
+		<typeAlias type="com.iu.main.bankBook.comment.CommentDTO" alias="CommentDTO"/>
 		<typeAlias type="com.iu.main.member.MemberDTO" alias="MemberDTO"/>
 		<typeAlias type="com.iu.main.member.MemberFileDTO" alias="MemberFileDTO"/>
 		<typeAlias type="com.iu.main.board.notice.NoticeDTO" alias="NoticeDTO"/>

@@ -136,4 +136,27 @@
   		SET BOOKNAME=#{bookName}, BOOKRATE=#{bookRate}, BOOKSALE=#{bookSale}, BOOKCONTENTS=#{bookContents}
   		WHERE BOOKNUM=#{bookNum} 
   	</update>
+  	
+  	
+  	
+  	
+  	<!-- comment -->
+  	<!-- 특정 상품에 대한 댓글만 가져오기 
+  		parameter로 2가지 내용(bookNum, Pager의 내용)-->
+  	
+  	<select id="getCommentTotal" parameterType="CommentDTO" resultType="Long">
+  		SELECT COUNT(COMMENTNUM) FROM BOOKCOMMENT
+  		WHERE BOOKNUM = #{bookNum}
+  	</select>
+  	<select id="getCommentList" parameterType="Map" resultType="CommentDTO">
+  		SELECT * FROM
+  		(SELECT ROWNUM R, C.* FROM
+  		(SELECT * FROM BOOKCOMMENT 
+  		WHERE BOOKNUM = #{comment.bookNum}	
+  		ORDERY BY COMMENTNUM DESC) C)
+  		WHERE R BETWEEN #{pager.startRow} AND #{pager.lastRow}
+  	</select>
+  	
+  	
+  	
   </mapper>

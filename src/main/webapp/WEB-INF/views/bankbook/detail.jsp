@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <title>Insert title here</title>
 <c:import url="../temp/bootStrap.jsp"></c:import>
 </head>
@@ -77,13 +78,15 @@
 
 
 	<!-- 실시간 댓글 -->
-	<div id="replyList">
-
+	<div class="mb-3">
+		<textarea name="accountPassword" id="comment" class="form-control"></textarea>
+		<button id="commentAdd" class="btn btn-primary">댓글달기</button>
 	</div>
 
 	<div>
-		<input type="text" id="text">
-		<button type="button" id="textBtn" class="btn btn-primary">댓글달기</button>
+		<table id="commentList">
+
+		</table>
 	</div>
 
 <%-- 	
@@ -99,7 +102,7 @@
 		 실제 경로 root 기준   : /bankbook/detail.jsp
 		 detail.jsp 기준	  : ..(bankbook 폴더 나가고)/resorce/js/delete.js		=> script 주소
 		-->
-	<script src="../resources/js/delete.js"></script>
+<script src="../resources/js/delete.js"></script>
 
 	<!-- <script>
 		// 1. 함수 사용 : js에서는 ${dto.bookNum}이 넘어가지 못하니 함수에 담아 보내준다.
@@ -107,93 +110,144 @@
 	</script> -->
 
 	<!-- 함수 사용 : js에서는 ${dto.bookNum}이 넘어가지 못하니 함수에 담아 보내준다. -->
-	<script type="text/javascript">	
-		const add = document.getElementById("add");
+<script type="text/javascript">	
+		// javaScript & ajax
+		// bankbook > detail.jsp > 상품가입
 
-		add.addEventListener("click", function(){
-			// data-add-num : bookNum			
-			let bookNum = add.getAttribute("data-add-num");
-			// pw.value : password
-			let pw = document.getElementById("pw").value;
+		// const add = document.getElementById("add");
 
-			// ajax1() 변수 실행
-			// ajax1(bookNum, pw);
-			 ajax2(bookNum, pw);
-		});
+		// add.addEventListener("click", function(){
+		// 	// data-add-num : bookNum			
+		// 	let bookNum = add.getAttribute("data-add-num");
+		// 	// pw.value : password
+		// 	let pw = document.getElementById("pw").value;
+
+		// 	// ajax1() 변수 실행
+		// 	// ajax1(bookNum, pw);
+		// 	ajax2(bookNum, pw);
+		// });
 
 
-		function ajax2(bookNum, pw){
-			fetch("../bookAccount/add",{
-				method : "post",
-				body : "bookNum="+bookNum+"&"+"accountPassword="+pw ,
-				headers : {
-					"Content-type":"application/x-www-form-urlencoded"
-				}
-			})
-			.then((response)=>{
-				return response.text();		// 0 or 1
-			})
-			.then((r)=>{	// response의 결과값을 r에 담는다.
-				if(r>0){
-					alert("가입 완료");
-				}else{
-					alert("가입 실패");
-				}
 
-				location.href="../";
-			})
-			;
+		// function ajax1(bookNum, pw){
+		// 	// 1. Ajax 객체 선언
+		// 	let xhttp = new XMLHttpRequest();
 
-		}
+		// 	// 2. 요청정보 : open("method", "url") -> POST로 DB에 전달.
+		// 	xhttp.open("post","../bookAccount/add");
 
-		function ajax1(bookNum, pw){
-			// 1. Ajax 객체 선언
-			let xhttp = new XMLHttpRequest();
+		// 	// 3. 요청 header 정보
+        //     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-			// 2. 요청정보 : open("method", "url") -> POST로 DB에 전달.
-			xhttp.open("post","../bookAccount/add");
+		// 	// 4. 요청 발생(POST일 경우 파라미터 작성) Key=Value&Key2=Value2....
+		// 	xhttp.send("bookNum="+bookNum+"&"+"accountPassword="+pw);
 
-			// 3. 요청 header 정보
-            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-			// 4. 요청 발생(POST일 경우 파라미터 작성) Key=Value&Key2=Value2....
-			xhttp.send("bookNum="+bookNum+"&"+"accountPassword="+pw);
-
-			// 5. 응답 처리
-			xhttp.onreadystatechange=function(){
-				if(this.readyState==4 && this.status==200){
-					// ajaxResult의 Text 내용이 r에 담김. (1 or 0)
-					let r = this.responseText.trim();
-					console.log(r);
-					if(r>0){
-						alert("가입 성공");
-					}else{
-						alert("가입 실패");
-					}
-					// aler창 뜨고 Modal 창 강제종료
-					document.getElementById("close").click();
+		// 	// 5. 응답 처리
+		// 	xhttp.onreadystatechange=function(){
+		// 		if(this.readyState==4 && this.status==200){
+		// 			// ajaxResult의 Text 내용이 r에 담김. (1 or 0)
+		// 			let r = this.responseText.trim();
+		// 			console.log(r);
+		// 			if(r>0){
+		// 				alert("가입 성공");
+		// 			}else{
+		// 				alert("가입 실패");
+		// 			}
+		// 			// aler창 뜨고 Modal 창 강제종료
+		// 			document.getElementById("close").click();
 					
-					// index page 이용
+		// 			// index page 이용
+		// 			location.href="../";
+		// 		}
+		// 	}
+		// }
+
+
+		// function ajax2(bookNum, pw){
+		// 	fetch("../bookAccount/add",{
+		// 		method : "post",
+		// 		body : "bookNum="+bookNum+"&"+"accountPassword="+pw ,
+		// 		headers : {
+		// 			"Content-type":"application/x-www-form-urlencoded"
+		// 		}
+		// 	})
+		// 	.then((response)=>{
+		// 		return response.text();		// 0 or 1
+		// 	})
+		// 	.then((r)=>{	// response의 결과값을 r에 담는다.
+		// 		if(r>0){
+		// 			alert("가입 완료");
+		// 		}else{
+		// 			alert("가입 실패");
+		// 		}
+
+		// 		location.href="../";
+		// 	})
+		// 	;
+
+		// }
+		
+		// jquery ajax
+		$('#add').click(function(){
+			let bookNum = $(this).attr("data-add-num");
+			let pw = $('#pw').val();
+			ajax(bookNum, pw);
+		})
+
+		function ajax(bookNum, pw){
+			$.ajax({
+				type:'post',
+				url : '../bookAccount/add',
+				data :{
+					bookNum:bookNum,
+					accountPassword:pw
+				},
+				success:function(response){
+					if(response.trim()>0){
+						alert("가입완료");
+						location.href="/bankbook/detail?bookNum="+bookNum;
+					}else{
+						alert("가입실패");
+						location.href="/bankbook/detail?bookNum="+bookNum;
+					}
+				},
+				error:function(){
+					alert("관리자 문의하세요.")
 					location.href="../";
 				}
-			}
+			});
 		}
+		
 
+
+
+
+</script>
+
+
+<!-- <script type="text/javascript">
 	// 실시간 댓글
 		const reply = document.getElementById("replyList");
+		const content = document.getElementById("contents").value;
+		const textBtn = document.getElementById("textBtn");
 		
-		
-		getReplyList(1);
+		getList(1);
 
 
 		reply.addEventListener("click", function(event){
 			if(event.target.classList.contains("move")){
 				let page = event.target.getAttribute("data-num");
-				getReplyList(page);
+				getList(page);
 			}
 		})
 
-		function getReplyList(page){
+		textBtn.addEventListener("click", function(){
+			ajax3(bookNum, content);
+		})
+
+
+
+		function getList(page){
 			
 			let bookNum = add.getAttribute("data-add-num");		// 재활용. 해당 bookNum 대입.
 			fetch("../bookReply/list?bookNum="+bookNum,{
@@ -206,33 +260,55 @@
 		}
 
 
+
 	// 댓글 insert
-		// const text = document.getElementById("text").value;
-		// const textBtn = document.getElementById("textBtn");
- 
 
-		// function ajax3(bookNum, text){
-		// 	let bookNum = add.getAttribute("data-add-num");
+		function ajax3(bookNum, content){
+			let bookNum = add.getAttribute("data-add-num");
+			fetch("../bookReply/add",{
+				method :"post",
+				body : "bookNum="+bookNum+"&"+"replyContents="+content,
+				headers : {
+					"Content-type":"application/x-www-form-urlencoded"
+				}
+			})
+			.then((response)=>{
+				return response.text();		// 0 or 1
+			})
+			.then((r)=>{	// response의 결과값을 r에 담는다.
+				if(r>0){
+					alert("등록성공")
+					getList(page);
+				}else{
+					alert("등록실패")
+				}
+			})
+			;
+		}
 
-		// 	fetch("../bookReply/add",{
-		// 		method :"post",
-		// 		body : "bookNum="+bookNum+"&"+"replyContents="+text,
-		// 		headers : {
-		// 			"Content-type":"application/x-www-form-urlencoded"
-		// 		}
-		// 	})
-		// 	.then((response)=>{
-		// 		return response.text();		// 0 or 1
-		// 	})
-		// 	.then((r)=>{	// response의 결과값을 r에 담는다.
-		// 		reply.innerHTML="r";
-		// 	})
-		// 	;
-		// }
+		
+</script> -->
 
-		// textBtn.addEventListener("click", function(){
-		// 	ajax3(bookNum, text);
-		// })
+<script type="text/javaScript">
+	let bookNum = add.getAttribute("data-add-num");
+	getCommentList(bookNum, 1);
+
+	function getCommentList(bookNum, page){
+		$.ajax({
+			type : 'get',
+			url : './commentList',
+			data : {
+				bookNum:bookNum,
+				page:page
+			},
+			success:function(result){
+				$('#commentList').append(result);
+			},
+			error:function(){
+				alert("관리자에게 문의하세요.");
+			}
+		});
+	}
 </script>
 
 </body>
