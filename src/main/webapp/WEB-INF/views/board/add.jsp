@@ -83,6 +83,7 @@
 	const frm = document.getElementById("frm");
 
 
+	// 위지위그 사용
 	$("#contents").summernote({
             height:400,
             callbacks:{
