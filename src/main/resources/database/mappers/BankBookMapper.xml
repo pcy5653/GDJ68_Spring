@@ -159,7 +159,7 @@
   	
   	<insert id="setCommentAdd" parameterType="CommentDTO" >
   		INSERT INTO BOOKCOMMENT (COMMENTNUM, ID, BOOKNUM, COMMENTCONTENTS, COMMENTDATE)
-  		VALUES (CO_SEQ.NEXTVAL, #{id}, #{bookNum}, #{commentContents}, #{commentDate})
+  		VALUES (CO_SEQ.NEXTVAL, #{id}, #{bookNum}, #{commentContents}, SYSDATE)
   	</insert>
   	
   </mapper>

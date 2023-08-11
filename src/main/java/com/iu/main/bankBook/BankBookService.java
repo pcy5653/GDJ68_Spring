@@ -97,7 +97,7 @@ public class BankBookService {
 	}
 	
 	
-	// ---------------COMMENT 
+	// ------------------------- COMMENT ----------------------------- 
 	// list
 	public List<CommentDTO> getCommentList(Pager pager, CommentDTO commentDTO) throws Exception{
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -111,7 +111,6 @@ public class BankBookService {
 	
 	// insert
 	public int setCommentAdd(CommentDTO commentDTO)throws Exception{
-
 		return bankBookDAO.setCommentAdd(commentDTO);
 	}
 	

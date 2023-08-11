@@ -119,20 +119,20 @@ public class BankBookController {
 	//--------COMMENT (bankbook > detail.jsp > commentList table 쪽)
 	@GetMapping("commentList")
 	public void getCommentList(CommentDTO commentDTO, Pager pager, Model model)throws Exception{
+		pager.setPerPage(2L);
 		List<CommentDTO> ar = bankBookService.getCommentList(pager, commentDTO);
 		model.addAttribute("commentList", ar);
 	}
-	
-	@GetMapping("commentList")
-	public void setCommentAdd()throws Exception{
-	
-	}
-	
-	@PostMapping("commentList")
-	public String setCommentAdd(CommentDTO commentDTO)throws Exception{
-		 int result = bankBookService.setCommentAdd(commentDTO);
+	@PostMapping("commentAdd")
+	public String setCommentAdd(CommentDTO commentDTO, HttpSession session, Model model)throws Exception{
+		// id를 memberDTO에 받아 comment id에 넣고 결과갑을 ajaxResult.jsp로 보낸다.
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		commentDTO.setId(memberDTO.getId());
+		int result = bankBookService.setCommentAdd(commentDTO);
+		model.addAttribute("result", result);
 		
-		 return "redirect:./detail";
+		return "commons/ajaxResult";
+		
 	}
 
 }

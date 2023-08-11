@@ -85,8 +85,12 @@
 
 	<div>
 		<table id="commentList">
-
+			<!--댓글 list-->
 		</table>
+
+		<div id="more">
+				<!--더보기 버튼-->
+		</div>
 	</div>
 
 <%-- 	
@@ -282,10 +286,23 @@
 
 <!-- 2. 실시간 댓글 작성 -->
 <script type="text/javascript">
-	// 2_1. 댓글 List 보이기
+	// 2_1. 댓글 List 보이기+더보기 작업
 	// Jquery Ajax
+	let bn = $("#add").attr("data-add-num");
+	let pageNum = 1;
+	let tp =0;
 	
-	getCommentList($("#add").attr("data-add-num"), 1);
+	// 더보기 btn
+	$('#more').on("click","#moreButton", function(){
+		if(pageNum>=tp){
+			alert("마지막 페이지")
+			return;
+		}
+		pageNum++;
+		getCommentList(bn, pageNum);
+	})
+
+	getCommentList(bn, pageNum);
 
 	function getCommentList(bookNum, page){
 		$.ajax({
@@ -296,14 +313,50 @@
 				page:page
 			},
 			success:function(result){
-				$('#commentList').append(result);
+				$('#commentList').append(result);    // 1. 먼저 result를 append 시킨뒤,
+				tp = $('#totalPage').attr("data-totalPage"); // 2. totalPage를 확인한다.<tr>
+				console.log($('#totalPage').attr("data-totalPage"));
+				let button = '<button id="moreButton">더보기('+pageNum+'/'+tp+')</button>'
+				$('#more').html(button);
 			},
 			error:function(){
 				alert("관리자에게 문의하세요.");
 			}
 		});
 	}
+
+
+	// 2_2. 댓글 추가
+	$('#commentAdd').click(function(){
+		let contents = $('#comment').val();
+		$.ajax({
+			type: 'post',
+			url : 'commentAdd',
+			data : {
+				bookNum:bn,
+				commentContents:contents
+			},
+			success: function(result){
+				if(result.trim()>0){
+					alert("댓글 등록되었습니다.")
+					// 작성한 글이 맨위로 와야하니 이전의 글을 다시 불러온다.
+					// 기존의 글이 append됐기에 글 등록해도 작성한 글은 처음의 append한 내용 뒤에 작성된다.
+					// 그래서 기존의 글을 비운 뒤, getCommentList를 호출한다
+					$('#commentList').empty();
+
+					// 작성한 글 등록 시, textarea 비워지기
+					$('#comment').val("");
+
+					// 더보기의 page를 나열하고 댓글 등록 시, pageNum =1 초기화
+					pageNum=1;
+					
+					getCommentList(bn, 1);
+				}
+			}
+		})
+	})
 </script>
+
 
 
 </body>

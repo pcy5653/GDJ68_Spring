@@ -6,10 +6,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.iu.main.board.BoardDTO;
 import com.iu.main.board.BoardService;
+import com.iu.main.file.FileDTO;
 import com.iu.main.util.FileManager;
 import com.iu.main.util.Pager;
 
@@ -23,6 +25,25 @@ public class NoticeService implements BoardService{
 	private FileManager fileManager;
 	
 	
+	
+	// 이미지 업로드 시 : 위지위그
+	public String setContentsImg(MultipartFile file, HttpSession session)throws Exception{
+		// 경로를 받아 contents 부분에 뿌림(DB X)
+		String path ="/resources/upload/notice/";
+		String fileName =fileManager.fileSave(path, session, file);
+		// 이미지 폴더 + 파일명
+		return path+fileName;
+	}
+	// 이미지 삭제 시 : 위지위그
+	public boolean setContentsImgDelete(String path, HttpSession session)throws Exception{
+		// path : /resources/upload/notice/파일명
+		// 경로명을 제외한 파일명만 삭제한다.
+		FileDTO fileDTO = new FileDTO();
+		// path에서 파일명만 가져와서 setFileName으로 가져온다.
+		fileDTO.setFileName(path.substring(path.lastIndexOf("/")+1));
+		path = "/resources/upload/notice/";
+		return fileManager.fileDelete(fileDTO, path, session);
+	}
 	
 	// List
 	@Override

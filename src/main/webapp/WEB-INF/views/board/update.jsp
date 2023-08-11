@@ -7,6 +7,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="../temp/bootStrap.jsp"></c:import>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<!-- include summernote css/js 위지위그-->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+</head>
 </head>
 <body>
 <c:import url="../temp/header.jsp"></c:import>
@@ -53,6 +58,10 @@
 	 </section>
 
 	 <script src="/resources/js/file.js"></script>
-  
+	 
+	 <script type="text/javascript">
+		// 위지위그 contents에서 사용 (맨 위에 link + script 추가)
+		$('#contents').summernote();
+	 </script>
 </body>
 </html>

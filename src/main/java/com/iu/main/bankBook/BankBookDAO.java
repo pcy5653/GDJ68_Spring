@@ -23,7 +23,7 @@ public class BankBookDAO {
 	// *Mapper 파일 위치
 	private final String NAMESPACE="com.iu.main.bankBook.BankBookDAO.";
 	
-	//------- BANKBOOK LIST
+	//-------------------- BANKBOOK LIST -----------------------------
 	
 	// total : List의 페이지 넘버 보여주기
 	public Long getTotal(Pager pager) throws Exception{
@@ -79,7 +79,7 @@ public class BankBookDAO {
 	
 	
 	
-	// COMMENT LIST
+	// ----------------------- COMMENT LIST -------------------------------------
 	public List<CommentDTO> getCommentList(Map<String, Object> map) throws Exception{
 		// 파라미터로 List의 갯수를 보내주는 데이터 2개를 보내준다. (bookNum, row값(start, last))
 		return sqlSession.selectList(NAMESPACE+"getCommentList", map);

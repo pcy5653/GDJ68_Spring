@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,12 +27,34 @@ public class NoticeController {
 	@Autowired
 	private NoticeService noticeService;
 	
+
 	// jsp H1의 이름
 	// @ModelAttribute : @RequestMapping이 실행되기 전에(list, add, ...) 실행되고, board(키)로 notice(value)를 담아 보낸다.
 	@ModelAttribute("board")
 	public String getBoardName() {
 		return "notice";
 	}
+	
+	// 이미지 업로드 시 : 위지위그
+	@PostMapping("setContentsImg")
+	public String setContentsImg(MultipartFile files, HttpSession session, Model model)throws Exception{
+		System.out.println("setContentsImg");
+		System.out.println(files.getOriginalFilename());  
+		String path = noticeService.setContentsImg(files, session);
+		
+		// 결과값 path를 호출한 ajax로 보내준다.
+		model.addAttribute("result", path);
+		return "commons/ajaxResult";
+	}
+	// 이미지 삭제 시 : 위지위그
+	@PostMapping("setContentsImgDelete")
+	public String setContentsImgDelete(String path, HttpSession session, Model model)throws Exception{
+		
+		boolean check = noticeService.setContentsImgDelete(path, session);
+		model.addAttribute("result", check);
+		return "commons/ajaxResult";
+	}
+	
 	
 	
 	@RequestMapping(value="list")
