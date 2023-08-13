@@ -148,11 +148,6 @@ public class NoticeController {
 		
 		// redirect로 리턴하지 않으면 해당 num의 삭제된 list만 보여준다.
 		return "redirect:./list";
-	}
-	
-	
-	
-	
-	
+	}	
 	
 }
