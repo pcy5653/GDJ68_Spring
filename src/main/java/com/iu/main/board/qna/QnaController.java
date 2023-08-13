@@ -44,6 +44,16 @@ public class QnaController {
 		return "board/list";
 	}
 	
+	// detail
+	@RequestMapping(value="detail", method = RequestMethod.GET)
+	public ModelAndView getDetail(QnaDTO qnaDTO, ModelAndView mv)throws Exception {
+		BoardDTO boardDTO = qnaService.getDetail(qnaDTO);
+		mv.setViewName("board/detail");
+		mv.addObject("dto",boardDTO);
+		
+		return mv;
+	}
+	
 	
 	// Add
 	@RequestMapping(value="add", method = RequestMethod.GET)
@@ -74,17 +84,6 @@ public class QnaController {
 	
 	
 	
-	// detail
-	@RequestMapping(value="detail", method = RequestMethod.GET)
-	public ModelAndView getDetail(QnaDTO qnaDTO, ModelAndView mv)throws Exception {
-		BoardDTO boardDTO = qnaService.getDetail(qnaDTO);
-		mv.setViewName("board/detail");
-		mv.addObject("dto",boardDTO);
-		
-		return mv;
-	}
-	
-	
 	@RequestMapping(value="update", method = RequestMethod.GET)
 	public String setUpdate(QnaDTO qnaDTO, Model model) throws Exception {
 		BoardDTO boardDTO = qnaService.getDetail(qnaDTO);
@@ -94,9 +93,9 @@ public class QnaController {
 	}
 	
 	@RequestMapping(value="update", method = RequestMethod.POST)
-	public String setUpdate(QnaDTO qnaDTO) throws Exception {
-		int result = qnaService.setUpdate(qnaDTO);
-		
+	public String setUpdate(QnaDTO qnaDTO, MultipartFile [] photos, HttpSession session) throws Exception {
+		int result = qnaService.setUpdate(qnaDTO, photos, session);
+
 		return "redirect:./detail?num="+qnaDTO.getNum();
 	}
 	
