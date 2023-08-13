@@ -119,7 +119,16 @@
   	
   	
   	
-  	
+  	<!-- 수정 중 파일 삭제 -->
+    <!-- 1. fileNum으로 fileName을 조회하기 -->
+    <select id="getFileDetail" parameterType="QnaFileDTO" resultType="QnaFileDTO">
+       SELECT FILENUM, FILENAME FROM QNAFILE WHERE FILENUM =#{fileNum}
+    </select>
+    
+    <!-- 2. DB 삭제 -->
+    <delete id="setFileDelete" parameterType="QnaFileDTO">
+       DELETE QNAFILE WHERE FILENUM =#{fileNum}
+    </delete>
   	
   	
   	

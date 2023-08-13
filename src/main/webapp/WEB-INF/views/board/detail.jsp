@@ -37,7 +37,7 @@
 	<!-- Getter 이름 : 메서드에서 get을 제외하고 첫번째글자를 소문자로 바꾼것 -->
 	<!-- DB & GETTER 이름 동일 -->
 	
-	<table class="table table-hover">
+		<table class="table table-hover">
 			<thead class="table-dark">
 				<th>SUBJECT</th><th>작성자</th><th>날짜</th><th>HIT</th>
 			</thead>
