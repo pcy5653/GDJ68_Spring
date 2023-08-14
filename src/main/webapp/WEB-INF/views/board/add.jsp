@@ -1,14 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<c:import url="../temp/bootStrap.jsp"></c:import>
-
-<style>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<c:import url="../temp/bootStrap.jsp"></c:import>
+		
+		<!-- 로그인된 사용자를 구분 -->
+		<c:if test="${empty member}">
+			<script type="text/javascript">
+				alert("로그인하세요");
+				location.href="../member/login";
+			</script>
+		</c:if> 
+		
+		<style>
 	h1 {text-align:center;font-weight:800;}
 	.container {position:relative;} 
 	

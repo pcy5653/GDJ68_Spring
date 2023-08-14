@@ -109,12 +109,12 @@
   	<update id="setUpdate" parameterType="QnaDTO">
   		UPDATE QNA
   		SET SUBJECT=#{subject}, CONTENTS=#{contents}
-  		WHERE NUM=#{num}
+  		WHERE NUM=#{num} AND NAME = #{name}
   	</update>
   	
   	
   	<delete id="setDelete" parameterType="QnaDTO">
-  			DELETE QNA WHERE NUM=#{num}
+  			DELETE QNA WHERE NUM=#{num} AND NAME = #{name}
   	</delete>
   	
   	

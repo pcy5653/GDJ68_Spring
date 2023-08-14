@@ -10,6 +10,7 @@
 		<typeAlias type="com.iu.main.bankBook.BankBookFileDTO" alias="BankBookFileDTO"/>
 		<typeAlias type="com.iu.main.bankBook.comment.CommentDTO" alias="CommentDTO"/>
 		<typeAlias type="com.iu.main.member.MemberDTO" alias="MemberDTO"/>
+		<typeAlias type="com.iu.main.member.RoleDTO" alias="RoleDTO"/>
 		<typeAlias type="com.iu.main.member.MemberFileDTO" alias="MemberFileDTO"/>
 		<typeAlias type="com.iu.main.board.notice.NoticeDTO" alias="NoticeDTO"/>
 		<typeAlias type="com.iu.main.board.notice.NoticeFileDTO" alias="NoticeFileDTO"/>

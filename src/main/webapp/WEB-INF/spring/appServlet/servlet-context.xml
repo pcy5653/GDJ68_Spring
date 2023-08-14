@@ -22,6 +22,66 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	
+	<!-- Interceptor 설정 : 어떤 url이 왔을 때 어떠한것이 실행될 것이냐-->
+	
+	<beans:bean class="com.iu.main.interceptors.InterceptorTest1" id="InterceptorTest1"></beans:bean>
+	
+ 	<interceptors>
+		<!-- <interceptor>
+			<mapping path="/notice/*"/>           /notice/* : notice로 들어온 모든 하위 경로			
+			<exclude-mapping path="/notice/add"/> <exclude-mappting : 해당 경로 제외>
+			<beans:ref bean="interceptorTest1"/>  클래스명의 첫글자를 소문자로 변경
+		</interceptor> -->
+		
+		<!-- <interceptor>
+			<mapping path="/notice/*"/>
+			<beans:bean class="com.iu.main.interceptors.InterceptorTest1"></beans:bean>
+		</interceptor> -->
+		
+		<!-- <interceptor>
+			<mapping path="/notice/*"/>
+			<mapping path="/qna/*"/>
+			<beans:ref bean="interceptorTest1" />
+		</interceptor> -->
+		
+		<interceptor>
+			<mapping path="/qna/*"/>      
+			<mapping path="/member/*"/>
+			<mapping path="/notice/*"/>
+			<exclude-mapping path="/member/login"/>
+			<exclude-mapping path="/member/join"/>   
+			<exclude-mapping path="/member/logout"/>  			
+			<exclude-mapping path="/qna/list"/> 
+			<exclude-mapping path="/notice/list"/>
+			<exclude-mapping path="/notice/detail"/>  
+			<beans:ref bean="li"/>  
+		</interceptor>
+		
+		
+		<interceptor>
+			<mapping path="/notice/update"/>
+			<mapping path="/qna/update"/>
+			<beans:bean class="com.iu.main.interceptors.OwnerInterceptor"></beans:bean>
+		</interceptor>
+		
+		
+		<!-- 공지사항 관리자만 글 작성 
+		     annotation 방법-->
+		<interceptor>
+			<mapping path="/notice/add"/>
+			<mapping path="/notice/update"/>
+			<mapping path="/notice/delete"/>
+			
+			<beans:ref bean="adminInterceptor"/>
+		</interceptor>
+
+	</interceptors>	 
+	
+
+
+	
+	
 	<!-- package의 모든 파일 annotation 하라 -->
 	<context:component-scan base-package="com.iu.main" />
 	

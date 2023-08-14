@@ -101,9 +101,11 @@
 			</form>
 		</div>
 		
-		<a class="btn btn-danger" href="./add">게시물 등록</a>
-		
-		
+		<!-- 로그인 했을 때 생성 -->
+		<c:if test="${not empty member}">
+			<a class="btn btn-danger" href="./add">게시물 등록</a>
+		</c:if>
+			
 		
 	
 	</section>

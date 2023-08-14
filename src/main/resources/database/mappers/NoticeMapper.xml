@@ -98,7 +98,7 @@
   		<update id="setUpdate" parameterType="NoticeDTO">
   			UPDATE NOTICE
   			SET NOTICETITLE=#{subject}, NOTICECONTENTS=#{contents}
-  			WHERE NOTICENUM=#{num}
+  			WHERE NOTICENUM=#{num} AND NOTICENAME = #{name}
   		</update>
   		
   		<!-- 수정 중 파일 삭제 -->
@@ -115,6 +115,6 @@
   		
   		
   		<delete id="setDelete" parameterType="NoticeDTO">
-  			DELETE NOTICE WHERE NOTICENUM = #{num}
+  			DELETE NOTICE WHERE NOTICENUM = #{num} AND NOTICENAME = #{name}
   		</delete>
   </mapper>

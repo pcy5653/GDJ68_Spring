@@ -1,6 +1,7 @@
 package com.iu.main.member;
 
 import java.sql.Date;
+import java.util.List;
 
 
 public class MemberDTO {
@@ -16,6 +17,17 @@ public class MemberDTO {
 	private MemberFileDTO memberFileDTO;
 	
 	
+	// 멤버 1명이 여러개의 role을 지닐 수 있다.
+	private List<RoleDTO> roles;
+	
+	
+	
+	public List<RoleDTO> getRoles() {
+		return roles;
+	}
+	public void setRoles(List<RoleDTO> roles) {
+		this.roles = roles;
+	}
 	public MemberFileDTO getMemberFileDTO() {
 		return memberFileDTO;
 	}
