@@ -25,11 +25,11 @@
   				1개 이상은 무조건 갖고 잇으니 INNER JOIN-->
   			INNER JOIN
   			MEMBERROLE MR
-  			ON(M.ID = MR=ID)
+  			ON(M.ID = MR.ID)
   			<!-- 2. MEMBERROLE과 ROLE JOIN -->
   			INNER JOIN 
   			ROLE R
-  			ON(R.ROLENUM = MR.ROLENUM)
+  			ON(R.ROLENUM = MR.NUM)
   		WHERE M.ID=#{id} AND M.PW=#{pw}
   </select>
   
