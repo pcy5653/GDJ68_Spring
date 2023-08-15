@@ -55,7 +55,7 @@
 			<exclude-mapping path="/qna/list"/> 
 			<exclude-mapping path="/notice/list"/>
 			<exclude-mapping path="/notice/detail"/>  
-			<beans:ref bean="li"/>  
+			<beans:ref bean="loginInterceptor"/>  
 		</interceptor>
 		
 		

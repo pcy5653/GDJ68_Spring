@@ -9,7 +9,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.iu.main.member.MemberDTO;
 
-@Component("li")
+@Component
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 	
 	// qna의 모든 기능은 로그인한 사람만 가능
