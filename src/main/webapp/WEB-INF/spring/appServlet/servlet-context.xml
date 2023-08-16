@@ -22,28 +22,40 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+		<beans:property name="order" value="1"></beans:property>
+	</beans:bean>
+	
+	<!-- FileManager인 이름 실행 , 우선순위 0번째 -->
+	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<beans:property name="order" value="0"></beans:property>
+	</beans:bean>
+	
 	
 	<!-- Interceptor 설정 : 어떤 url이 왔을 때 어떠한것이 실행될 것이냐-->
 	
-	<beans:bean class="com.iu.main.interceptors.InterceptorTest1" id="InterceptorTest1"></beans:bean>
+	<!-- <beans:bean class="com.iu.main.interceptors.InterceptorTest1" id="InterceptorTest1"></beans:bean> -->
 	
- 	<interceptors>
-		<!-- <interceptor>
+ 	<!-- <interceptors>
+		<interceptor>
 			<mapping path="/notice/*"/>           /notice/* : notice로 들어온 모든 하위 경로			
 			<exclude-mapping path="/notice/add"/> <exclude-mappting : 해당 경로 제외>
 			<beans:ref bean="interceptorTest1"/>  클래스명의 첫글자를 소문자로 변경
-		</interceptor> -->
+		</interceptor>
 		
-		<!-- <interceptor>
+		<interceptor>
 			<mapping path="/notice/*"/>
 			<beans:bean class="com.iu.main.interceptors.InterceptorTest1"></beans:bean>
-		</interceptor> -->
+		</interceptor>
 		
-		<!-- <interceptor>
+		<interceptor>
 			<mapping path="/notice/*"/>
 			<mapping path="/qna/*"/>
 			<beans:ref bean="interceptorTest1" />
-		</interceptor> -->
+		</interceptor>
 		
 		<interceptor>
 			<mapping path="/qna/*"/>      
@@ -66,8 +78,8 @@
 		</interceptor>
 		
 		
-		<!-- 공지사항 관리자만 글 작성 
-		     annotation 방법-->
+		공지사항 관리자만 글 작성 
+		     annotation 방법
 		<interceptor>
 			<mapping path="/notice/add"/>
 			<mapping path="/notice/update"/>
@@ -76,7 +88,7 @@
 			<beans:ref bean="adminInterceptor"/>
 		</interceptor>
 
-	</interceptors>	 
+	</interceptors>	  -->
 	
 
 

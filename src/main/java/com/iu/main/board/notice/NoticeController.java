@@ -35,6 +35,17 @@ public class NoticeController {
 		return "notice";
 	}
 	
+	
+	@GetMapping("fileDown")
+	public String getFileDown(NoticeFileDTO noticeFileDTO, Model model)throws Exception{
+		// 올릴 때 file의 정보
+		noticeFileDTO = noticeService.getFileDown(noticeFileDTO);
+		model.addAttribute("file", noticeFileDTO);
+		
+		// bean의 이름 리턴 (fileManager)
+		return "fileManager";
+	}
+	
 	// 이미지 업로드 시 : 위지위그
 	@PostMapping("setContentsImg")
 	public String setContentsImg(MultipartFile files, HttpSession session, Model model)throws Exception{
@@ -76,6 +87,7 @@ public class NoticeController {
 		if(boardDTO != null) {
 			// jsp에서 실행할 변수의 키(notice)의 이름을 jsp에서 정확하게 작성하자!
 			model.addAttribute("dto", boardDTO);
+			System.out.println(((NoticeDTO)boardDTO).getFileDTOs().get(0).getFileNum());
 			return "board/detail";
 		}else {
 			model.addAttribute("message","없는 내용입니다!");

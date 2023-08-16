@@ -15,7 +15,7 @@
   <!-- Member와 MemberFile의 정보를 가져오기 -->
   <!-- resultType으로 반환티입 지정해서 아래의 resultMap에서 실행 -->
   <select id="getLogin" parameterType="MemberDTO" resultMap="getLoginResult">
-  		SELECT M.* , MF.*, R.* 
+  		SELECT M.* , MF.*<!-- , R.*  -->
   		FROM MEMBER M
   			LEFT OUTER JOIN
   			MEMBERFILE MF
@@ -23,13 +23,13 @@
   			<!-- roleNum, roleName 을 가져오기 
   			    1. MEMBER와 MEMBERROLE JOIN
   				1개 이상은 무조건 갖고 잇으니 INNER JOIN-->
-  			INNER JOIN
+  			<!-- INNER JOIN
   			MEMBERROLE MR
   			ON(M.ID = MR.ID)
-  			<!-- 2. MEMBERROLE과 ROLE JOIN -->
+  			2. MEMBERROLE과 ROLE JOIN
   			INNER JOIN 
   			ROLE R
-  			ON(R.ROLENUM = MR.NUM)
+  			ON(R.ROLENUM = MR.NUM) -->
   		WHERE M.ID=#{id} AND M.PW=#{pw}
   </select>
   

@@ -131,6 +131,10 @@ public class NoticeService implements BoardService{
 		return 0;
 	}
 	
+	public NoticeFileDTO getFileDown(NoticeFileDTO noticeFileDTO)throws Exception{
+		return noticeDAO.getFileDetail(noticeFileDTO);
+	}
+	
 	// Delete
 	@Override
 	public int setDelete(BoardDTO boardDTO,HttpSession session ) throws Exception {

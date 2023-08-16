@@ -57,7 +57,7 @@
 		<div>
 			<!-- Controller에서 작성한 키 이름과 동일하게 적기 -->
 			<c:forEach items="${dto.fileDTOs}" var="f">
-				<a href="../resources/upload/${board}/${f.fileName}">${f.originalName}</a>
+				<a href="./fileDown?fileNum=${f.fileNum}">${f.originalName}</a>
 			</c:forEach>
 		</div>
 		

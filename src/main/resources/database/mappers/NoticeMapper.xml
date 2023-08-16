@@ -104,7 +104,7 @@
   		<!-- 수정 중 파일 삭제 -->
   		<!-- 1. fileNum으로 fileName을 조회하기 -->
   		<select id="getFileDetail" parameterType="NoticeFileDTO" resultType="NoticeFileDTO">
-  			SELECT FILENUM, FILENAME FROM NOTICEFILE WHERE FILENUM =#{fileNum}
+  			SELECT FILENUM, FILENAME, ORIGINALNAME FROM NOTICEFILE WHERE FILENUM =#{fileNum}
   		</select>
   		
   		<!-- 2. DB 삭제 -->
