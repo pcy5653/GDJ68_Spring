@@ -1,6 +1,7 @@
 package com.iu.main.board.notice;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -71,8 +72,8 @@ public class NoticeDAO implements BoardDAO{
 	
 	// Delete
 	@Override
-	public int setDelete(BoardDTO boardDTO) throws Exception{
-		return sqlSession.delete(NAMESPACE+"setDelete", boardDTO);
+	public int setDelete(Map<String, Object> map) throws Exception{
+		return sqlSession.delete(NAMESPACE+"setDelete", map);
 	}
 	
 	// 조회수 업데이트

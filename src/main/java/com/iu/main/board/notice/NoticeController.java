@@ -143,8 +143,8 @@ public class NoticeController {
 	
 	// Delete
 	@RequestMapping(value="delete", method = RequestMethod.POST)
-	public String setDelete(NoticeDTO noticeDTO) throws Exception{
-		int result = noticeService.setDelete(noticeDTO);
+	public String setDelete(NoticeDTO noticeDTO, HttpSession session) throws Exception{
+		int result = noticeService.setDelete(noticeDTO, session);
 		
 		// redirect로 리턴하지 않으면 해당 num의 삭제된 list만 보여준다.
 		return "redirect:./list";

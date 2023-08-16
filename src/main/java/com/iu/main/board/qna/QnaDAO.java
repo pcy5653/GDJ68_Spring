@@ -1,6 +1,7 @@
 package com.iu.main.board.qna;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,8 +74,8 @@ public class QnaDAO implements BoardDAO {
 	}
 
 	@Override
-	public int setDelete(BoardDTO boardDTO) throws Exception {
-		return sqlSession.delete(NAMESPACE+"setDelete", boardDTO);
+	public int setDelete(Map<String, Object> map) throws Exception {
+		return sqlSession.delete(NAMESPACE+"setDelete", map);
 	}
 
 	@Override

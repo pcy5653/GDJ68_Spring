@@ -114,7 +114,7 @@
   		
   		
   		
-  		<delete id="setDelete" parameterType="NoticeDTO">
+  		<delete id="setDelete" parameterType="Map">
   			DELETE NOTICE WHERE NOTICENUM = #{num} AND NOTICENAME = #{name}
   		</delete>
   </mapper>

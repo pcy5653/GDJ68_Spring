@@ -1,6 +1,8 @@
 package com.iu.main.board.notice;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.iu.main.board.BoardDTO;
 import com.iu.main.board.BoardService;
 import com.iu.main.file.FileDTO;
+import com.iu.main.member.MemberDTO;
 import com.iu.main.util.FileManager;
 import com.iu.main.util.Pager;
 
@@ -130,7 +133,11 @@ public class NoticeService implements BoardService{
 	
 	// Delete
 	@Override
-	public int setDelete(BoardDTO boardDTO) throws Exception {
-		return noticeDAO.setDelete(boardDTO);
+	public int setDelete(BoardDTO boardDTO,HttpSession session ) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		map.put("dto", boardDTO);
+		map.put("member", memberDTO.getId());
+		return noticeDAO.setDelete(map);
 	}
 }

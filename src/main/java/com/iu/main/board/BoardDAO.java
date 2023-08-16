@@ -1,6 +1,7 @@
 package com.iu.main.board;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -27,7 +28,7 @@ public interface BoardDAO {
 	public int setUpdate(BoardDTO boardDTO)throws Exception;
 	
 	//Delete
-	public int setDelete(BoardDTO boardDTO)throws Exception;
+	public int setDelete(Map<String, Object> map)throws Exception;
 	
 	//totalCount(10개씩)
 	public Long getTotal(Pager pager) throws Exception;
