@@ -87,7 +87,6 @@ public class NoticeController {
 		if(boardDTO != null) {
 			// jsp에서 실행할 변수의 키(notice)의 이름을 jsp에서 정확하게 작성하자!
 			model.addAttribute("dto", boardDTO);
-			System.out.println(((NoticeDTO)boardDTO).getFileDTOs().get(0).getFileNum());
 			return "board/detail";
 		}else {
 			model.addAttribute("message","없는 내용입니다!");
@@ -155,8 +154,10 @@ public class NoticeController {
 	
 	// Delete
 	@RequestMapping(value="delete", method = RequestMethod.POST)
-	public String setDelete(NoticeDTO noticeDTO, HttpSession session) throws Exception{
+	public String setDelete(NoticeDTO noticeDTO, HttpSession session , Model model) throws Exception{
 		int result = noticeService.setDelete(noticeDTO, session);
+		model.addAttribute("member", session);
+		model.addAttribute("dto", noticeDTO);
 		
 		// redirect로 리턴하지 않으면 해당 num의 삭제된 list만 보여준다.
 		return "redirect:./list";

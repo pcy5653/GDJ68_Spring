@@ -72,6 +72,7 @@
 		
 		<!-- parameterName = data-delete-name 속성에 넣기 -->
 		<!-- method POST -->
+		<input type="hidden" data-url="delete" data-delete-name="name" data-delete-num="${member.id}">
 		<button id="del"  class="btn btn-danger c1" data-url="delete" data-delete-name="num" data-delete-num="${dto.num}">삭제</button>
 
 
