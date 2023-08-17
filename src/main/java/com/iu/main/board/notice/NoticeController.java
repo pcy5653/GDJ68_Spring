@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -162,5 +163,21 @@ public class NoticeController {
 		// redirect로 리턴하지 않으면 해당 num의 삭제된 list만 보여준다.
 		return "redirect:./list";
 	}	
+	
+	
+	// ------------------Exception 처리----------------------
+	
+//	// 1. Null error 처리
+//	@ExceptionHandler(NullPointerException.class)
+//	public String serverError() throws Exception{
+//		return "view name";  // 가고싶은 error jsp 경로 작성
+//	}
+//	
+//	// 2. 부모(Exception)타입을 사용하여 모든 error 처리
+//	@ExceptionHandler(Exception.class)
+//	public String serverError2(Exception ex , Model model)throws Exception{
+//		ex.getMessage();	 // error message 출력 -> model에 담아 jsp에 뿌려줄 수 있다.
+//		return "view naem";  // 가고싶은 error jsp 경로 작성
+//	}
 	
 }

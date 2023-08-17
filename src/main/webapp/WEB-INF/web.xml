@@ -34,4 +34,17 @@
     <servlet-name>appServlet</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+  
+  <!--Exception 처리-->
+<!--   <error-page>
+  	방법 1. jsp 경로
+  	<error-code>404</error-code>
+  	<location>/WEB-INF/views/errors/front_error.jsp</location>
+  </error-page>
+  
+  <error-page>
+  	방법 2. url(controller 경로)
+  	<error-code>400</error-code>
+  	<location>/error/front</location>
+  </error-page> -->
 </web-app>
